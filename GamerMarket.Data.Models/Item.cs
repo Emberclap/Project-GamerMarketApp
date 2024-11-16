@@ -1,7 +1,9 @@
 ﻿using CinemaApp.Commons;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.SqlTypes;
 using static CinemaApp.Commons.EntityValidationConstants.Item;
 
 namespace GamerMarket.Data.Models
@@ -9,7 +11,7 @@ namespace GamerMarket.Data.Models
     public class Item
     {
         [Key]
-        public int Id { get; set; }
+        public int ItemId { get; set; }
         [Required]
         [MaxLength(NameMaxValue)]
         public string Name { get; set; } = null!;
@@ -17,6 +19,8 @@ namespace GamerMarket.Data.Models
         [MaxLength(DescriptionMaxValue)]
         public string Description { get; set; } = null!;
 
+        [ForeignKey(nameof(Type))]
+        public int TypeId { get; set; }
         [Required]
         [MaxLength(EntityValidationConstants.ItemType.NameMaxValue)]
         public ItemType Type { get; set; } = null!;
@@ -27,8 +31,13 @@ namespace GamerMarket.Data.Models
         [Required]
         public IdentityUser Publisher { get; set; } = null!;
 
+        [ForeignKey(nameof(Game))]
+        public int GameId { get; set; }
+        [Required]
+        public Game Game { get; set; } = null!;
         public DateTime AddedOn { get; set; }
 
+        [Precision(18, 2)]
         public decimal Price { get; set; }
 
         public bool SoldOut { get; set; }

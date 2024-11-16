@@ -6,14 +6,14 @@ namespace GamerMarket.Data.Models
     public class ItemType
     {
         [Key]
-        public int Id { get; set; }
+        public int TypeId { get; set; }
 
         [Required]
         [MaxLength(NameMaxValue)]
         public string Name { get; set; } = null!;
 
 
-        public virtual ICollection<ItemCategory> ItemCategories { get; set; }  = new HashSet<ItemCategory>();
+        public virtual ICollection<TypeCategory> TypeCategories { get; set; }  = new HashSet<TypeCategory>();
         public virtual ICollection<Item> Items { get; } = new HashSet<Item>();
     }
 }

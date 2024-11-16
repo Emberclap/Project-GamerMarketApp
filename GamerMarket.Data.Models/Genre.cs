@@ -6,7 +6,7 @@ namespace GamerMarket.Data.Models
     public class Genre
     {
         [Key]
-        public int Id { get; set; }
+        public int GenreId { get; set; }
 
         [Required]
         [MaxLength(NameMaxValue)]

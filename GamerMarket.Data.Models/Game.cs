@@ -8,7 +8,7 @@ namespace GamerMarket.Data.Models
     public class Game
     {
         [Key]
-        public int Id { get; set; }
+        public int GameId { get; set; }
 
         [Required]
         [MaxLength(TitleMaxValue)]
