@@ -1,9 +1,10 @@
 ﻿
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GamerMarketApp.Data
 {
-    public class GamerMarketDbContext : DbContext
+    public class GamerMarketDbContext : IdentityDbContext
     {
 
         public GamerMarketDbContext()
