@@ -11,11 +11,11 @@ namespace GamerMarket.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(TitleMaxLength)]
+        [MaxLength(TitleMaxValue)]
         public string Title { get; set; } = null!;
 
         [Required]
-        [MaxLength(DescriptionMaxLength)]
+        [MaxLength(DescriptionMaxValue)]
         public string Description { get; set; } = null!;
 
         public string? ImageUrl { get; set; }
@@ -26,5 +26,7 @@ namespace GamerMarket.Data.Models
         public Genre Genre { get; set; } = null!;
 
         public bool IsDeleted { get; set; }
+
+        public virtual ICollection<Item> Items { get; set; } = new HashSet<Item>();
     }
 }
