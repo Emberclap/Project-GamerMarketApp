@@ -1,4 +1,4 @@
-using GamerMarketApp;
+using GamerMarketApp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,9 +13,9 @@ namespace GamerMarketApp
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<GamerMarketDbContext>(options =>
-                options.UseSqlServer(connectionString));
+               options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
+            
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<GamerMarketDbContext>();
             builder.Services.AddControllersWithViews();

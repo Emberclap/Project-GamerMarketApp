@@ -25,6 +25,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
   </ItemGroup>
 
@@ -95,5 +96,13 @@
     <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
     <None Include="wwwroot\lib\jquery\LICENSE.txt" />
   </ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\GamerMarket.Data.Models\GamerMarket.Data.Models.csproj" />
+		<ProjectReference Include="..\GamerMarketApp.Commons\GamerMarketApp.Commons.csproj" />
+		<ProjectReference Include="..\GamerMarketApp.Data\GamerMarketApp.Data.csproj" />
+	</ItemGroup>
+
+
 
 </Project>
