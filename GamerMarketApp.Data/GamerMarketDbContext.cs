@@ -21,7 +21,7 @@ namespace GamerMarketApp.Data
         public virtual DbSet<Game> Games { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Item> Items { get; set; }
-        public virtual DbSet<ItemSubtype> ItemCategories { get; set; }
+        public virtual DbSet<ItemSubtype> ItemSubtypes { get; set; }
         public virtual DbSet<ItemType> ItemsTypes { get; set; }
         public virtual DbSet<GamerItem> GamersItems { get; set; }
 
