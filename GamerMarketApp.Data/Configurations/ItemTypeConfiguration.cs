@@ -17,16 +17,16 @@ namespace GamerMarketApp.Data.Configurations
         {
             var itemTypes = new List<ItemType>()
             {
-                new ItemType { TypeId = 1, Name = "Cosmetic Items" },
-                new ItemType { TypeId = 2, Name = "Functional Equipment" },
-                new ItemType { TypeId = 3, Name = "Consumables" },
-                new ItemType { TypeId = 4, Name = "Crafting Materials" },
-                new ItemType { TypeId = 5, Name = "Currency" },
-                new ItemType { TypeId = 6, Name = "Collectibles" },
-                new ItemType { TypeId = 7, Name = "Utility Items" },
-                new ItemType { TypeId = 8, Name = "Housing and Decor Items" },
-                new ItemType { TypeId = 9, Name = "Event-Specific Items" },
-                new ItemType { TypeId = 10, Name = "NFTs (Non-Fungible Tokens)" }
+                new ItemType { ItemTypeId = 1, Name = "Cosmetic Items" },
+                new ItemType { ItemTypeId = 2, Name = "Functional Equipment" },
+                new ItemType { ItemTypeId = 3, Name = "Consumables" },
+                new ItemType { ItemTypeId = 4, Name = "Crafting Materials" },
+                new ItemType { ItemTypeId = 5, Name = "Currency" },
+                new ItemType { ItemTypeId = 6, Name = "Collectibles" },
+                new ItemType { ItemTypeId = 7, Name = "Utility Items" },
+                new ItemType { ItemTypeId = 8, Name = "Housing and Decor Items" },
+                new ItemType { ItemTypeId = 9, Name = "Event-Specific Items" },
+                new ItemType { ItemTypeId = 10, Name = "NFTs (Non-Fungible Tokens)" }
             };
 
             return itemTypes;

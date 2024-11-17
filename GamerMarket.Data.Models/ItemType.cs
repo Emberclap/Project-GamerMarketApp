@@ -6,7 +6,7 @@ namespace GamerMarket.Data.Models
     public class ItemType
     {
         [Key]
-        public int TypeId { get; set; }
+        public int ItemTypeId { get; set; }
 
         [Required]
         [MaxLength(NameMaxValue)]

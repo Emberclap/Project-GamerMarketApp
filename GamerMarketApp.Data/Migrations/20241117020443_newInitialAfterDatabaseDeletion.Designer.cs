@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamerMarketApp.Data.Migrations
 {
     [DbContext(typeof(GamerMarketDbContext))]
-    [Migration("20241117013232_fixPropertyName-ItemTypeInItemSubtype")]
-    partial class fixPropertyNameItemTypeInItemSubtype
+    [Migration("20241117020443_newInitialAfterDatabaseDeletion")]
+    partial class newInitialAfterDatabaseDeletion
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,8 +49,8 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.HasKey("GameId");
 
@@ -212,8 +212,8 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("GenreId");
 
@@ -321,8 +321,8 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
@@ -367,8 +367,8 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("SubtypeId");
 
@@ -549,70 +549,70 @@ namespace GamerMarketApp.Data.Migrations
 
             modelBuilder.Entity("GamerMarket.Data.Models.ItemType", b =>
                 {
-                    b.Property<int>("TypeId")
+                    b.Property<int>("ItemTypeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TypeId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ItemTypeId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
-                    b.HasKey("TypeId");
+                    b.HasKey("ItemTypeId");
 
                     b.ToTable("ItemsTypes");
 
                     b.HasData(
                         new
                         {
-                            TypeId = 1,
+                            ItemTypeId = 1,
                             Name = "Cosmetic Items"
                         },
                         new
                         {
-                            TypeId = 2,
+                            ItemTypeId = 2,
                             Name = "Functional Equipment"
                         },
                         new
                         {
-                            TypeId = 3,
+                            ItemTypeId = 3,
                             Name = "Consumables"
                         },
                         new
                         {
-                            TypeId = 4,
+                            ItemTypeId = 4,
                             Name = "Crafting Materials"
                         },
                         new
                         {
-                            TypeId = 5,
+                            ItemTypeId = 5,
                             Name = "Currency"
                         },
                         new
                         {
-                            TypeId = 6,
+                            ItemTypeId = 6,
                             Name = "Collectibles"
                         },
                         new
                         {
-                            TypeId = 7,
+                            ItemTypeId = 7,
                             Name = "Utility Items"
                         },
                         new
                         {
-                            TypeId = 8,
+                            ItemTypeId = 8,
                             Name = "Housing and Decor Items"
                         },
                         new
                         {
-                            TypeId = 9,
+                            ItemTypeId = 9,
                             Name = "Event-Specific Items"
                         },
                         new
                         {
-                            TypeId = 10,
+                            ItemTypeId = 10,
                             Name = "NFTs (Non-Fungible Tokens)"
                         });
                 });
