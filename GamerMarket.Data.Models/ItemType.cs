@@ -13,7 +13,7 @@ namespace GamerMarket.Data.Models
         public string Name { get; set; } = null!;
 
 
-        public virtual ICollection<TypeCategory> TypeCategories { get; set; }  = new HashSet<TypeCategory>();
+        public virtual ICollection<ItemSubtype> ItemSubtypes { get; set; }  = new HashSet<ItemSubtype>();
         public virtual ICollection<Item> Items { get; } = new HashSet<Item>();
     }
 }

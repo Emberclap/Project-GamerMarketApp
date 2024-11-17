@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static CinemaApp.Commons.EntityValidationConstants.ItemCategory;
+using static CinemaApp.Commons.EntityValidationConstants.ItemSubtype;
 
 namespace GamerMarket.Data.Models
 {
-    public class TypeCategory
+    public class ItemSubtype
     {
         [Key]
-        public int CategoryId { get; set; }
+        public int SubtypeId { get; set; }
         [Required]
         [MaxLength(NameMaxValue)]
         public string Name { get; set; } = null!;

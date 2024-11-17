@@ -34,7 +34,7 @@
             public const byte NameMinValue = 5;
             public const byte NameMaxValue = 20;
         }
-        public static class ItemCategory
+        public static class ItemSubtype
         {
             public const byte NameMinValue = 2;
             public const byte NameMaxValue = 40;
