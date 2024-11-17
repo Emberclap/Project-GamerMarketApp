@@ -1,6 +1,7 @@
 ﻿using GamerMarket.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Metadata.Ecma335;
 
 namespace GamerMarketApp.Data.Configurations
 {
@@ -9,7 +10,14 @@ namespace GamerMarketApp.Data.Configurations
         public void Configure(EntityTypeBuilder<Genre> builder)
         {
             builder
-                 .HasData(
+                 .HasData(this.SeedGenres());
+                 
+        }
+
+        private IEnumerable<Genre> SeedGenres()
+        {
+            var genres = new List<Genre>()
+            {
                  new Genre { GenreId = 1, Name = "Action" },
                  new Genre { GenreId = 2, Name = "Adventure" },
                  new Genre { GenreId = 3, Name = "Fighting" },
@@ -24,7 +32,11 @@ namespace GamerMarketApp.Data.Configurations
                  new Genre { GenreId = 12, Name = "Strategy" },
                  new Genre { GenreId = 13, Name = "Music video game" },
                  new Genre { GenreId = 14, Name = "Battle royale" },
-                 new Genre { GenreId = 15, Name = "Sandbox" });
+                 new Genre { GenreId = 15, Name = "Sandbox" }
+            };
+
+            return genres; 
         }
+
     }
 }
