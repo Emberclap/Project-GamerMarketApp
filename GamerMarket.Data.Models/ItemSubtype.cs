@@ -16,7 +16,7 @@ namespace GamerMarket.Data.Models
         public string Description { get; set; } = null!;
 
         [ForeignKey(nameof(ItemType))]
-        public int TypeId { get; set; }
+        public int ItemTypeId { get; set; }
         [Required]
         public ItemType ItemType { get; set; } = null!;
 
