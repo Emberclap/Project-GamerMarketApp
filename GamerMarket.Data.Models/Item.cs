@@ -1,10 +1,9 @@
-﻿using CinemaApp.Commons;
+﻿using GamerMarketApp.Commons;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.SqlTypes;
-using static CinemaApp.Commons.EntityValidationConstants.Item;
+using static GamerMarketApp.Commons.EntityValidationConstants.Item;
 
 namespace GamerMarket.Data.Models
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static CinemaApp.Commons.EntityValidationConstants.ItemSubtype;
+using static GamerMarketApp.Commons.EntityValidationConstants.ItemSubtype;
 
 namespace GamerMarket.Data.Models
 {

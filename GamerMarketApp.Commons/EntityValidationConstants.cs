@@ -1,4 +1,4 @@
-﻿namespace CinemaApp.Commons
+﻿namespace GamerMarketApp.Commons
 {
     public static class EntityValidationConstants
     {

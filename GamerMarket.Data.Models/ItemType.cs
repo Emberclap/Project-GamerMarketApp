@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static CinemaApp.Commons.EntityValidationConstants.Genre;
+using static GamerMarketApp.Commons.EntityValidationConstants.Genre;
 
 namespace GamerMarket.Data.Models
 {
