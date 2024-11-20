@@ -20,11 +20,11 @@ namespace GamerMarketApp.Data.Models
         [Required]
         public string ImageUrl { get; set; } = null!;
 
-        [ForeignKey(nameof(Type))]
-        public int TypeId { get; set; }
+        [ForeignKey(nameof(SubType))]
+        public int SubTypeId { get; set; }
         [Required]
-        [MaxLength(EntityValidationConstants.ItemType.NameMaxValue)]
-        public ItemType Type { get; set; } = null!;
+        [MaxLength(EntityValidationConstants.ItemSubtype.NameMaxValue)]
+        public ItemSubtype SubType { get; set; } = null!;
 
         [Required]
         [ForeignKey(nameof(Publisher))]
