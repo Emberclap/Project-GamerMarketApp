@@ -25,8 +25,10 @@
         {
             public const byte NameMinValue = 2;
             public const byte NameMaxValue = 70;
+
             public const int DescriptionMinValue = 5;
             public const int DescriptionMaxValue = 500;
+
             public const string AddedOnFormat = "dd-MM-yyyy";
         }
         public static class ItemType
@@ -38,6 +40,7 @@
         {
             public const byte NameMinValue = 2;
             public const byte NameMaxValue = 50;
+
             public const int DescriptionMinValue = 5;
             public const int DescriptionMaxValue = 100;
         }

@@ -1,4 +1,6 @@
 using GamerMarketApp.Data;
+using GamerMarketApp.Data.Repository.Interfaces;
+using GamerMarketApp.Data.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,10 +18,20 @@ namespace GamerMarketApp
                options.UseSqlServer(connectionString));
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-            
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+            })
                 .AddEntityFrameworkStores<GamerMarketDbContext>();
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped(typeof(IGenericRepository<>),
+                typeof(GenericRepository<>));
 
             var app = builder.Build();
 
