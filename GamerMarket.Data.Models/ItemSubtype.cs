@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using static GamerMarketApp.Commons.EntityValidationConstants.ItemSubtype;
 
-namespace GamerMarket.Data.Models
+namespace GamerMarketApp.Data.Models
 {
     public class ItemSubtype
     {

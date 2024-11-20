@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static GamerMarketApp.Commons.EntityValidationConstants.Genre;
 
-namespace GamerMarket.Data.Models
+namespace GamerMarketApp.Data.Models
 {
     public class Genre
     {

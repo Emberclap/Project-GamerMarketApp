@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace GamerMarket.Data.Models
+namespace GamerMarketApp.Data.Models
 {
     [PrimaryKey(nameof(ItemId), nameof(GamerId))]
     public class GamerItem

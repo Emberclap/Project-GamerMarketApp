@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static GamerMarketApp.Commons.EntityValidationConstants.Game;
 
 
-namespace GamerMarket.Data.Models
+namespace GamerMarketApp.Data.Models
 {
-    using static CinemaApp.Commons.EntityValidationConstants.Game;
     public class Game
     {
         [Key]

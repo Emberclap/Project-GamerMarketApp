@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static GamerMarketApp.Commons.EntityValidationConstants.Item;
 
-namespace GamerMarket.Data.Models
+namespace GamerMarketApp.Data.Models
 {
     public class Item
     {
