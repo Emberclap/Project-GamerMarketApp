@@ -17,6 +17,8 @@ namespace GamerMarketApp.Data.Models
         [Required]
         [MaxLength(DescriptionMaxValue)]
         public string Description { get; set; } = null!;
+        [Required]
+        public string ImageUrl { get; set; } = null!;
 
         [ForeignKey(nameof(Type))]
         public int TypeId { get; set; }
