@@ -1,4 +1,4 @@
-﻿using GamerMarket.Data.Models;
+﻿using GamerMarketApp.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Metadata.Ecma335;
