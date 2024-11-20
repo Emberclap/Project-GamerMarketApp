@@ -1,5 +1,4 @@
-﻿
-using GamerMarket.Data.Models;
+﻿using GamerMarketApp.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;

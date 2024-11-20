@@ -1,5 +1,6 @@
 ﻿using GamerMarketApp.Data.Repository.Interfaces;
-using GamerMarket.Data.Models;
+using GamerMarketApp.Data.Models;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace GamerMarketApp.Data.Repository

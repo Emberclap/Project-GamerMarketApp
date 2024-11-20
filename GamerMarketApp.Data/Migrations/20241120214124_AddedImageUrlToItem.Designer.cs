@@ -4,6 +4,7 @@ using GamerMarketApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamerMarketApp.Data.Migrations
 {
     [DbContext(typeof(GamerMarketDbContext))]
-    partial class GamerMarketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241120214124_AddedImageUrlToItem")]
+    partial class AddedImageUrlToItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,7 +56,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Games", (string)null);
+                    b.ToTable("Games");
 
                     b.HasData(
                         new
@@ -196,7 +199,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("GamerId");
 
-                    b.ToTable("GamersItems", (string)null);
+                    b.ToTable("GamersItems");
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.Genre", b =>
@@ -214,7 +217,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasKey("GenreId");
 
-                    b.ToTable("Genres", (string)null);
+                    b.ToTable("Genres");
 
                     b.HasData(
                         new
@@ -320,9 +323,6 @@ namespace GamerMarketApp.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("ItemTypeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(70)
@@ -339,20 +339,18 @@ namespace GamerMarketApp.Data.Migrations
                     b.Property<bool>("SoldOut")
                         .HasColumnType("bit");
 
-                    b.Property<int>("SubTypeId")
+                    b.Property<int>("TypeId")
                         .HasColumnType("int");
 
                     b.HasKey("ItemId");
 
                     b.HasIndex("GameId");
 
-                    b.HasIndex("ItemTypeId");
-
                     b.HasIndex("PublisherId");
 
-                    b.HasIndex("SubTypeId");
+                    b.HasIndex("TypeId");
 
-                    b.ToTable("Items", (string)null);
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.ItemSubtype", b =>
@@ -380,7 +378,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("ItemTypeId");
 
-                    b.ToTable("ItemSubtypes", (string)null);
+                    b.ToTable("ItemSubtypes");
 
                     b.HasData(
                         new
@@ -568,7 +566,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasKey("ItemTypeId");
 
-                    b.ToTable("ItemsTypes", (string)null);
+                    b.ToTable("ItemsTypes");
 
                     b.HasData(
                         new
@@ -863,19 +861,15 @@ namespace GamerMarketApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamerMarketApp.Data.Models.ItemType", null)
-                        .WithMany("Items")
-                        .HasForeignKey("ItemTypeId");
-
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Publisher")
                         .WithMany()
                         .HasForeignKey("PublisherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamerMarketApp.Data.Models.ItemSubtype", "SubType")
-                        .WithMany()
-                        .HasForeignKey("SubTypeId")
+                    b.HasOne("GamerMarketApp.Data.Models.ItemType", "Type")
+                        .WithMany("Items")
+                        .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -883,7 +877,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.Navigation("Publisher");
 
-                    b.Navigation("SubType");
+                    b.Navigation("Type");
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.ItemSubtype", b =>

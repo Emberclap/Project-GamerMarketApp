@@ -4,6 +4,7 @@ using GamerMarketApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamerMarketApp.Data.Migrations
 {
     [DbContext(typeof(GamerMarketDbContext))]
-    partial class GamerMarketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241120222728_ChangedItemTypeToItemSubTypeFIx")]
+    partial class ChangedItemTypeToItemSubTypeFIx
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,7 +56,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Games", (string)null);
+                    b.ToTable("Games");
 
                     b.HasData(
                         new
@@ -196,7 +199,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("GamerId");
 
-                    b.ToTable("GamersItems", (string)null);
+                    b.ToTable("GamersItems");
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.Genre", b =>
@@ -214,7 +217,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasKey("GenreId");
 
-                    b.ToTable("Genres", (string)null);
+                    b.ToTable("Genres");
 
                     b.HasData(
                         new
@@ -352,7 +355,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("SubTypeId");
 
-                    b.ToTable("Items", (string)null);
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.ItemSubtype", b =>
@@ -380,7 +383,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("ItemTypeId");
 
-                    b.ToTable("ItemSubtypes", (string)null);
+                    b.ToTable("ItemSubtypes");
 
                     b.HasData(
                         new
@@ -568,7 +571,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasKey("ItemTypeId");
 
-                    b.ToTable("ItemsTypes", (string)null);
+                    b.ToTable("ItemsTypes");
 
                     b.HasData(
                         new
