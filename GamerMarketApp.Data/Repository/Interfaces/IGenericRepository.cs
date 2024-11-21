@@ -8,5 +8,6 @@
         Task UpdateAsync(T Entity);
         Task DeleteAsync(object Id);
         Task SaveAsync();
+        IQueryable<T> GetAllAttached();
     }
 }
