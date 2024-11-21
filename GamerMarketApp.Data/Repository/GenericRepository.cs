@@ -31,6 +31,11 @@ namespace GamerMarketApp.Data.Repository
             return await dbSet.ToListAsync();
         }
 
+        public IQueryable<T> GetAllAttached()
+        {
+            return this.dbSet.AsQueryable();
+        }
+
         public async Task<T?> GetByIdAsync(object Id)
         {
             return await dbSet.FindAsync(Id);
