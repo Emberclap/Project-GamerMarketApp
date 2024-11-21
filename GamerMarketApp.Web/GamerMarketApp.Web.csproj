@@ -29,6 +29,8 @@
 
   <ItemGroup>
     <Folder Include="Commons\" />
+    <Folder Include="Views\Item\" />
+    <Folder Include="wwwroot\Img\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -95,9 +97,11 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\GamerMarket.Data.Models\GamerMarket.Data.Models.csproj" />
+		<ProjectReference Include="..\GamerMarket.Data.Models\GamerMarketApp.Data.Models.csproj" />
 		<ProjectReference Include="..\GamerMarketApp.Commons\GamerMarketApp.Commons.csproj" />
 		<ProjectReference Include="..\GamerMarketApp.Data\GamerMarketApp.Data.csproj" />
+		<ProjectReference Include="..\GamerMarketApp.Services.Data\GamerMarketApp.Services.Data.csproj" />
+		<ProjectReference Include="..\GamerMarketApp.Web.Models\GamerMarketApp.Web.ViewModels.csproj" />
 	</ItemGroup>
 
 

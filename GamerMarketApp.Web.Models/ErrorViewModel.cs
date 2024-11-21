@@ -1,4 +1,4 @@
-namespace GamerMarketApp.Models
+namespace GamerMarketApp.Web.ViewModels
 {
     public class ErrorViewModel
     {

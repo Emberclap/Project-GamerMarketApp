@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamerMarketApp.Web", "GamerMarketApp.Web.csproj", "{98F8A2ED-8E4E-41A0-88F5-383908DE901F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamerMarket.Data.Models", "..\GamerMarket.Data.Models\GamerMarket.Data.Models.csproj", "{ADE822C6-9CCF-4537-882A-5DE11F0CD978}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamerMarketApp.Data.Models", "..\GamerMarket.Data.Models\GamerMarketApp.Data.Models.csproj", "{ADE822C6-9CCF-4537-882A-5DE11F0CD978}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{BF99D997-75B3-4D62-B0DA-5FB5EF67FB18}"
 EndProject
@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamerMarketApp.Data", "..\G
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5A545F33-F4D0-4783-BBA5-03263244AC04}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{64AD9B54-0EFE-4AF4-A7C7-E16BA51ED737}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerMarketApp.Web.ViewModels", "..\GamerMarketApp.Web.Models\GamerMarketApp.Web.ViewModels.csproj", "{FBEF5ED6-945F-4D57-9F09-9E1271EB0C90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerMarketApp.Services.Data", "..\GamerMarketApp.Services.Data\GamerMarketApp.Services.Data.csproj", "{DF63406D-747F-4563-ADBF-932D82908000}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,14 @@ Global
 		{4689CABE-AD5A-4320-A4E5-B738CEC8A2B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4689CABE-AD5A-4320-A4E5-B738CEC8A2B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4689CABE-AD5A-4320-A4E5-B738CEC8A2B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBEF5ED6-945F-4D57-9F09-9E1271EB0C90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBEF5ED6-945F-4D57-9F09-9E1271EB0C90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBEF5ED6-945F-4D57-9F09-9E1271EB0C90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBEF5ED6-945F-4D57-9F09-9E1271EB0C90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF63406D-747F-4563-ADBF-932D82908000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF63406D-747F-4563-ADBF-932D82908000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF63406D-747F-4563-ADBF-932D82908000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF63406D-747F-4563-ADBF-932D82908000}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,7 +59,8 @@ Global
 		{98F8A2ED-8E4E-41A0-88F5-383908DE901F} = {BF99D997-75B3-4D62-B0DA-5FB5EF67FB18}
 		{ADE822C6-9CCF-4537-882A-5DE11F0CD978} = {59F900B6-61EC-4D88-854A-D5A5E0F55FA0}
 		{4689CABE-AD5A-4320-A4E5-B738CEC8A2B8} = {59F900B6-61EC-4D88-854A-D5A5E0F55FA0}
-		{64AD9B54-0EFE-4AF4-A7C7-E16BA51ED737} = {5A545F33-F4D0-4783-BBA5-03263244AC04}
+		{FBEF5ED6-945F-4D57-9F09-9E1271EB0C90} = {BF99D997-75B3-4D62-B0DA-5FB5EF67FB18}
+		{DF63406D-747F-4563-ADBF-932D82908000} = {5A545F33-F4D0-4783-BBA5-03263244AC04}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8AB2BAA2-01BC-440B-8DB3-BBFE37B6911A}
