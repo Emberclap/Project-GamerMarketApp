@@ -3,6 +3,8 @@ using GamerMarketApp.Data.Repository.Interfaces;
 using GamerMarketApp.Data.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using GamerMarketApp.Services.Data.Interfaces;
+using GamerMarketApp.Services.Data;
 
 namespace GamerMarketApp
 {
@@ -24,10 +26,13 @@ namespace GamerMarketApp
                 options.SignIn.RequireConfirmedAccount = true;
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
-                options.Password.RequireUppercase = true;
+                options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
             })
                 .AddEntityFrameworkStores<GamerMarketDbContext>();
+
+            builder.Services.AddScoped<IGameService, GameService>();
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped(typeof(IGenericRepository<>),

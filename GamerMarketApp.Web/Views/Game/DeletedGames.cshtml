@@ -1,0 +1,53 @@
+﻿@using GamerMarketApp.Web.ViewModels.Game;
+@model IEnumerable<GameViewModel>
+@{
+    ViewBag.Title = "Deleted Games";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @foreach (var e in Model)
+    {
+        <div class="card text-dark  col-4">
+            @if (!string.IsNullOrEmpty(e.ImageUrl))
+            {
+                <img src="@e.ImageUrl" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;">
+            }
+            else
+            {
+                <img src="~/img/NoImage.jpg" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;" alt="Placeholder Image">
+            }
+            <div class="card-body d-flex flex-column">
+                <div class="row">
+                    <div class="col">
+                        <div class="title-wrapper" style="height: 6em; overflow: hidden;">
+                            <h3 class="card-title mt-1">@e.Title</h3>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <h5 class="card-title mt-1">@e.Genre</h5>
+                <p class="card-text">@e.Description</p>
+                <div class="row mt-auto">
+                    <form asp-action="BringGameBack" method="post">
+                        <input type="hidden" asp-for="@e.Id" />
+                        <div class="row mt-auto">
+                            <div class="col-6 px-1">
+                                <button asp-controller="Game" asp-action="BringGameBack" asp-route-id="@e.Id" type="submit" class="btn btn-secondary w-100 mb-2">Bring Back</button>
+                            </div>
+                            <div class="col-6 px-1">
+                                <a asp-controller="Game" asp-action="DeleteConfirmed" asp-route-id="@e.Id" class="btn btn-danger w-100 mb-2">HardDelete</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
