@@ -2,6 +2,7 @@
 using GamerMarketApp.Data.Models;
 
 using Microsoft.EntityFrameworkCore;
+using static GamerMarketApp.Commons.EntityValidationConstants;
 
 namespace GamerMarketApp.Data.Repository
 {
@@ -10,20 +11,18 @@ namespace GamerMarketApp.Data.Repository
         protected readonly GamerMarketDbContext context = dbContext;
         protected readonly DbSet<T> dbSet = dbContext.Set<T>();
 
-        public async Task AddAsync(T Entity)
+        public async Task AddAsync(T entity)
         {
-            await dbSet.AddAsync(Entity);
+            await dbSet.AddAsync(entity);
             await SaveAsync();
         }
 
-        public async Task DeleteAsync(object Id)
+        public async Task<bool> DeleteAsync(T entity)
         {
-            var entity = await dbSet.FindAsync(Id);
-            if (entity != null)
-            {
-                dbSet.Remove(entity);
-            }
+            this.dbSet.Remove(entity);
             await SaveAsync();
+
+            return true;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
@@ -36,20 +35,22 @@ namespace GamerMarketApp.Data.Repository
             return this.dbSet.AsQueryable();
         }
 
-        public async Task<T?> GetByIdAsync(object Id)
+        public async Task<T?> GetByIdAsync(int id)
         {
-            return await dbSet.FindAsync(Id);
+            return await dbSet.FindAsync(id);
+
         }
 
+        public async Task<bool> UpdateAsync(T entity)
+        {
+            dbSet.Update(entity);
+            await SaveAsync();
+            return true;
+        }
         public async Task SaveAsync()
         {
             await context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(T Entity)
-        {
-            dbSet.Update(Entity);
-            await SaveAsync();
-        }
     }
 }
