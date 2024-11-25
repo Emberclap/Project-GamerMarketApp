@@ -1,10 +1,11 @@
+using GamerMarketApp.Web.Controllers;
 using GamerMarketApp.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace GamerMarketApp.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
