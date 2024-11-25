@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamerMarketApp.Data.Migrations
 {
     [DbContext(typeof(GamerMarketDbContext))]
-    [Migration("20241120221158_ChangedItemTypeToItemSubType")]
-    partial class ChangedItemTypeToItemSubType
+    [Migration("20241125123104_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -309,7 +309,6 @@ namespace GamerMarketApp.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -335,9 +334,6 @@ namespace GamerMarketApp.Data.Migrations
                     b.Property<string>("PublisherId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("SoldOut")
-                        .HasColumnType("bit");
 
                     b.Property<int>("SubTypeId")
                         .HasColumnType("int");
@@ -867,7 +863,7 @@ namespace GamerMarketApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamerMarketApp.Data.Models.ItemType", "SubType")
+                    b.HasOne("GamerMarketApp.Data.Models.ItemSubtype", "SubType")
                         .WithMany("Items")
                         .HasForeignKey("SubTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -952,11 +948,14 @@ namespace GamerMarketApp.Data.Migrations
                     b.Navigation("Games");
                 });
 
+            modelBuilder.Entity("GamerMarketApp.Data.Models.ItemSubtype", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("GamerMarketApp.Data.Models.ItemType", b =>
                 {
                     b.Navigation("ItemSubtypes");
-
-                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

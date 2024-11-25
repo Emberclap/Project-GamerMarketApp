@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GamerMarketApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class newInitialAfterDatabaseDeletion : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -208,7 +208,7 @@ namespace GamerMarketApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ItemCategories",
+                name: "ItemSubtypes",
                 columns: table => new
                 {
                     SubtypeId = table.Column<int>(type: "int", nullable: false)
@@ -219,9 +219,9 @@ namespace GamerMarketApp.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ItemCategories", x => x.SubtypeId);
+                    table.PrimaryKey("PK_ItemSubtypes", x => x.SubtypeId);
                     table.ForeignKey(
-                        name: "FK_ItemCategories_ItemsTypes_ItemTypeId",
+                        name: "FK_ItemSubtypes_ItemsTypes_ItemTypeId",
                         column: x => x.ItemTypeId,
                         principalTable: "ItemsTypes",
                         principalColumn: "ItemTypeId",
@@ -235,13 +235,13 @@ namespace GamerMarketApp.Data.Migrations
                     ItemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    TypeId = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SubTypeId = table.Column<int>(type: "int", nullable: false),
                     PublisherId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     GameId = table.Column<int>(type: "int", nullable: false),
                     AddedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    SoldOut = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -260,10 +260,10 @@ namespace GamerMarketApp.Data.Migrations
                         principalColumn: "GameId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Items_ItemsTypes_TypeId",
-                        column: x => x.TypeId,
-                        principalTable: "ItemsTypes",
-                        principalColumn: "ItemTypeId",
+                        name: "FK_Items_ItemSubtypes_SubTypeId",
+                        column: x => x.SubTypeId,
+                        principalTable: "ItemSubtypes",
+                        principalColumn: "SubtypeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -352,7 +352,7 @@ namespace GamerMarketApp.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ItemCategories",
+                table: "ItemSubtypes",
                 columns: new[] { "SubtypeId", "Description", "ItemTypeId", "Name" },
                 values: new object[,]
                 {
@@ -432,11 +432,6 @@ namespace GamerMarketApp.Data.Migrations
                 column: "GenreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemCategories_ItemTypeId",
-                table: "ItemCategories",
-                column: "ItemTypeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Items_GameId",
                 table: "Items",
                 column: "GameId");
@@ -447,9 +442,14 @@ namespace GamerMarketApp.Data.Migrations
                 column: "PublisherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Items_TypeId",
+                name: "IX_Items_SubTypeId",
                 table: "Items",
-                column: "TypeId");
+                column: "SubTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemSubtypes_ItemTypeId",
+                table: "ItemSubtypes",
+                column: "ItemTypeId");
         }
 
         /// <inheritdoc />
@@ -474,9 +474,6 @@ namespace GamerMarketApp.Data.Migrations
                 name: "GamersItems");
 
             migrationBuilder.DropTable(
-                name: "ItemCategories");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -489,10 +486,13 @@ namespace GamerMarketApp.Data.Migrations
                 name: "Games");
 
             migrationBuilder.DropTable(
-                name: "ItemsTypes");
+                name: "ItemSubtypes");
 
             migrationBuilder.DropTable(
                 name: "Genres");
+
+            migrationBuilder.DropTable(
+                name: "ItemsTypes");
         }
     }
 }

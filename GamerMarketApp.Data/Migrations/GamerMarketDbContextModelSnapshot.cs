@@ -53,7 +53,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Games", (string)null);
+                    b.ToTable("Games");
 
                     b.HasData(
                         new
@@ -196,7 +196,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("GamerId");
 
-                    b.ToTable("GamersItems", (string)null);
+                    b.ToTable("GamersItems");
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.Genre", b =>
@@ -214,7 +214,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasKey("GenreId");
 
-                    b.ToTable("Genres", (string)null);
+                    b.ToTable("Genres");
 
                     b.HasData(
                         new
@@ -306,7 +306,6 @@ namespace GamerMarketApp.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -319,9 +318,6 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<int?>("ItemTypeId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -336,9 +332,6 @@ namespace GamerMarketApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<bool>("SoldOut")
-                        .HasColumnType("bit");
-
                     b.Property<int>("SubTypeId")
                         .HasColumnType("int");
 
@@ -346,13 +339,11 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.HasIndex("ItemTypeId");
-
                     b.HasIndex("PublisherId");
 
                     b.HasIndex("SubTypeId");
 
-                    b.ToTable("Items", (string)null);
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.ItemSubtype", b =>
@@ -380,7 +371,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("ItemTypeId");
 
-                    b.ToTable("ItemSubtypes", (string)null);
+                    b.ToTable("ItemSubtypes");
 
                     b.HasData(
                         new
@@ -568,7 +559,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasKey("ItemTypeId");
 
-                    b.ToTable("ItemsTypes", (string)null);
+                    b.ToTable("ItemsTypes");
 
                     b.HasData(
                         new
@@ -863,10 +854,6 @@ namespace GamerMarketApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamerMarketApp.Data.Models.ItemType", null)
-                        .WithMany("Items")
-                        .HasForeignKey("ItemTypeId");
-
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Publisher")
                         .WithMany()
                         .HasForeignKey("PublisherId")
@@ -874,7 +861,7 @@ namespace GamerMarketApp.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("GamerMarketApp.Data.Models.ItemSubtype", "SubType")
-                        .WithMany()
+                        .WithMany("Items")
                         .HasForeignKey("SubTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -958,11 +945,14 @@ namespace GamerMarketApp.Data.Migrations
                     b.Navigation("Games");
                 });
 
+            modelBuilder.Entity("GamerMarketApp.Data.Models.ItemSubtype", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("GamerMarketApp.Data.Models.ItemType", b =>
                 {
                     b.Navigation("ItemSubtypes");
-
-                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }
