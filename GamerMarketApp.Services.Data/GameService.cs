@@ -6,11 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GamerMarketApp.Services.Data
 {
-    public class GameService(IGenericRepository<Game> gameRepository,
-        IGenericRepository<Genre> genreRepository) : IGameService
+    public class GameService(IGameRepository gameRepository) : IGameService
     {
-        private readonly IGenericRepository<Game> gameRepository = gameRepository;
-        private readonly IGenericRepository<Genre> genreRepository = genreRepository;
+        private readonly IGameRepository gameRepository = gameRepository;
+        //private readonly IDropdownService dropdownService = dropdownService;
 
         public async Task<IEnumerable<GameViewModel>> GetAllGamesAsync()
         {
@@ -46,7 +45,7 @@ namespace GamerMarketApp.Services.Data
         {
             var model = new GameAddViewModel()
             {
-                Genres = await GetGenres()
+              Genres = await gameRepository.GetGenreAsync()
             };
             return model;
         }
@@ -64,20 +63,19 @@ namespace GamerMarketApp.Services.Data
 
         public async Task<GameAddViewModel> GetEditModelAsync(int id)
         {
-            var model = await gameRepository.GetAllAttached()
-                .Where(g => g.IsDeleted == false)
-                .Select(g => new GameAddViewModel
-                {
-                    Id = g.GameId,
-                    Title = g.Title,
-                    Description = g.Description,
-                    ImageUrl = g.ImageUrl,
-                    GenreId = g.GenreId  
-                })
-                .FirstOrDefaultAsync(g => g.Id == id);
-            
+            var game = await gameRepository
+                .FirstOrDefaultAsync(g => g.GameId == id && g.IsDeleted == false);
 
-            model.Genres = await GetGenres();
+            var model = new GameAddViewModel()
+            {
+                Id = game.GameId,
+                Title = game.Title,
+                Description = game.Description,
+                ImageUrl = game.ImageUrl,
+                GenreId = game.GenreId
+            };
+
+            model.Genres = await gameRepository.GetGenreAsync();
 
             return model;
         }
@@ -149,10 +147,6 @@ namespace GamerMarketApp.Services.Data
 
             await this.gameRepository.UpdateAsync(gameEntity);
         }
-        private async Task<List<Genre>> GetGenres()
-        {
 
-            return (List<Genre>)await this.genreRepository.GetAllAsync();
-        }
     }
 }

@@ -4,6 +4,8 @@ using GamerMarketApp.Services.Data.Interfaces;
 
 namespace GamerMarketApp.Services.Data
 {
+    // Currently not in use!! Thinking of using it like UnitOfWorkService.
+    // Couple of hours to make it work, just to change my mind and decide to go for extended generic repository with a custom query method :D
     public class DropdownService(IGenericRepository<ItemSubtype> itemSubtypeRepository,
         IGenericRepository<Game> gameRepository,
         IGenericRepository<Genre> genreRepository) : IDropdownService
