@@ -2,7 +2,7 @@
 using GamerMarketApp.Data.Models;
 
 using Microsoft.EntityFrameworkCore;
-using static GamerMarketApp.Commons.EntityValidationConstants;
+using System.Linq.Expressions;
 
 namespace GamerMarketApp.Data.Repository
 {
@@ -52,5 +52,12 @@ namespace GamerMarketApp.Data.Repository
             await context.SaveChangesAsync();
         }
 
+        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
+        {
+            var entity = await this.dbSet
+                .FirstOrDefaultAsync(predicate);
+
+            return entity;
+        }
     }
 }
