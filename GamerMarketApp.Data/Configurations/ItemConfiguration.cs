@@ -1,11 +1,5 @@
 ﻿using GamerMarketApp.Data.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.Identity.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GamerMarketApp.Data.Configurations
 {
@@ -41,7 +35,7 @@ namespace GamerMarketApp.Data.Configurations
         }
 
         private static DateTime RandomDate()
-        {
+        { 
             var random = new Random();
             var startDate = new DateTime(2023, 1, 1);
             var endDate = DateTime.Now;
