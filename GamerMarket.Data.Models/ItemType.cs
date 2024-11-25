@@ -14,6 +14,5 @@ namespace GamerMarketApp.Data.Models
 
 
         public virtual ICollection<ItemSubtype> ItemSubtypes { get; set; }  = new HashSet<ItemSubtype>();
-        public virtual ICollection<Item> Items { get; } = new HashSet<Item>();
     }
 }

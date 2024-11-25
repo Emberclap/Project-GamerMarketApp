@@ -14,9 +14,9 @@ namespace GamerMarketApp.Data.Models
         [Required]
         [MaxLength(NameMaxValue)]
         public string Name { get; set; } = null!;
-        [Required]
+
         [MaxLength(DescriptionMaxValue)]
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; }
         [Required]
         public string ImageUrl { get; set; } = null!;
 
@@ -40,9 +40,6 @@ namespace GamerMarketApp.Data.Models
 
         [Precision(18, 2)]
         public decimal Price { get; set; }
-
-        public bool SoldOut { get; set; }
-
         public bool IsDeleted { get; set; }
     }
 }

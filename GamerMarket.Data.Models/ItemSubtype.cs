@@ -20,5 +20,7 @@ namespace GamerMarketApp.Data.Models
         [Required]
         public ItemType ItemType { get; set; } = null!;
 
+        public virtual ICollection<Item> Items { get; } = new HashSet<Item>();
+
     }
 }
