@@ -1,0 +1,59 @@
+﻿@using GamerMarketApp.Web.ViewModels.Item;
+@model ItemAddViewModel
+
+@{
+    ViewData["Title"] = "Add Item";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+
+<hr />
+<div class="row justify-content-center">
+    <div class="col-xl-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" aria-required="true" rows="3"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label">Image Url:</label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubTypeId" class="control-label">Type</label>
+                <select asp-for="SubTypeId" class ="form-control" asp-items="ViewBag.SubTypeId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="GameId" class="control-label">Game</label>
+                <select asp-for="GameId" class ="form-control" asp-items="ViewBag.GameId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddedOn" class="control-label">Date</label>
+                <input asp-for="@Model.AddedOn" class="form-control" aria-required="true" />
+
+                <span asp-validation-for="AddedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
