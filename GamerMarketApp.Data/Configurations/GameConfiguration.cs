@@ -20,7 +20,7 @@ namespace GamerMarketApp.Data.Configurations
                 new Game
                 {
                     GameId = 1,
-                    Title = "Counter-Strike: Global Offensive",
+                    Title = "Counter-Strike: 2",
                     Description = "A competitive first-person shooter where players join terrorists or counter-terrorists in objective-based matches. It features a massive trading market for weapon skins.",
                     ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg",
                     GenreId = 4
@@ -38,7 +38,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 3,
                     Title = "Fortnite",
                     Description = "A vibrant battle royale game with a unique building mechanic. Players compete to survive, featuring purchasable character skins, emotes, and accessories.",
-                    ImageUrl = "https://cdn2.unrealengine.com/fortnite/home/fortnite-logo.jpg",
+                    ImageUrl = "https://image.api.playstation.com/vulcan/ap/rnd/202410/2918/95953c3726f54fba5e6cf53f97b10bcf99e0d43581ae2c55.jpg",
                     GenreId = 14
                 },
                 new Game
@@ -46,7 +46,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 4,
                     Title = "World of Warcraft",
                     Description = "A genre-defining MMORPG where players explore Azeroth, completing quests and engaging in battles. Offers tradable mounts, pets, and unique cosmetic items.",
-                    ImageUrl = "https://bnetcmsus-a.akamaihd.net/cms/blog_header/6m/6MMZ3YS6CUEY1538596859767.jpg",
+                    ImageUrl = "https://bnetcmsus-a.akamaihd.net/cms/blog_header/h9/H9LLMU20DQFJ1725400142786.png",
                     GenreId = 8
                 },
                 new Game
@@ -86,7 +86,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 9,
                     Title = "Roblox",
                     Description = "A creative gaming platform where users can design and play games. Features an expansive marketplace for user-created items and skins.",
-                    ImageUrl = "https://upload.wikimedia.org/wikipedia/en/6/66/Roblox_Logo.png",
+                    ImageUrl = "https://assets-prd.ignimgs.com/2024/09/06/roblox-rdc2024-everythingannounced-blogroll-1725644096329.jpg",
                     GenreId = 15
                 },
                 new Game
@@ -94,7 +94,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 10,
                     Title = "Call of Duty: Warzone",
                     Description = "A high-intensity battle royale with tactical gunfights and squad dynamics. Includes purchasable weapon blueprints, operator skins, and bundles.",
-                    ImageUrl = "https://cdn.callofduty.com/cdn/cod/warzone/home-hero.jpg",
+                    ImageUrl = "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1962663/header.jpg?t=1731603761",
                     GenreId = 14
                 },
                 new Game
@@ -102,7 +102,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 11,
                     Title = "EVE Online",
                     Description = "A space-based MMORPG where players engage in trading, exploration, and massive battles. Features a player-driven economy with tradable ships and skins.",
-                    ImageUrl = "https://cdn1.eveonline.com/community/online/logo.jpg",
+                    ImageUrl = "https://cdn2.unrealengine.com/eve-online-1920x1080-63abdd7114f4.png",
                     GenreId = 8
                 },
                 new Game
@@ -110,7 +110,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 12,
                     Title = "The Elder Scrolls Online",
                     Description = "An MMORPG set in the rich Elder Scrolls universe, featuring expansive quests and dungeons. Players can buy mounts, costumes, and furnishings.",
-                    ImageUrl = "https://images.elderscrollsonline.com/images/fb/fbde43a6da77d05a73830e8722fa245b.jpg",
+                    ImageUrl = "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/306130/header.jpg?t=1726169108",
                     GenreId = 8
                 },
                 new Game
@@ -126,7 +126,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 14,
                     Title = "Minecraft",
                     Description = "A sandbox game where players can build, mine, and explore an infinite world. Offers a marketplace for skins, texture packs, and other in-game content.",
-                    ImageUrl = "https://www.minecraft.net/content/dam/minecraft/logos/og-minecraft-logo.jpg",
+                    ImageUrl = "https://i.ytimg.com/vi_webp/ztNoBI0m_P0/maxresdefault.webp",
                     GenreId = 15
                 }
             };

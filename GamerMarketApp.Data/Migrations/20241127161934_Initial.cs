@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace GamerMarketApp.Data.Migrations
 {
     /// <inheritdoc />
@@ -237,7 +235,7 @@ namespace GamerMarketApp.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SubTypeId = table.Column<int>(type: "int", nullable: false),
+                    SubtypeId = table.Column<int>(type: "int", nullable: false),
                     PublisherId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     GameId = table.Column<int>(type: "int", nullable: false),
                     AddedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -260,8 +258,8 @@ namespace GamerMarketApp.Data.Migrations
                         principalColumn: "GameId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Items_ItemSubtypes_SubTypeId",
-                        column: x => x.SubTypeId,
+                        name: "FK_Items_ItemSubtypes_SubtypeId",
+                        column: x => x.SubtypeId,
                         principalTable: "ItemSubtypes",
                         principalColumn: "SubtypeId",
                         onDelete: ReferentialAction.Cascade);
@@ -289,97 +287,6 @@ namespace GamerMarketApp.Data.Migrations
                         principalTable: "Items",
                         principalColumn: "ItemId",
                         onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.InsertData(
-                table: "Genres",
-                columns: new[] { "GenreId", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Action" },
-                    { 2, "Adventure" },
-                    { 3, "Fighting" },
-                    { 4, "Sports" },
-                    { 5, "Racing" },
-                    { 6, "RPG" },
-                    { 7, "Survival" },
-                    { 8, "MMORPG" },
-                    { 9, "MOBA" },
-                    { 10, "FPS" },
-                    { 11, "Shooter" },
-                    { 12, "Strategy" },
-                    { 13, "Music video game" },
-                    { 14, "Battle royale" },
-                    { 15, "Sandbox" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ItemsTypes",
-                columns: new[] { "ItemTypeId", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Cosmetic Items" },
-                    { 2, "Functional Equipment" },
-                    { 3, "Consumables" },
-                    { 4, "Crafting Materials" },
-                    { 5, "Currency" },
-                    { 6, "Collectibles" },
-                    { 7, "Utility Items" },
-                    { 8, "Housing and Decor Items" },
-                    { 9, "Event-Specific Items" },
-                    { 10, "NFTs (Non-Fungible Tokens)" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Games",
-                columns: new[] { "GameId", "Description", "GenreId", "ImageUrl", "IsDeleted", "Title" },
-                values: new object[,]
-                {
-                    { 1, "A competitive first-person shooter where players join terrorists or counter-terrorists in objective-based matches. It features a massive trading market for weapon skins.", 4, "https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg", false, "Counter-Strike: Global Offensive" },
-                    { 2, "A team-based MOBA game where two teams of five players control heroes with unique abilities to destroy the enemy's base, featuring a robust economy for hero cosmetics.", 9, "https://cdn.akamai.steamstatic.com/steam/apps/570/header.jpg", false, "Dota 2" },
-                    { 3, "A vibrant battle royale game with a unique building mechanic. Players compete to survive, featuring purchasable character skins, emotes, and accessories.", 14, "https://cdn2.unrealengine.com/fortnite/home/fortnite-logo.jpg", false, "Fortnite" },
-                    { 4, "A genre-defining MMORPG where players explore Azeroth, completing quests and engaging in battles. Offers tradable mounts, pets, and unique cosmetic items.", 8, "https://bnetcmsus-a.akamaihd.net/cms/blog_header/6m/6MMZ3YS6CUEY1538596859767.jpg", false, "World of Warcraft" },
-                    { 5, "A classic team-based shooter featuring various character classes. Players trade cosmetic hats, weapons, and items to customize their experience.", 10, "https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg", false, "Team Fortress 2" },
-                    { 6, "A fast-paced strategy game where two teams of champions compete to destroy each other's nexus. Players can purchase skins and accessories to personalize their gameplay.", 9, "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg", false, "League of Legends" },
-                    { 7, "A brutal survival game where players gather resources, build bases, and fend off others. Skins for tools and clothing can be bought and traded.", 7, "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/header.jpg", false, "Rust" },
-                    { 8, "A realistic battle royale game where players fight to survive in large, detailed maps. It features purchasable and tradable weapon skins and outfits.", 14, "https://cdn.cloudflare.steamstatic.com/steam/apps/578080/header.jpg", false, "PUBG: Battlegrounds" },
-                    { 9, "A creative gaming platform where users can design and play games. Features an expansive marketplace for user-created items and skins.", 15, "https://upload.wikimedia.org/wikipedia/en/6/66/Roblox_Logo.png", false, "Roblox" },
-                    { 10, "A high-intensity battle royale with tactical gunfights and squad dynamics. Includes purchasable weapon blueprints, operator skins, and bundles.", 14, "https://cdn.callofduty.com/cdn/cod/warzone/home-hero.jpg", false, "Call of Duty: Warzone" },
-                    { 11, "A space-based MMORPG where players engage in trading, exploration, and massive battles. Features a player-driven economy with tradable ships and skins.", 8, "https://cdn1.eveonline.com/community/online/logo.jpg", false, "EVE Online" },
-                    { 12, "An MMORPG set in the rich Elder Scrolls universe, featuring expansive quests and dungeons. Players can buy mounts, costumes, and furnishings.", 8, "https://images.elderscrollsonline.com/images/fb/fbde43a6da77d05a73830e8722fa245b.jpg", false, "The Elder Scrolls Online" },
-                    { 13, "A fast-paced battle royale with unique hero abilities. Features a variety of skins and cosmetics available for purchase.", 14, "https://cdn.cloudflare.steamstatic.com/steam/apps/1172470/header.jpg", false, "Apex Legends" },
-                    { 14, "A sandbox game where players can build, mine, and explore an infinite world. Offers a marketplace for skins, texture packs, and other in-game content.", 15, "https://www.minecraft.net/content/dam/minecraft/logos/og-minecraft-logo.jpg", false, "Minecraft" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ItemSubtypes",
-                columns: new[] { "SubtypeId", "Description", "ItemTypeId", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Custom appearances for characters, weapons, or vehicles.", 1, "Skins" },
-                    { 2, "Decorative headgear for characters.", 1, "Hats/Helmets" },
-                    { 3, "Custom animations for characters, such as dances or gestures.", 1, "Emotes/Dances" },
-                    { 4, "Customizable graffiti or tags used in-game.", 1, "Sprays" },
-                    { 5, "Companion creatures that follow the player.", 1, "Pets" },
-                    { 6, "Vehicles or creatures used for faster travel or aesthetics.", 1, "Mounts" },
-                    { 7, "Guns, swords, or other items used in combat.", 2, "Weapons" },
-                    { 8, "Gear providing protection or stat boosts.", 2, "Armor" },
-                    { 9, "Transport or combat vehicles, often tradable.", 2, "Vehicles" },
-                    { 10, "Items that restore health points (HP).", 3, "Health Potions" },
-                    { 11, "Temporary stat-boosting consumables.", 3, "Buffs" },
-                    { 12, "Items that resurrect players or allies.", 3, "Revival Items" },
-                    { 13, "Materials used for crafting weapons or armor.", 4, "Ores/Metals" },
-                    { 14, "Ingredients used for alchemy or potion-making.", 4, "Herbs" },
-                    { 15, "Instructions for crafting specific items.", 4, "Blueprints/Recipes" },
-                    { 16, "In-game standard currency for trading.", 5, "Gold/Coins" },
-                    { 17, "Real-money currency for in-game purchases.", 5, "Premium Currency" },
-                    { 18, "Containers with random rewards.", 5, "Loot Boxes/Crates" },
-                    { 19, "Digital or physical cards collected by players.", 6, "Trading Cards" },
-                    { 20, "Items that expand player inventory space.", 7, "Bags/Inventory Space" },
-                    { 21, "Items for decorating player-owned spaces.", 8, "Furniture" },
-                    { 22, "Customizable decorations for in-game housing.", 8, "Wall Art" },
-                    { 23, "Limited-time skins available during events.", 9, "Holiday-Themed Skins" },
-                    { 24, "Unique, tradable assets tied to blockchain technology.", 10, "Blockchain-Based Assets" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -442,9 +349,9 @@ namespace GamerMarketApp.Data.Migrations
                 column: "PublisherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Items_SubTypeId",
+                name: "IX_Items_SubtypeId",
                 table: "Items",
-                column: "SubTypeId");
+                column: "SubtypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemSubtypes_ItemTypeId",
