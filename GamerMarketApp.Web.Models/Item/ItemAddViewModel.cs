@@ -17,7 +17,7 @@ namespace GamerMarketApp.Web.ViewModels.Item
         public string? Description { get; set; }
         [Required]
         public string ImageUrl { get; set; } = null!;
-        public int SubTypeId { get; set; }
+        public int SubtypeId { get; set; }
         public int GameId { get; set; }
         [Required]
         [RegularExpression(@"\d{2}-\d{2}-\d{4}", ErrorMessage = "Invalid date format. Use 'dd-MM-yyyy'.")]
