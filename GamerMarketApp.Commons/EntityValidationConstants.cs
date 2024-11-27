@@ -29,7 +29,7 @@
             public const int DescriptionMinValue = 5;
             public const int DescriptionMaxValue = 500;
 
-            public const string AddedOnFormat = "dd-MM-yyyy";
+            public const string AddedOnFormat = "dd/MM/yyyy";
         }
         public static class ItemType
         {
