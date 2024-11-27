@@ -32,7 +32,7 @@ namespace GamerMarketApp.Data.Repository
 
         public IQueryable<T> GetAllAttached()
         {
-            return this.dbSet.AsQueryable();
+            return this.dbSet.AsQueryable().AsNoTracking();
         }
 
         public async Task<T?> GetByIdAsync(int id)
