@@ -15,13 +15,15 @@ namespace GamerMarketApp.Services.Data.Interfaces
         Task EditItemAsync(ItemAddViewModel model);
         Task SoftDeleteItemAsync(int id);
         Task<ItemDeleteViewModel> GetItemDeleteModelAsync(int id);
-        Task DeleteItemAsync(ItemDeleteViewModel model);
+        Task DeleteItemAsync(int id);
 
         Task<IEnumerable<ItemPreviewViewModel>> GetMyFavoriteItemsAsync(string userId);
         Task AddToFavoriteAsync(string userId, int gameId);
         Task RemoveFromFavoriteAsync(string userId, int gameId);
 
         Task<ItemDetailsViewModel> GetItemDetailsAsync(int id);
+
+        Task<IEnumerable<ItemPreviewViewModel>> GetAllDeletedItemsAsync();
 
     }
 }

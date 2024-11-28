@@ -5,8 +5,8 @@
 <div class="jumbotron text-center bg-dark text-white py-5">
     <h1 class="display-4">Welcome to GMarket</h1>
     <p class="lead">Buy, Sell, and Explore the Best Gaming Items, at the Best Prices.</p>
-    <a class="btn btn-primary btn-lg" href="/items" role="button">Browse Items</a>
-    <a class="btn btn-outline-light btn-lg" href="/sell" role="button">Sell Your Items</a>
+    <a class="btn btn-primary btn-lg" asp-controller="Item" asp-action="index">Browse Items</a>
+    <a class="btn btn-outline-light btn-lg" asp-area="" asp-controller="Item" asp-action="Add">Sell Your Items</a>
 </div>
 
 @* <div class="container my-5">

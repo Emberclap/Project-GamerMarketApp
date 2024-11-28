@@ -5,6 +5,9 @@ using GamerMarketApp.Services.Data.Interfaces;
 using GamerMarketApp.Services.Data;
 using GamerMarketApp.Data.Repository;
 using GamerMarketApp.Data.Repository.Interfaces;
+using static System.Formats.Asn1.AsnWriter;
+using System.Reflection.Emit;
+using GamerMarketApp.Data.Configurations;
 
 namespace GamerMarketApp
 {
@@ -34,6 +37,7 @@ namespace GamerMarketApp
             builder.Services.AddScoped(typeof(IGenericRepository<>),
                 typeof(GenericRepository<>));
             builder.Services.AddScoped<IGameRepository, GameRepository>();
+            builder.Services.AddScoped<IItemRepository, ItemRepository>();
 
             builder.Services.AddScoped<IGameService, GameService>();
             builder.Services.AddScoped<IItemService, ItemService>();
@@ -51,7 +55,7 @@ namespace GamerMarketApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

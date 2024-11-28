@@ -16,11 +16,13 @@ namespace GamerMarketApp.Web.ViewModels.Item
         [StringLength(DescriptionMaxValue, MinimumLength =DescriptionMinValue)]
         public string? Description { get; set; }
         [Required]
+        public string PublisherId { get; set; } = null!;
+        [Required]
         public string ImageUrl { get; set; } = null!;
         public int SubtypeId { get; set; }
         public int GameId { get; set; }
         [Required]
-        [RegularExpression(@"\d{2}-\d{2}-\d{4}", ErrorMessage = "Invalid date format. Use 'dd-MM-yyyy'.")]
+        [RegularExpression(@"\d{2}/\d{2}/\d{4}", ErrorMessage = "Invalid date format. Use 'dd/MM/yyyy'.")]
         public string AddedOn { get; set; } = null!;
 
         [Precision(18, 2)]

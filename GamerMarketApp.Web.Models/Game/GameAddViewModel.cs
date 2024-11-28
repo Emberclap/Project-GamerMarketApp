@@ -18,7 +18,6 @@ namespace GamerMarketApp.Web.ViewModels.Game
         [Required]
         [StringLength(DescriptionMaxValue, MinimumLength = DescriptionMinValue)]
         public string Description { get; set; } = null!;
-
         public int GenreId { get; set; }
 
         public List<Genre> Genres { get; set; } = [];

@@ -3,6 +3,7 @@ using GamerMarketApp.Web.ViewModels.Item;
 using GamerMarketApp.Services.Data.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Globalization;
+using GamerMarketApp.Services.Data;
 
 namespace GamerMarketApp.Web.Controllers
 {
@@ -34,7 +35,7 @@ namespace GamerMarketApp.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize]       
         public async Task<IActionResult> Add()
         {
             var model = await itemService.GetItemAddModelAsync();
@@ -42,12 +43,14 @@ namespace GamerMarketApp.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(ItemAddViewModel model)
         {
             
             if (!ModelState.IsValid)
             {
+                model = await itemService.GetItemAddModelAsync();
                 return View(model);
             }
             
@@ -57,84 +60,85 @@ namespace GamerMarketApp.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Item/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var item = await _context.Items.FindAsync(id);
-            //if (item == null)
-            //{
-            //    return NotFound();
-            //}
-            //ViewData["GameId"] = new SelectList(_context.Games, "GameId", "Title");
-            //ViewData["SubTypeId"] = new SelectList(_context.ItemSubtypes, "SubtypeId", "Name");
-            return View();
-        }
-
-        // POST: Item/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
-            //if (!DateTime
-            //    .TryParseExact(model.AddedOn, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,
-            //    out DateTime addedOn))
-            //{
-            //    throw new InvalidOperationException("Invalid date format.");
-            //}
-            //if (id != item.ItemId)
-            //{
-            //    return NotFound();
-            //}
-
-            //if (ModelState.IsValid)
-            //{
-            //    try
-            //    {
-            //        _context.Update(item);
-            //        await _context.SaveChangesAsync();
-            //    }
-            //    catch (DbUpdateConcurrencyException)
-            //    {
-            //        if (!ItemExists(item.ItemId))
-            //        {
-            //            return NotFound();
-            //        }
-            //        else
-            //        {
-            //            throw;
-            //        }
-            //    }
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //ViewData["GameId"] = new SelectList(_context.Games, "GameId", "Title");
-            //ViewData["SubTypeId"] = new SelectList(_context.ItemSubtypes, "SubtypeId", "Name");
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var model = await itemService.GetItemEditModelAsync(id);
+            if (GetUserId() != model.PublisherId)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            if (model == null)
+            {
+                return NotFound();
+            }
+            
+            return View(model);
         }
 
-        // GET: Item/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(ItemAddViewModel model)
         {
-            if (id == null)
+            if (!DateTime
+                .TryParseExact(model.AddedOn, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,
+                out DateTime addedOn))
             {
-                return NotFound();
+                throw new InvalidOperationException("Invalid date format.");
             }
 
-
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Index));
             }
-
-            return View();
+            await itemService.EditItemAsync(model);
+            return  RedirectToAction(nameof(Index));
         }
 
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            var model = await this.itemService.GetItemDeleteModelAsync(id);
+            return View(model);
+        }
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(ItemDeleteViewModel Model)
+        {
+            if (ModelState.IsValid)
+            {
+                return View(Model);
+            }
+            await this.itemService.SoftDeleteItemAsync(Model.ItemId);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> DeletedItems()
+        {
+            var model = await itemService.GetAllDeletedItemsAsync();
+            return View(model);
+        }
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> HardDelete(int id)
+        {
+            await this.itemService.DeleteItemAsync(id);
+
+            return RedirectToAction(nameof(DeletedItems));
+        }
 
     }
 }
