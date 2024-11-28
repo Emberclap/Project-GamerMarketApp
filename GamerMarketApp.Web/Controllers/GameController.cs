@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using GamerMarketApp.Services.Data.Interfaces;
 using GamerMarketApp.Web.ViewModels.Game;
@@ -8,8 +6,8 @@ using GamerMarketApp.Web.ViewModels.Game;
 
 namespace GamerMarketApp.Web.Controllers
 {
-   
-    public class GameController(IGameService gameService) : Controller
+
+    public class GameController(IGameService gameService) : BaseController
     {
         private readonly IGameService gameService = gameService;
 
@@ -54,6 +52,10 @@ namespace GamerMarketApp.Web.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var model = await gameService.GetEditModelAsync(id);
+            //if (GetUserId() != model.Publisher)
+            //{
+            //    return RedirectToAction(nameof(AllGames));
+            //}
             return View(model);
             
         }
@@ -67,6 +69,11 @@ namespace GamerMarketApp.Web.Controllers
             {
                 return View(model);
             }
+            //ToDo: Moderator permission
+            //if (GetUserId()
+            //{
+            //    return RedirectToAction(nameof(AllGames));
+            //}
             await this.gameService.EditGameAsync(model);
 
             return RedirectToAction(nameof(AllGames));
@@ -75,9 +82,13 @@ namespace GamerMarketApp.Web.Controllers
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Delete(int id)
-        {
+        {      
             var model = await gameService.GetGameDeleteModelAsync(id);
-            return View(model);
+            if (model == null)
+            {
+                return NotFound(model);
+            }
+                return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

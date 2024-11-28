@@ -23,7 +23,6 @@ namespace GamerMarketApp.Services.Data
                     Genre = g.Genre.Name,
                     Description = g.Description,
                 })
-                .AsNoTracking()
                 .ToListAsync();
         }
         public async Task<IEnumerable<GameViewModel>> GetAllDeletedGamesAsync()
@@ -38,14 +37,13 @@ namespace GamerMarketApp.Services.Data
                     Genre = g.Genre.Name,
                     Description = g.Description,
                 })
-                .AsNoTracking()
                 .ToListAsync();
         }
         public async Task<GameAddViewModel> GetAddModelAsync()
         {
             var model = new GameAddViewModel()
             {
-              Genres = await gameRepository.GetGenreAsync()
+                Genres = (List<Genre>)await gameRepository.GetGenreAsync()
             };
             return model;
         }
@@ -75,13 +73,13 @@ namespace GamerMarketApp.Services.Data
                 GenreId = game.GenreId
             };
 
-            model.Genres = await gameRepository.GetGenreAsync();
+            model.Genres = (List<Genre>)await gameRepository.GetGenreAsync();
 
             return model;
         }
         public async Task EditGameAsync(GameAddViewModel model)
         {
-           
+
             var gameEntity = new Game()
             {
                 GameId = model.Id,
@@ -95,15 +93,15 @@ namespace GamerMarketApp.Services.Data
 
         public async Task<GameConfirmDeleteViewModel> GetConfirmDeleteModelAsync(int id)
         {
-            var model = await gameRepository.GetAllAttached()
-                .Select(g => new GameConfirmDeleteViewModel()
-                {
-                    Id = g.GameId,
-                    Title = g.Title,
-                    ImageUrl = g.ImageUrl
-                })
-                .FirstOrDefaultAsync(g => g.Id == id);
+            var gameToDelete = await gameRepository
+                .FirstOrDefaultAsync(g => g.GameId == id && !g.IsDeleted);
 
+            var model = new GameConfirmDeleteViewModel()
+            {
+                Id = gameToDelete.GameId,
+                Title = gameToDelete.Title,
+                ImageUrl = gameToDelete.ImageUrl
+            };
             return model;
         }
 
@@ -112,12 +110,12 @@ namespace GamerMarketApp.Services.Data
             var model = await gameRepository.GetAllAttached()
                 .Where(g => g.IsDeleted == false)
                 .Select(g => new GameDeleteViewModel
-                {
+            {
                     Id = g.GameId,
                     Title = g.Title,
                     ImageUrl = g.ImageUrl,
                     Description = g.Description,
-                    Genre = g.Genre.Name,
+                    Genre = g.Genre.Name
                 })
                 .FirstOrDefaultAsync(g => g.Id == id);
 
@@ -129,7 +127,7 @@ namespace GamerMarketApp.Services.Data
             var gameEntity = await gameRepository.GetByIdAsync(model.Id);
 
             await gameRepository.DeleteAsync(gameEntity);
-            
+
         }
         public async Task UndoSoftDeleteGameAsync(int id)
         {
@@ -142,7 +140,7 @@ namespace GamerMarketApp.Services.Data
         public async Task SoftDeleteGameAsync(int id)
         {
             var gameEntity = await gameRepository.GetByIdAsync(id);
-            
+
             gameEntity.IsDeleted = true;
 
             await this.gameRepository.UpdateAsync(gameEntity);
