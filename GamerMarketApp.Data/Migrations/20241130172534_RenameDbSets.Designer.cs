@@ -4,6 +4,7 @@ using GamerMarketApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamerMarketApp.Data.Migrations
 {
     [DbContext(typeof(GamerMarketDbContext))]
-    partial class GamerMarketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241130172534_RenameDbSets")]
+    partial class RenameDbSets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -611,7 +614,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UsersItems");
+                    b.ToTable("UserItems");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -868,7 +871,7 @@ namespace GamerMarketApp.Data.Migrations
             modelBuilder.Entity("GamerMarketApp.Data.Models.UserItem", b =>
                 {
                     b.HasOne("GamerMarketApp.Data.Models.Item", "Item")
-                        .WithMany("UserItems")
+                        .WithMany("GamersItems")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -947,7 +950,7 @@ namespace GamerMarketApp.Data.Migrations
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.Item", b =>
                 {
-                    b.Navigation("UserItems");
+                    b.Navigation("GamersItems");
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.ItemSubtype", b =>

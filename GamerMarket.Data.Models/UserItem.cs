@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GamerMarketApp.Data.Models
 {
-    [PrimaryKey(nameof(ItemId), nameof(GamerId))]
-    public class GamerItem
+    [PrimaryKey(nameof(ItemId), nameof(UserId))]
+    public class UserItem
     {
         [ForeignKey(nameof(Item))]
         public int ItemId { get; set; }
@@ -14,9 +14,9 @@ namespace GamerMarketApp.Data.Models
         public Item Item { get; set; } = null!;
 
         [Required]
-        [ForeignKey(nameof(Gamer))]
-        public string GamerId { get; set; } = null!;
+        [ForeignKey(nameof(User))]
+        public string UserId { get; set; } = null!;
         [Required]
-        public IdentityUser Gamer { get; set; } = null!;
+        public IdentityUser User { get; set; } = null!;
     }
 }

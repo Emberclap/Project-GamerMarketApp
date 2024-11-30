@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamerMarketApp.Data.Migrations
 {
     [DbContext(typeof(GamerMarketDbContext))]
-    [Migration("20241127162343_InitialSeeding")]
-    partial class InitialSeeding
+    [Migration("20241130183541_RenameDbSets2")]
+    partial class RenameDbSets2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -185,21 +185,6 @@ namespace GamerMarketApp.Data.Migrations
                             IsDeleted = false,
                             Title = "Minecraft"
                         });
-                });
-
-            modelBuilder.Entity("GamerMarketApp.Data.Models.GamerItem", b =>
-                {
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("GamerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ItemId", "GamerId");
-
-                    b.HasIndex("GamerId");
-
-                    b.ToTable("GamersItems");
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.Genre", b =>
@@ -562,7 +547,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasKey("ItemTypeId");
 
-                    b.ToTable("ItemsTypes");
+                    b.ToTable("ItemTypes");
 
                     b.HasData(
                         new
@@ -615,6 +600,21 @@ namespace GamerMarketApp.Data.Migrations
                             ItemTypeId = 10,
                             Name = "NFTs (Non-Fungible Tokens)"
                         });
+                });
+
+            modelBuilder.Entity("GamerMarketApp.Data.Models.UserItem", b =>
+                {
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ItemId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UsersItems");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -830,25 +830,6 @@ namespace GamerMarketApp.Data.Migrations
                     b.Navigation("Genre");
                 });
 
-            modelBuilder.Entity("GamerMarketApp.Data.Models.GamerItem", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Gamer")
-                        .WithMany()
-                        .HasForeignKey("GamerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GamerMarketApp.Data.Models.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Gamer");
-
-                    b.Navigation("Item");
-                });
-
             modelBuilder.Entity("GamerMarketApp.Data.Models.Item", b =>
                 {
                     b.HasOne("GamerMarketApp.Data.Models.Game", "Game")
@@ -885,6 +866,25 @@ namespace GamerMarketApp.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("ItemType");
+                });
+
+            modelBuilder.Entity("GamerMarketApp.Data.Models.UserItem", b =>
+                {
+                    b.HasOne("GamerMarketApp.Data.Models.Item", "Item")
+                        .WithMany("UserItems")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -946,6 +946,11 @@ namespace GamerMarketApp.Data.Migrations
             modelBuilder.Entity("GamerMarketApp.Data.Models.Genre", b =>
                 {
                     b.Navigation("Games");
+                });
+
+            modelBuilder.Entity("GamerMarketApp.Data.Models.Item", b =>
+                {
+                    b.Navigation("UserItems");
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.ItemSubtype", b =>

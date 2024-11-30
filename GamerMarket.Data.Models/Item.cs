@@ -41,5 +41,8 @@ namespace GamerMarketApp.Data.Models
         [Precision(18, 2)]
         public decimal Price { get; set; }
         public bool IsDeleted { get; set; }
+
+        public virtual ICollection<UserItem> UserItems { get; set; } = new HashSet<UserItem>();
+
     }
 }
