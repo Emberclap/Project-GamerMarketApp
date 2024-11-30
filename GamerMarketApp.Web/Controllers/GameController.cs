@@ -19,6 +19,7 @@ namespace GamerMarketApp.Web.Controllers
             return View(model);
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> DeletedGames()
         {
             var model = await gameService.GetAllDeletedGamesAsync();
@@ -91,6 +92,7 @@ namespace GamerMarketApp.Web.Controllers
                 return View(model);
         }
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SoftDelete(int id)
         {
@@ -99,6 +101,7 @@ namespace GamerMarketApp.Web.Controllers
             return RedirectToAction(nameof(AllGames));
         }
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> BringGameBack(int id)
         {
