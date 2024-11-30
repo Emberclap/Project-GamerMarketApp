@@ -8,57 +8,57 @@
 <h2 class="text-center">@ViewBag.Title</h2>
 
 <div class="card container col-4">
-    <form asp-action="Details" method="post">
-        <input type="hidden" asp-for="ItemId" />
-        @if (!string.IsNullOrEmpty(Model.ImageUrl))
-        {
-            <img src="@Model.ImageUrl" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;">
-        }
-        else
-        {
-            <img src="~/img/NoImage.jpg" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;" alt="Placeholder Image">
-        }
-        <div class="card-body d-flex flex-column">
-            <div class="row">
-                <div class="col">
-                    <div class="title-wrapper" style="height: 6em; overflow: hidden;">
-                        <h1 class="card-title text-success mt-1">@Model.Name</h1>
-                        <p class="text-light">@Model.Game</p>
-                    </div>
+    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+    {
+        <img src="@Model.ImageUrl" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;">
+    }
+    else
+    {
+        <img src="~/img/NoImage.jpg" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;" alt="Placeholder Image">
+    }
+    <div class="card-body d-flex flex-column">
+        <div class="row">
+            <div class="col">
+                <div class="title-wrapper" style="height: 6em; overflow: hidden;">
+                    <h1 class="card-title text-success mt-1">@Model.Name</h1>
+                    <p class="text-light">@Model.Game</p>
                 </div>
             </div>
-            <h3 class="card-title text-light">€ @Model.Price</h3>
-            <p class="card-text">@Model.Description</p>
-            <hr />
-            <div class="mt-auto">
-                <p class="text-body">Added On: @Model.AddedOn </p>
-                <p class="text-body">Owned By: @Model.Publisher </p>
-            </div>
+        </div>
+        <h3 class="card-title text-light">€ @Model.Price</h3>
+        <p class="card-text">@Model.Description</p>
+        <hr />
+        <div class="mt-auto">
+            <p class="text-body">Added On: @Model.AddedOn </p>
+            <p class="text-body">Owned By: @Model.Publisher </p>
+        </div>
+        <form method="post">
+            <input type="hidden" asp-for="ItemId" />
             @if (User?.Identity?.IsAuthenticated ?? false)
             {
                 @if (User?.Identity?.Name != Model.Publisher)
                 {
                     <div class="row mt-auto">
                         <div class="col-6 px-1">
-                        <a asp-controller="Item" asp-action="AddToCart" asp-route-id="@Model.ItemId" class="btn btn-secondary w-100 mb-2">Add to Cart</a>
+                            <button asp-controller="" asp-action="AddToCart" asp-route-id="@Model.ItemId" type="submit" class="btn btn-secondary w-100 mb-2">Add to Cart</button>
+                        </div>
+                        <div class="col-6 px-1">
+                            <button asp-controller="Watchlist" asp-action="AddToMyWatchlist" asp-route-id="@Model.ItemId" type="submit" class="btn btn-primary w-100 mb-2">Add to Watchlist</button>
+                        </div>
                     </div>
-                    <div class="col-6 px-1">
-                        <a asp-controller="Watchlist" asp-action="AddToMyWatchList" asp-route-id="@Model.ItemId" class="btn btn-info w-100 mb-2">Add to Watchlist</a>
-                    </div>
-                </div>
                 }
                 else
                 {
-                <div class="row mt-auto">
-                    <div class="col-6 px-1">
-                        <a asp-controller="Item" asp-action="Edit" asp-route-id="@Model.ItemId" class="btn btn-primary w-100 mb-2">Edit</a>
+                    <div class="row mt-auto">
+                        <div class="col-6 px-1">
+                            <a asp-controller="Item" asp-action="Edit" asp-route-id="@Model.ItemId" class="btn btn-primary w-100 mb-2">Edit</a>
+                        </div>
+                        <div class="col-6 px-1">
+                            <a asp-controller="Item" asp-action="Delete" asp-route-id="@Model.ItemId" class="btn btn-danger w-100 mb-2">Delete</a>
+                        </div>
                     </div>
-                    <div class="col-6 px-1">
-                        <a asp-controller="Item" asp-action="Delete" asp-route-id="@Model.ItemId" class="btn btn-danger w-100 mb-2">Delete</a>
-                    </div>
-                </div>
                 }
             }
-        </div>
-    </form>
+        </form>
+    </div>
 </div>

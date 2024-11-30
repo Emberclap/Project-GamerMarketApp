@@ -24,7 +24,7 @@ namespace GamerMarketApp.Web.Controllers
         {
             var userId = GetUserId();
             await watchlistService.AddToWatchlistAsync(userId, id);
-            return RedirectToAction("Index", "Item");
+            return RedirectToAction(nameof(Index));
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

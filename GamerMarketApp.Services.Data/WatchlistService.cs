@@ -39,7 +39,7 @@ namespace GamerMarketApp.Services.Data
                     Game = ui.Item.Game.Title,
                     ImageUrl = ui.Item.ImageUrl,
                     Subtype = ui.Item.Subtype.Name,
-                    Publisher = ui.Item.PublisherId,
+                    Publisher = ui.Item.Publisher.UserName,
                     Price = ui.Item.Price.ToString("# ###.00"),
                 })
                 .ToListAsync();
