@@ -4,7 +4,6 @@
 
 using System;
 using System.Threading.Tasks;
-using GamerMarketApp.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

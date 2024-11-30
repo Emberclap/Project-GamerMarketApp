@@ -3,6 +3,7 @@ using GamerMarketApp.Web.ViewModels.Item;
 using GamerMarketApp.Services.Data.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Globalization;
+using GamerMarketApp.Services.Data;
 
 namespace GamerMarketApp.Web.Controllers
 {
@@ -83,7 +84,7 @@ namespace GamerMarketApp.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(ItemEditViewModel model)
+        public async Task<IActionResult> Edit(ItemAddViewModel model)
         {
             if (!DateTime
                 .TryParseExact(model.AddedOn, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,

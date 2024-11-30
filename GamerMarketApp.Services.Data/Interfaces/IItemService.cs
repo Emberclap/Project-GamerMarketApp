@@ -4,15 +4,26 @@ namespace GamerMarketApp.Services.Data.Interfaces
 {
     public interface IItemService
     {
+
         Task<ItemAddViewModel> GetItemAddModelAsync();
+
         Task AddItemAsync(ItemAddViewModel model , string userId);
+
         Task<IEnumerable<ItemPreviewViewModel>> GetAllItemsAsync();
-        Task<ItemEditViewModel> GetItemEditModelAsync(int id);
-        Task EditItemAsync(ItemEditViewModel model);
+
+        Task<ItemAddViewModel> GetItemEditModelAsync(int id);
+        Task EditItemAsync(ItemAddViewModel model);
         Task SoftDeleteItemAsync(int id);
         Task<ItemDeleteViewModel> GetItemDeleteModelAsync(int id);
         Task DeleteItemAsync(int id);
+
+        Task<IEnumerable<ItemPreviewViewModel>> GetMyFavoriteItemsAsync(string userId);
+        Task AddToFavoriteAsync(string userId, int gameId);
+        Task RemoveFromFavoriteAsync(string userId, int gameId);
+
         Task<ItemDetailsViewModel> GetItemDetailsAsync(int id);
+
         Task<IEnumerable<ItemPreviewViewModel>> GetAllDeletedItemsAsync();
+
     }
 }

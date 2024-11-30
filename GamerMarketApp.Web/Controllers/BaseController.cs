@@ -4,10 +4,9 @@ using System.Security.Claims;
 
 namespace GamerMarketApp.Web.Controllers
 {
-    
+    [Authorize]
     public class BaseController : Controller
     {
-        [Authorize]
         protected string GetUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;

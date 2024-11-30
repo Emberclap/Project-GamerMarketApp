@@ -1,11 +1,13 @@
 using GamerMarketApp.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using GamerMarketApp.Services.Data.Interfaces;
 using GamerMarketApp.Services.Data;
 using GamerMarketApp.Data.Repository;
 using GamerMarketApp.Data.Repository.Interfaces;
-using GamerMarketApp.Data.Models;
-using Microsoft.AspNetCore.Identity;
+using static System.Formats.Asn1.AsnWriter;
+using System.Reflection.Emit;
+using GamerMarketApp.Data.Configurations;
 
 namespace GamerMarketApp
 {
@@ -32,7 +34,6 @@ namespace GamerMarketApp
                 options.Password.RequireNonAlphanumeric = false;
             })
                 .AddEntityFrameworkStores<GamerMarketDbContext>();
-
             builder.Services.AddScoped(typeof(IGenericRepository<>),
                 typeof(GenericRepository<>));
             builder.Services.AddScoped<IGameRepository, GameRepository>();
@@ -40,8 +41,6 @@ namespace GamerMarketApp
 
             builder.Services.AddScoped<IGameService, GameService>();
             builder.Services.AddScoped<IItemService, ItemService>();
-            builder.Services.AddScoped<IWatchlistService, WatchlistService>();
-
             builder.Services.AddControllersWithViews();
             var app = builder.Build();
 
