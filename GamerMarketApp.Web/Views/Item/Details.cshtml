@@ -36,14 +36,19 @@
             </div>
             @if (User?.Identity?.IsAuthenticated ?? false)
             {
-                <div class="row mt-auto">
-                    <div class="col-6 px-1">
+                @if (User?.Identity?.Name != Model.Publisher)
+                {
+                    <div class="row mt-auto">
+                        <div class="col-6 px-1">
                         <a asp-controller="Item" asp-action="AddToCart" asp-route-id="@Model.ItemId" class="btn btn-secondary w-100 mb-2">Add to Cart</a>
                     </div>
                     <div class="col-6 px-1">
-                        <a asp-controller="Item" asp-action="AddToWatchList" asp-route-id="@Model.ItemId" class="btn btn-info w-100 mb-2">Add to Watchlist</a>
+                        <a asp-controller="Watchlist" asp-action="AddToMyWatchList" asp-route-id="@Model.ItemId" class="btn btn-info w-100 mb-2">Add to Watchlist</a>
                     </div>
                 </div>
+                }
+                else
+                {
                 <div class="row mt-auto">
                     <div class="col-6 px-1">
                         <a asp-controller="Item" asp-action="Edit" asp-route-id="@Model.ItemId" class="btn btn-primary w-100 mb-2">Edit</a>
@@ -52,6 +57,7 @@
                         <a asp-controller="Item" asp-action="Delete" asp-route-id="@Model.ItemId" class="btn btn-danger w-100 mb-2">Delete</a>
                     </div>
                 </div>
+                }
             }
         </div>
     </form>

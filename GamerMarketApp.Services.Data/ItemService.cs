@@ -34,11 +34,6 @@ namespace GamerMarketApp.Services.Data
             await itemRepository.AddAsync(Item);
         }
 
-        public Task AddToFavoriteAsync(string userId, int gameId)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task DeleteItemAsync(int id)
         {
             var entity = await itemRepository
@@ -46,7 +41,7 @@ namespace GamerMarketApp.Services.Data
             await itemRepository.DeleteAsync(entity);
         }
 
-        public async Task EditItemAsync(ItemAddViewModel model)
+        public async Task EditItemAsync(ItemEditViewModel model)
         {
             if (model == null)
             {
@@ -86,6 +81,7 @@ namespace GamerMarketApp.Services.Data
                    Game = i.Game.Title,
                    ImageUrl = i.ImageUrl,
                    Subtype = i.Subtype.Name,
+                   Publisher = i.Publisher.UserName,
                    Price = i.Price.ToString("# ###.00"),
                })
                .ToListAsync();
@@ -127,11 +123,11 @@ namespace GamerMarketApp.Services.Data
             return await itemRepository.GetItemDetailsAsync(id);
         }
 
-        public async Task<ItemAddViewModel> GetItemEditModelAsync(int id)
+        public async Task<ItemEditViewModel> GetItemEditModelAsync(int id)
         {
             var item = await itemRepository.FirstOrDefaultAsync(g => g.ItemId == id);
 
-            var model = new ItemAddViewModel()
+            var model = new ItemEditViewModel()
             {
                 ItemId = item.ItemId,
                 Name = item.Name,
@@ -146,16 +142,6 @@ namespace GamerMarketApp.Services.Data
             model.Games = (List<Game>)await itemRepository.GetGamesAsync();
             model.ItemSubtypes = (List<ItemSubtype>)await itemRepository.GetItemSubtypesAsync();
             return model;
-        }
-
-        public Task<IEnumerable<ItemPreviewViewModel>> GetMyFavoriteItemsAsync(string userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task RemoveFromFavoriteAsync(string userId, int gameId)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task SoftDeleteItemAsync(int id)
@@ -179,7 +165,8 @@ namespace GamerMarketApp.Services.Data
                     Game = i.Game.Title,
                     Description = i.Description,
                     Price = i.Price.ToString("# ###.00"),
-                    Subtype = i.Subtype.Name
+                    Subtype = i.Subtype.Name,
+                    Publisher = i.Publisher.UserName,
                 })
                 .ToListAsync();
         }
