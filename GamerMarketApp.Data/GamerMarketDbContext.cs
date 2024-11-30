@@ -12,7 +12,7 @@ namespace GamerMarketApp.Data
         {
             
         }
-        public GamerMarketDbContext(DbContextOptions<GamerMarketDbContext> options)
+        public GamerMarketDbContext(DbContextOptions options)
             : base(options)
         {
         }
@@ -21,8 +21,8 @@ namespace GamerMarketApp.Data
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<ItemSubtype> ItemSubtypes { get; set; }
-        public virtual DbSet<ItemType> ItemsTypes { get; set; }
-        public virtual DbSet<GamerItem> GamersItems { get; set; }
+        public virtual DbSet<ItemType> ItemTypes { get; set; }
+        public virtual DbSet<UserItem> UsersItems { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
