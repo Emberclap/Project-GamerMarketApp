@@ -16,8 +16,6 @@ namespace GamerMarketApp.Web.ViewModels.Item
         [StringLength(DescriptionMaxValue, MinimumLength =DescriptionMinValue)]
         public string? Description { get; set; }
         [Required]
-        public string PublisherId { get; set; } = null!;
-        [Required]
         public string ImageUrl { get; set; } = null!;
         public int SubtypeId { get; set; }
         public int GameId { get; set; }
