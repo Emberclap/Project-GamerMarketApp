@@ -22,4 +22,8 @@
     <ProjectReference Include="..\GamerMarketApp.Web.Models\GamerMarketApp.Web.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MIgrations\" />
+  </ItemGroup>
+
 </Project>

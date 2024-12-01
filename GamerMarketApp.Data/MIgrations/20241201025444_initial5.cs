@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GamerMarketApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial5 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -66,7 +66,7 @@ namespace GamerMarketApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ItemsTypes",
+                name: "ItemTypes",
                 columns: table => new
                 {
                     ItemTypeId = table.Column<int>(type: "int", nullable: false)
@@ -75,7 +75,7 @@ namespace GamerMarketApp.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ItemsTypes", x => x.ItemTypeId);
+                    table.PrimaryKey("PK_ItemTypes", x => x.ItemTypeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -221,9 +221,9 @@ namespace GamerMarketApp.Data.Migrations
                 {
                     table.PrimaryKey("PK_ItemSubtypes", x => x.SubtypeId);
                     table.ForeignKey(
-                        name: "FK_ItemSubtypes_ItemsTypes_ItemTypeId",
+                        name: "FK_ItemSubtypes_ItemTypes_ItemTypeId",
                         column: x => x.ItemTypeId,
-                        principalTable: "ItemsTypes",
+                        principalTable: "ItemTypes",
                         principalColumn: "ItemTypeId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -268,28 +268,38 @@ namespace GamerMarketApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GamersItems",
+                name: "UsersItems",
                 columns: table => new
                 {
                     ItemId = table.Column<int>(type: "int", nullable: false),
-                    GamerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GamersItems", x => new { x.ItemId, x.GamerId });
+                    table.PrimaryKey("PK_UsersItems", x => new { x.ItemId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_GamersItems_AspNetUsers_GamerId",
-                        column: x => x.GamerId,
+                        name: "FK_UsersItems_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GamersItems_Items_ItemId",
+                        name: "FK_UsersItems_Items_ItemId",
                         column: x => x.ItemId,
                         principalTable: "Items",
                         principalColumn: "ItemId",
                         onDelete: ReferentialAction.NoAction);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "1", null, "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 0, "8b80bae2-64a1-492d-85ed-8cc426d0b341", "admin@example.com", true, false, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", "AQAAAAIAAYagAAAAEF6MArzVR2cY/yANjQ7OFiJbXVTn9oOObQoO0JDmOqlhQpYOW7nv9w7+PF6F09XsIA==", null, false, "9e06e609-8f14-4a31-a713-200c74f124b8", false, "admin@example.com" });
 
             migrationBuilder.InsertData(
                 table: "Genres",
@@ -314,7 +324,7 @@ namespace GamerMarketApp.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ItemsTypes",
+                table: "ItemTypes",
                 columns: new[] { "ItemTypeId", "Name" },
                 values: new object[,]
                 {
@@ -329,6 +339,11 @@ namespace GamerMarketApp.Data.Migrations
                     { 9, "Event-Specific Items" },
                     { 10, "NFTs (Non-Fungible Tokens)" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "1", "a75b8366-0bac-46e0-9e94-e9cfaf771b3d" });
 
             migrationBuilder.InsertData(
                 table: "Games",
@@ -382,6 +397,23 @@ namespace GamerMarketApp.Data.Migrations
                     { 24, "Unique, tradable assets tied to blockchain technology.", 10, "Blockchain-Based Assets" }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Items",
+                columns: new[] { "ItemId", "AddedOn", "Description", "GameId", "ImageUrl", "IsDeleted", "Name", "Price", "PublisherId", "SubtypeId" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "A rare arcana skin for Pudge, featuring stunning visual effects.", 2, "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUivB9aSQPRVees2c6cQ0hwIgFot6imKglhnfWbdz8SuYjkw4SJz_OmZrjUlGoD6px307yV9Ir23lK18hZpN2H7IIGLMlhprnEbA94/360fx360f", false, "Feast of Abscession", 22.9m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
+                    { 2, new DateTime(2023, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "A legendary knife skin for CS:GO with sleek animations and rare patterns.", 1, "https://xn--b1agb1afb.com/image/cache/catalog/2128/2129/viber_%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_2019-12-05_11-15-18-800x800w.jpg", false, "Karambit", 199.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
+                    { 3, new DateTime(2023, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "An epic astronaut-themed skin for Fortnite, perfect for galactic explorers.", 3, "https://qudahalloween.com/cdn/shop/articles/Dark-Voyager-costume-featured_1201x.jpg?v=1719395076", false, "Dark Voyager", 14.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
+                    { 4, new DateTime(2023, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "A dynamic skin for Lux that changes elements during the match.", 6, "https://i.pinimg.com/originals/f8/31/92/f83192912b8b605cc046810c47e9b8e7.jpg", false, "Elementalist Lux", 24.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
+                    { 5, new DateTime(2023, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "A rare arcana skin for Pudge, featuring stunning visual effects.", 2, "https://dota-showcase.com/storage/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style2.png", false, "Manifold Paradox", 19.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
+                    { 6, new DateTime(2023, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "The fabled blades that shattered the Anvil Magus Hroth. Its terrible weight dented and shattered his iron shell, just as its blades tore into the enchanted hide beneath.", 2, "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXB9AJbIo8h5hlcX0TVVduv287XVk5LJxFZsragejhs0uHPdHMXuIzgwtaIk6_wMuvUwDoF7pJ12-_D8Ijw0FG1-UVpMTr2LYGQdVA2fxiOrTHuJria/360fx360f", false, "Inscribed The Basher Blades", 6.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
+                    { 7, new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "High risk and high reward, the infamous AWP is recognizable by its signature report and one-shot, one-kill policy. It has been painted by airbrushing transparent paints that fade together over a chrome base coat. This isn't just a weapon, it's a conversation piece - Imogen, Arms Dealer In Training", 1, "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAZh7PLfYQJE7dizq4yCkP_gfezXxj0IvJBy2rrH9NSh2VXs80VsYWGnd9SWcAFoaFCEqVa7wu3oh5Gi_MOeScxOzqI/360fx360f", false, "AWP | Fade", 1799.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 7 },
+                    { 8, new DateTime(2024, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "A unique skin for Wraith that delves into her mysterious past.", 13, "https://cdnb.artstation.com/p/assets/images/images/027/923/487/4k/gary-huang-voidwalker-master.jpg?1592962782", false, "Wraith Voidwalker", 11.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
+                    { 9, new DateTime(2023, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "An ultra-rare mount with a ghostly tiger aesthetic.", 4, "https://wow.zamimg.com/uploads/screenshots/normal/1079770-reins-of-the-swift-spectral-tiger.jpg", false, "Swift Spectral Tiger", 499.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 6 },
+                    { 10, new DateTime(2024, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brutosaurs are used by the Zandalari Empire as both weapons of war and enormous, mobile trading posts.", 4, "https://wow.zamimg.com/uploads/screenshots/normal/742674-reins-of-the-mighty-caravan-brutosaur.jpg", false, "Reins of the Mighty Caravan Brutosaur", 290.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 6 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -422,11 +454,6 @@ namespace GamerMarketApp.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GamersItems_GamerId",
-                table: "GamersItems",
-                column: "GamerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Games_GenreId",
                 table: "Games",
                 column: "GenreId");
@@ -450,6 +477,11 @@ namespace GamerMarketApp.Data.Migrations
                 name: "IX_ItemSubtypes_ItemTypeId",
                 table: "ItemSubtypes",
                 column: "ItemTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersItems_UserId",
+                table: "UsersItems",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -471,7 +503,7 @@ namespace GamerMarketApp.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "GamersItems");
+                name: "UsersItems");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -492,7 +524,7 @@ namespace GamerMarketApp.Data.Migrations
                 name: "Genres");
 
             migrationBuilder.DropTable(
-                name: "ItemsTypes");
+                name: "ItemTypes");
         }
     }
 }

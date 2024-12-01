@@ -1,16 +1,15 @@
 ﻿using GamerMarketApp.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GamerMarketApp.Data.Configurations
 {
-    public class ItemConfiguration
+    public class ItemConfiguration : IEntityTypeConfiguration<Item>
     {
         public void Configure(EntityTypeBuilder<Item> builder)
         {
             builder
-                 .HasData(this.SeedItems());
-         
-
+                 .HasData(this.SeedItems());  
         }
 
 
@@ -27,7 +26,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 2,
                     AddedOn = RandomDate(),
                     Price = 22.9m,
-                    PublisherId = "349ebbac-3bf6-4888-8582-eb9456fbf039",
+                    PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
                     SubtypeId = 1
 
                 },
@@ -40,7 +39,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 1,
                     AddedOn = RandomDate(),
                     Price = 199.99m,
-                    PublisherId = "349ebbac-3bf6-4888-8582-eb9456fbf039",
+                    PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
                     SubtypeId = 1
                 },
                 new Item
@@ -48,11 +47,11 @@ namespace GamerMarketApp.Data.Configurations
                     ItemId = 3,
                     Name = "Dark Voyager",
                     Description = "An epic astronaut-themed skin for Fortnite, perfect for galactic explorers.",
-                    ImageUrl = "https://static.wikia.nocookie.net/fortnite/images/e/e2/Dark_Voyager_%28Featured%29_-_Outfit_-_Fortnite.png/revision/latest?cb=20230617011914",
+                    ImageUrl = "https://qudahalloween.com/cdn/shop/articles/Dark-Voyager-costume-featured_1201x.jpg?v=1719395076",
                     GameId = 3,
                     AddedOn = RandomDate(),
                     Price = 14.99m,
-                    PublisherId = "349ebbac-3bf6-4888-8582-eb9456fbf039",
+                    PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
                     SubtypeId = 1
                 },
                 new Item
@@ -60,11 +59,11 @@ namespace GamerMarketApp.Data.Configurations
                     ItemId = 4,
                     Name = "Elementalist Lux",
                     Description = "A dynamic skin for Lux that changes elements during the match.",
-                    ImageUrl = "https://static.wikia.nocookie.net/leagueoflegends/images/6/67/Lux_ElementalistSkin_HD.jpg/revision/latest/scale-to-width-down/1200?cb=20240524163228",
+                    ImageUrl = "https://i.pinimg.com/originals/f8/31/92/f83192912b8b605cc046810c47e9b8e7.jpg",
                     GameId = 6,
                     AddedOn = RandomDate(),
                     Price = 24.99m,
-                    PublisherId = "349ebbac-3bf6-4888-8582-eb9456fbf039",
+                    PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
                     SubtypeId = 1
                 },
                 new Item
@@ -76,7 +75,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 2,
                     AddedOn = RandomDate(),
                     Price = 19.99m,
-                    PublisherId = "349ebbac-3bf6-4888-8582-eb9456fbf039",
+                    PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
                     SubtypeId = 1
                 },
                 new Item
@@ -88,7 +87,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 2,
                     AddedOn = RandomDate(),
                     Price = 6.99m,
-                    PublisherId = "349ebbac-3bf6-4888-8582-eb9456fbf039",
+                    PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
                     SubtypeId = 1
                 },
                 new Item
@@ -100,7 +99,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 1,
                     AddedOn = RandomDate(),
                     Price = 1799.99m,
-                    PublisherId = "349ebbac-3bf6-4888-8582-eb9456fbf039",
+                    PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
                     SubtypeId = 7
                 },
                 new Item
@@ -112,7 +111,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 13,
                     AddedOn = RandomDate(),
                     Price = 11.99m,
-                    PublisherId = "349ebbac-3bf6-4888-8582-eb9456fbf039",
+                    PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
                     SubtypeId = 1
                 },
                 new Item
@@ -124,7 +123,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 4,
                     AddedOn = RandomDate(),
                     Price = 499.99m,
-                    PublisherId = "349ebbac-3bf6-4888-8582-eb9456fbf039",
+                    PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
                     SubtypeId = 6
                 },
                 new Item
@@ -136,7 +135,7 @@ namespace GamerMarketApp.Data.Configurations
                     GameId = 4,
                     AddedOn = RandomDate(),
                     Price = 290.99m,
-                    PublisherId = "349ebbac-3bf6-4888-8582-eb9456fbf039",
+                    PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
                     SubtypeId = 6
                 }
 
@@ -151,9 +150,7 @@ namespace GamerMarketApp.Data.Configurations
             var startDate = new DateTime(2023, 1, 1);
             var endDate = DateTime.Now;
             int range = (endDate - startDate).Days;
-            var date = startDate.AddDays(random.Next(range));
-            DateTime.Parse(date.ToString("dd/MM/yyyy"));
-            return date;
+            return startDate.AddDays(random.Next(range));
         }
     }
 }
