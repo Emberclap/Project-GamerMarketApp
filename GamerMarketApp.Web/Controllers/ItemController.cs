@@ -108,8 +108,19 @@ namespace GamerMarketApp.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-
+            if (id == null)
+            {
+                return NotFound();
+            }
             var model = await this.itemService.GetItemDeleteModelAsync(id);
+            if (GetUserId() != model.Publisher)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            if (model == null)
+            {
+                return NotFound();
+            }
             return View(model);
         }
         [HttpPost]
