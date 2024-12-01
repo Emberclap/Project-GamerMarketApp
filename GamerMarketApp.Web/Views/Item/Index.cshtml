@@ -12,7 +12,10 @@
     @if (User?.Identity?.IsAuthenticated ?? false)
     {
         <div class="col-auto mt-1">
-            <a asp-controller="Item" asp-action="Add" class="btn btn-primary">Add Item</a>
+            <div class="col-auto mt-1">
+                <a asp-controller="Item" asp-action="Add" class="btn btn-outline-info">Add Item</a>
+                <a asp-controller="Watchlist" asp-action="Index" class="btn btn-outline-primary">My Watchlist</a>
+            </div>
         </div>
     }
 </div>
@@ -23,7 +26,7 @@
     {
         <div class="card-group d-flex flex-column" style="width: 20.6rem">
             <img src="@e.ImageUrl" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;">
-            <div class="card-body d-flex flex-column">
+            <div class="card-body border-secondary  d-flex flex-column">
                 <div class="card-body d-flex flex-column mt-auto" style="height: 9em;">
                     <h4 class="card-title text-success">@e.Name</h4>
                     <p class="text-light">@e.Game</p>
@@ -32,7 +35,7 @@
                 <div class="card-text mt-auto">
                     <div class="row mt-auto">
                         <div class="col-12 px-1">
-                            <a asp-controller="Item" asp-action="Details" asp-route-id="@e.ItemId" class="btn btn-info w-100 mb-2">Details</a>
+                            <a asp-controller="Item" asp-action="Details" asp-route-id="@e.ItemId" class="btn btn-outline-info w-100 mb-2">Details</a>
                         </div>
                         @if (User?.Identity?.IsAuthenticated ?? false)
                         {
@@ -42,9 +45,18 @@
                                 <div class="col-6 px-1">
                                     <a asp-controller="Item" asp-action="AddToCart" asp-route-id="@e.ItemId" class="btn btn-secondary w-100 mb-2">Add to Cart</a>
                                 </div>
-                                <form method="post" class="col-6 px-1">
-                                    <button asp-controller="Watchlist" asp-action="AddToMyWatchlist" asp-route-id="@e.ItemId" type="submit" class="btn btn-primary w-100 mb-2">Add to Watchlist</button>
-                                </form>
+                                @if (!e.IsInWatchlist)
+                                {
+                                    <form method="post" class="col-6 px-1">
+                                        <button asp-controller="Watchlist" asp-action="AddToMyWatchlist" asp-route-source="Index" asp-route-id="@e.ItemId" type="submit" class="btn btn-primary w-100 mb-2">Add to Watchlist</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form  method="post" class="col-6 px-1">
+                                        <button asp-controller="Watchlist" asp-action="RemoveFromMyWatchlist" asp-route-source="Index" asp-route-id="@e.ItemId" type="submit" class="btn  btn-primary w-100 mb-2">Remove Watch</button>
+                                    </form>
+                                }
                             }
                         }
                     </div>

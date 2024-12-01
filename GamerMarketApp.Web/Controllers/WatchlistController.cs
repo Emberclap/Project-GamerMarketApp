@@ -1,4 +1,5 @@
-﻿using GamerMarketApp.Services.Data;
+﻿using Elfie.Serialization;
+using GamerMarketApp.Services.Data;
 using GamerMarketApp.Services.Data.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,19 +21,37 @@ namespace GamerMarketApp.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddToMyWatchlist(int id)
+        public async Task<IActionResult> AddToMyWatchlist(int id, string source)
         {
             var userId = GetUserId();
             await watchlistService.AddToWatchlistAsync(userId, id);
-            return RedirectToAction(nameof(Index));
+            if (source == "Index")
+            {
+                return RedirectToAction("Index", "Item");
+            }
+            else
+            {
+                return RedirectToAction("Details", "Item", new { id });
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RemoveFromMyWatchlist(int id)
+        public async Task<IActionResult> RemoveFromMyWatchlist(int id, string source)
         {
             var userId = GetUserId();
             await watchlistService.RemoveFromWatchlistAsync(userId, id);
-            return RedirectToAction(nameof(Index));
+            if(source == "Index")
+            {
+                return RedirectToAction("Index", "Item");
+            }
+            else if (source == "Details")
+            {
+                return RedirectToAction("Details", "Item", new { id });
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
 }

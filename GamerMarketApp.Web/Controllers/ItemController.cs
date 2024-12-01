@@ -15,7 +15,8 @@ namespace GamerMarketApp.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var model = await itemService.GetAllItemsAsync();
+            var userId = GetUserId();
+            var model = await itemService.GetAllItemsAsync(userId);
             return View(model);
         }
 
@@ -23,7 +24,9 @@ namespace GamerMarketApp.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            var item = await itemService.GetItemDetailsAsync(id);
+            var userId = GetUserId();
+
+            var item = await itemService.GetItemDetailsAsync(userId, id);
 
             if (item == null)
             {

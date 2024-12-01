@@ -7,7 +7,5 @@ namespace GamerMarketApp.Data.Repository.Interfaces
     {
         Task<IEnumerable<Game>> GetGamesAsync();
         Task<IEnumerable<ItemSubtype>> GetItemSubtypesAsync();
-        Task<ItemDetailsViewModel?> GetItemDetailsAsync(int id);
-
     }
 }

@@ -6,11 +6,11 @@
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
-
-<div class="card container col-4">
+<hr />
+<div class="card border-info container col-4">
     @if (!string.IsNullOrEmpty(Model.ImageUrl))
     {
-        <img src="@Model.ImageUrl" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;">
+        <img src="@Model.ImageUrl" class="card-img-top mt-2 img-fluid" style="height: 200px; object-fit: cover;">
     }
     else
     {
@@ -42,9 +42,18 @@
                         <div class="col-6 px-1">
                             <button asp-controller="" asp-action="AddToCart" asp-route-id="@Model.ItemId" type="submit" class="btn btn-secondary w-100 mb-2">Add to Cart</button>
                         </div>
-                        <div class="col-6 px-1">
-                            <button asp-controller="Watchlist" asp-action="AddToMyWatchlist" asp-route-id="@Model.ItemId" type="submit" class="btn btn-primary w-100 mb-2">Add to Watchlist</button>
-                        </div>
+                        @if (!Model.IsInWatchlist)
+                        {
+                            <div class="col-6 px-1">
+                                <button asp-controller="Watchlist" asp-action="AddToMyWatchlist" asp-route-source="Details" asp-route-id="@Model.ItemId" type="submit" class="btn btn-primary w-100 mb-2">Add to Watchlist</button>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-6 px-1">
+                                <button asp-controller="Watchlist" asp-action="RemoveFromMyWatchlist" asp-route-source="Details" asp-route-id="@Model.ItemId" type="submit" class="btn  btn-primary w-100 mb-2">Remove Watch</button>
+                            </div>
+                        }
                     </div>
                 }
                 else

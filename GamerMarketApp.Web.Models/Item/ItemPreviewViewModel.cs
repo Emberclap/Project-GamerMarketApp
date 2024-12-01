@@ -18,5 +18,6 @@ namespace GamerMarketApp.Web.ViewModels.Item
         public required string Subtype { get; set; }
         public required string Game { get; set; }
         public required string Price { get; set; }
+        public bool IsInWatchlist { get; set; }
     }
 }

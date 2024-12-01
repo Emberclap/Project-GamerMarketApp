@@ -69,9 +69,10 @@ namespace GamerMarketApp.Services.Data
 
         }
 
-        public async Task<IEnumerable<ItemPreviewViewModel>> GetAllItemsAsync()
+        public async Task<IEnumerable<ItemPreviewViewModel>> GetAllItemsAsync(string userId)
         {
             return await itemRepository.GetAllAttached()
+               .Include(i => i.UserItems)
                .Where(i => i.IsDeleted == false)
                .Select(i => new ItemPreviewViewModel()
                {
@@ -83,6 +84,7 @@ namespace GamerMarketApp.Services.Data
                    Subtype = i.Subtype.Name,
                    Publisher = i.Publisher.UserName,
                    Price = i.Price.ToString("# ###.00"),
+                   IsInWatchlist = i.UserItems.Any(ui => ui.UserId == userId)
                })
                .ToListAsync();
         }
@@ -118,9 +120,25 @@ namespace GamerMarketApp.Services.Data
             return entity;
         }
 
-        public async Task<ItemDetailsViewModel> GetItemDetailsAsync(int id)
+        public async Task<ItemDetailsViewModel?> GetItemDetailsAsync(string userId,int id)
         {
-            return await itemRepository.GetItemDetailsAsync(id);
+            return await itemRepository.GetAllAttached()
+               .Include(i => i.UserItems)
+               .Where(i => i.IsDeleted == false && i.ItemId == id)
+               .Select(i => new ItemDetailsViewModel()
+               {
+                   ItemId = i.ItemId,
+                   Name = i.Name,
+                   Description = i.Description,
+                   Game = i.Game.Title,
+                   Publisher = i.Publisher.UserName,
+                   ImageUrl = i.ImageUrl,
+                   SubType = i.Subtype.Name,
+                   Price = i.Price.ToString("# ###.00"),
+                   AddedOn = i.AddedOn.ToString("dd/MM/yyyy"),
+                   IsInWatchlist = i.UserItems.Any(ui => ui.UserId == userId)
+               })
+               .FirstOrDefaultAsync(g => g.ItemId == id);
         }
 
         public async Task<ItemEditViewModel> GetItemEditModelAsync(int id)

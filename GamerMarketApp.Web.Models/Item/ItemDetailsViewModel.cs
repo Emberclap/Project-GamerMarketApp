@@ -10,6 +10,8 @@
         public required string SubType { get; set; }
         public required string Game { get; set; }
         public required string AddedOn { get; set; } 
-        public required string Price { get; set; } 
+        public required string Price { get; set; }
+        public bool IsInWatchlist { get; set; }
+
     }
 }

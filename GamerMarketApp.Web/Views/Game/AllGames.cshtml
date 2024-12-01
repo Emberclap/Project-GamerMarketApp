@@ -32,7 +32,7 @@
                 <p class="card-text">@e.Description</p>
                 <div class="row mt-auto">
                     <div class="col-12 px-1">
-                        <a asp-controller="Item" asp-action="ItemsByGame" asp-route-id="@e.Id" class="btn btn-info w-100 mb-2"> Browse Items</a>
+                        <a asp-controller="Item" asp-action="ItemsByGame" asp-route-id="@e.Id" class="btn btn-outline-info w-100 mb-2"> Browse Items</a>
                     </div>
                     @if (User?.Identity?.IsAuthenticated ?? false)
                     {
