@@ -4,6 +4,7 @@ using GamerMarketApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamerMarketApp.Data.Migrations
 {
     [DbContext(typeof(GamerMarketDbContext))]
-    partial class GamerMarketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241202200115_seedTestUsersWithRoles")]
+    partial class seedTestUsersWithRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -334,7 +337,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 1,
-                            AddedOn = new DateTime(2023, 4, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2023, 6, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A rare arcana skin for Pudge, featuring stunning visual effects.",
                             GameId = 2,
                             ImageUrl = "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUivB9aSQPRVees2c6cQ0hwIgFot6imKglhnfWbdz8SuYjkw4SJz_OmZrjUlGoD6px307yV9Ir23lK18hZpN2H7IIGLMlhprnEbA94/360fx360f",
@@ -347,7 +350,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 2,
-                            AddedOn = new DateTime(2023, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2024, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A legendary knife skin for CS:GO with sleek animations and rare patterns.",
                             GameId = 1,
                             ImageUrl = "https://xn--b1agb1afb.com/image/cache/catalog/2128/2129/viber_%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_2019-12-05_11-15-18-800x800w.jpg",
@@ -360,7 +363,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 3,
-                            AddedOn = new DateTime(2023, 2, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2024, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "An epic astronaut-themed skin for Fortnite, perfect for galactic explorers.",
                             GameId = 3,
                             ImageUrl = "https://qudahalloween.com/cdn/shop/articles/Dark-Voyager-costume-featured_1201x.jpg?v=1719395076",
@@ -373,7 +376,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 4,
-                            AddedOn = new DateTime(2023, 6, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2023, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A dynamic skin for Lux that changes elements during the match.",
                             GameId = 6,
                             ImageUrl = "https://i.pinimg.com/originals/f8/31/92/f83192912b8b605cc046810c47e9b8e7.jpg",
@@ -386,7 +389,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 5,
-                            AddedOn = new DateTime(2023, 7, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2024, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A rare arcana skin for Pudge, featuring stunning visual effects.",
                             GameId = 2,
                             ImageUrl = "https://dota-showcase.com/storage/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style2.png",
@@ -399,7 +402,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 6,
-                            AddedOn = new DateTime(2023, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2023, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The fabled blades that shattered the Anvil Magus Hroth. Its terrible weight dented and shattered his iron shell, just as its blades tore into the enchanted hide beneath.",
                             GameId = 2,
                             ImageUrl = "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXB9AJbIo8h5hlcX0TVVduv287XVk5LJxFZsragejhs0uHPdHMXuIzgwtaIk6_wMuvUwDoF7pJ12-_D8Ijw0FG1-UVpMTr2LYGQdVA2fxiOrTHuJria/360fx360f",
@@ -412,7 +415,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 7,
-                            AddedOn = new DateTime(2024, 2, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2024, 7, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "High risk and high reward, the infamous AWP is recognizable by its signature report and one-shot, one-kill policy. It has been painted by airbrushing transparent paints that fade together over a chrome base coat. This isn't just a weapon, it's a conversation piece - Imogen, Arms Dealer In Training",
                             GameId = 1,
                             ImageUrl = "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAZh7PLfYQJE7dizq4yCkP_gfezXxj0IvJBy2rrH9NSh2VXs80VsYWGnd9SWcAFoaFCEqVa7wu3oh5Gi_MOeScxOzqI/360fx360f",
@@ -425,7 +428,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 8,
-                            AddedOn = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A unique skin for Wraith that delves into her mysterious past.",
                             GameId = 13,
                             ImageUrl = "https://cdnb.artstation.com/p/assets/images/images/027/923/487/4k/gary-huang-voidwalker-master.jpg?1592962782",
@@ -438,7 +441,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 9,
-                            AddedOn = new DateTime(2024, 4, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2023, 12, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "An ultra-rare mount with a ghostly tiger aesthetic.",
                             GameId = 4,
                             ImageUrl = "https://wow.zamimg.com/uploads/screenshots/normal/1079770-reins-of-the-swift-spectral-tiger.jpg",
@@ -451,7 +454,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 10,
-                            AddedOn = new DateTime(2024, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2023, 7, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Brutosaurs are used by the Zandalari Empire as both weapons of war and enormous, mobile trading posts.",
                             GameId = 4,
                             ImageUrl = "https://wow.zamimg.com/uploads/screenshots/normal/742674-reins-of-the-mighty-caravan-brutosaur.jpg",
@@ -886,48 +889,48 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             Id = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
-                            AccessFailedCount = 3,
-                            ConcurrencyStamp = "8eb90964-6497-4e8c-a661-88951fe12a63",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b2672b21-456d-4205-9f1f-0b8b619c83c4",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
-                            LockoutEnabled = true,
+                            LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "TESTADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN/RvNwZ+QU+n+nRlnMb04Jdsu49FAFGr+PRQ+H4vjlPHWQKf5FJZbV1i+YbqO2Z2A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMjawoAS42P5hMncS8G9cHfv1HM5ysoue0tgEzyi7DetlQd4HIpHDhANWvT4aKpCKQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0e674ea2-2818-4dee-8a8c-bd322e400c5d",
+                            SecurityStamp = "7a38c900-4d0f-448d-99dc-76c8e7baeafa",
                             TwoFactorEnabled = false,
                             UserName = "testAdmin"
                         },
                         new
                         {
                             Id = "edd0d843-08a0-40d8-99f3-89414603ae15",
-                            AccessFailedCount = 3,
-                            ConcurrencyStamp = "254348a1-36cb-4ed1-a0ff-98690eeb14ca",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4d5ba15d-bf01-48f1-b5e0-01c0d9615134",
                             Email = "Manager@GMAIL.COM",
                             EmailConfirmed = true,
-                            LockoutEnabled = true,
+                            LockoutEnabled = false,
                             NormalizedEmail = "MANAGER@GMAIL.COM",
                             NormalizedUserName = "TESTMANAGER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGp+/9bqibaEqXVdza4kWwoYcWlNy4O2woRkBjQlQcjOU20OhPuZxPk5/3BOSFrtDA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL6kqshHbwqRZc/OpGjlKQMnMGTgeAaNARWevsrcSmg15bh7OhbjKjY/zBaFTUZkBg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9bfe205f-7fdf-4cfd-b7f8-b13c5bfa9b84",
+                            SecurityStamp = "ceab3a3a-5324-4025-8175-d2115bff7ba1",
                             TwoFactorEnabled = false,
                             UserName = "testManager"
                         },
                         new
                         {
                             Id = "11b7f420-600c-4095-926f-677202d4235f",
-                            AccessFailedCount = 3,
-                            ConcurrencyStamp = "fb49e91d-56e7-4fa5-ab1c-592d0bd303bc",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "6b648811-9607-4416-9ed8-155a202713ef",
                             Email = "TESTUSER@GMAIL.COM",
                             EmailConfirmed = true,
-                            LockoutEnabled = true,
+                            LockoutEnabled = false,
                             NormalizedEmail = "TESTUSER@GMAIL.COM",
                             NormalizedUserName = "TESTUSER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEE7vns5CJnwIl65AfbpumYRaS9AWpryeRWqOmz/+MkcwwDlcvG8dPFdc7dM/xb2oFw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOcSzBg7rY3kFFTYEuHR4Q/9pTFAgRUQZJVwyFD+xdKwVC5fD23GP+omt06zPUNjdg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "930be914-7c72-4472-9a06-dcf740adc7d8",
+                            SecurityStamp = "89b2d5d7-30b3-4cad-acdf-d4650e8749dc",
                             TwoFactorEnabled = false,
                             UserName = "testUser"
                         });
