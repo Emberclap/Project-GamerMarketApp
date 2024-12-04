@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 namespace GamerMarketApp.Web.Controllers
 {
-    
+
     public class BaseController : Controller
     {
         [Authorize]

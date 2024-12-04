@@ -6,10 +6,10 @@ using System.Globalization;
 
 namespace GamerMarketApp.Web.Controllers
 {
-    public class ItemController(IItemService itemService) : BaseController
+    public class ItemController(IItemService itemService) 
+        : BaseController
     {
         private readonly IItemService itemService = itemService;
-
 
         [HttpGet]
         [AllowAnonymous]
@@ -37,7 +37,7 @@ namespace GamerMarketApp.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]       
+        [Authorize]
         public async Task<IActionResult> Add()
         {
             var model = await itemService.GetItemAddModelAsync();
@@ -49,13 +49,13 @@ namespace GamerMarketApp.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(ItemAddViewModel model)
         {
-            
+
             if (!ModelState.IsValid)
             {
                 model = await itemService.GetItemAddModelAsync();
                 return View(model);
             }
-            
+
             string userId = GetUserId();
             await itemService.AddItemAsync(model, userId);
 
@@ -66,20 +66,22 @@ namespace GamerMarketApp.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var userId = GetUserId();
+            var isModerator = User.IsInRole("Moderator");
+
             var model = await itemService.GetItemEditModelAsync(id);
-            if (GetUserId() != model.PublisherId)
+
+            if (userId != model.PublisherId || !isModerator)
             {
                 return RedirectToAction(nameof(Index));
             }
+
+            
             if (model == null)
             {
                 return NotFound();
             }
-            
+
             return View(model);
         }
 
@@ -100,7 +102,7 @@ namespace GamerMarketApp.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             await itemService.EditItemAsync(model);
-            return  RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -108,19 +110,17 @@ namespace GamerMarketApp.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var isModerator = User.IsInRole("Moderator");
             var model = await this.itemService.GetItemDeleteModelAsync(id);
-            if (GetUserId() != model.Publisher)
-            {
-                return RedirectToAction(nameof(Index));
-            }
             if (model == null)
             {
                 return NotFound();
             }
+            if (GetUserId() != model.Publisher || !isModerator)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            
             return View(model);
         }
         [HttpPost]
@@ -137,14 +137,14 @@ namespace GamerMarketApp.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> DeletedItems()
         {
             var model = await itemService.GetAllDeletedItemsAsync();
             return View(model);
         }
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> HardDelete(int id)
         {

@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Authorization;
 using GamerMarketApp.Services.Data.Interfaces;
 using GamerMarketApp.Web.ViewModels.Game;
+using GamerMarketApp.Services.Data;
 
 
 namespace GamerMarketApp.Web.Controllers
 {
-
-    public class GameController(IGameService gameService) : BaseController
+    public class GameController(IGameService gameService)
+            : BaseController
     {
         private readonly IGameService gameService = gameService;
 
@@ -19,7 +20,7 @@ namespace GamerMarketApp.Web.Controllers
             return View(model);
         }
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> DeletedGames()
         {
             var model = await gameService.GetAllDeletedGamesAsync();
@@ -27,7 +28,7 @@ namespace GamerMarketApp.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles ="Moderator")]
         public async Task<IActionResult> AddGame()
         {
             var model = await gameService.GetAddModelAsync();
@@ -35,7 +36,7 @@ namespace GamerMarketApp.Web.Controllers
         }
         
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddGame(GameAddViewModel model)
         {
@@ -49,39 +50,28 @@ namespace GamerMarketApp.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> Edit(int id)
         {
             var model = await gameService.GetEditModelAsync(id);
-            //if (GetUserId() != model.Publisher)
-            //{
-            //    return RedirectToAction(nameof(AllGames));
-            //}
             return View(model);
-            
         }
 
         [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> Edit(GameAddViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            //ToDo: Moderator permission
-            //if (GetUserId()
-            //{
-            //    return RedirectToAction(nameof(AllGames));
-            //}
             await this.gameService.EditGameAsync(model);
 
             return RedirectToAction(nameof(AllGames));
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> Delete(int id)
         {      
             var model = await gameService.GetGameDeleteModelAsync(id);
@@ -92,8 +82,7 @@ namespace GamerMarketApp.Web.Controllers
                 return View(model);
         }
         [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> SoftDelete(int id)
         {
 
@@ -101,8 +90,7 @@ namespace GamerMarketApp.Web.Controllers
             return RedirectToAction(nameof(AllGames));
         }
         [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> BringGameBack(int id)
         {
 
@@ -111,15 +99,14 @@ namespace GamerMarketApp.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var model = await gameService.GetConfirmDeleteModelAsync(id);
             return View(model);
         }
         [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> DeleteConfirmed(GameConfirmDeleteViewModel model)
         {
 
