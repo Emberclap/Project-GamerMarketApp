@@ -1,5 +1,4 @@
 ﻿using GamerMarketApp.Data.Models;
-using GamerMarketApp.Web.ViewModels.Item;
 
 namespace GamerMarketApp.Data.Repository.Interfaces
 {

@@ -99,7 +99,7 @@ namespace GamerMarketApp.Services.Data
             return model;
         }
 
-        public async Task<ItemDeleteViewModel> GetItemDeleteModelAsync(int id)
+        public async Task<ItemDeleteViewModel?> GetItemDeleteModelAsync(int id)
         {
             var entity = await itemRepository.GetAllAttached()
                 .Include(g => g.Game)
@@ -114,7 +114,7 @@ namespace GamerMarketApp.Services.Data
                 Price = i.Price.ToString("# ###.00"),
                 AddedOn = i.AddedOn.ToString("dd/MM/yyyy"),
                 SubType = i.Subtype.Name,
-                Publisher = i.Publisher.UserName,
+                Publisher = i.Publisher.UserName!,
             })
             .FirstOrDefaultAsync(g => g.ItemId == id);
             return entity;
@@ -184,7 +184,7 @@ namespace GamerMarketApp.Services.Data
                     Description = i.Description,
                     Price = i.Price.ToString("# ###.00"),
                     Subtype = i.Subtype.Name,
-                    Publisher = i.Publisher.UserName,
+                    Publisher = i.Publisher.UserName!,
                 })
                 .ToListAsync();
         }

@@ -1,6 +1,5 @@
 ﻿using GamerMarketApp.Data.Models;
 using GamerMarketApp.Data.Repository.Interfaces;
-using GamerMarketApp.Web.ViewModels.Item;
 using Microsoft.EntityFrameworkCore;
 
 namespace GamerMarketApp.Data.Repository

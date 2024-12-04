@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GamerMarketApp.Commons\GamerMarketApp.Commons.csproj" />
     <ProjectReference Include="..\GamerMarketApp.Data\GamerMarketApp.Data.csproj" />
     <ProjectReference Include="..\GamerMarketApp.Web.Models\GamerMarketApp.Web.ViewModels.csproj" />
   </ItemGroup>
