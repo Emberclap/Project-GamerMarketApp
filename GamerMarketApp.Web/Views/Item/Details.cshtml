@@ -36,7 +36,18 @@
             <input type="hidden" asp-for="ItemId" />
             @if (User?.Identity?.IsAuthenticated ?? false)
             {
-                @if (User?.Identity?.Name != Model.Publisher)
+                @if (User.IsInRole("Moderator") || User?.Identity?.Name == Model.Publisher)
+                {
+                    <div class="row mt-auto">
+                        <div class="col-6 px-1">
+                            <a asp-controller="Item" asp-action="Edit" asp-route-id="@Model.ItemId" class="btn btn-primary w-100 mb-2">Edit</a>
+                        </div>
+                        <div class="col-6 px-1">
+                            <a asp-controller="Item" asp-action="Delete" asp-route-id="@Model.ItemId" class="btn btn-danger w-100 mb-2">Delete</a>
+                        </div>
+                    </div>
+                }
+                else 
                 {
                     <div class="row mt-auto">
                         <div class="col-6 px-1">
@@ -54,17 +65,6 @@
                                 <button asp-controller="Watchlist" asp-action="RemoveFromMyWatchlist" asp-route-source="Details" asp-route-id="@Model.ItemId" type="submit" class="btn  btn-primary w-100 mb-2">Remove Watch</button>
                             </div>
                         }
-                    </div>
-                }
-                else
-                {
-                    <div class="row mt-auto">
-                        <div class="col-6 px-1">
-                            <a asp-controller="Item" asp-action="Edit" asp-route-id="@Model.ItemId" class="btn btn-primary w-100 mb-2">Edit</a>
-                        </div>
-                        <div class="col-6 px-1">
-                            <a asp-controller="Item" asp-action="Delete" asp-route-id="@Model.ItemId" class="btn btn-danger w-100 mb-2">Delete</a>
-                        </div>
                     </div>
                 }
             }
