@@ -26,8 +26,8 @@ namespace GamerMarketApp.Data.Configurations
                 new IdentityRole
                 {
                     Id = "2",
-                    Name = "MANAGER",
-                    NormalizedName = "MANAGER"
+                    Name = "Moderator",
+                    NormalizedName = "MODERATOR"
                 },
                 new IdentityRole
                 {

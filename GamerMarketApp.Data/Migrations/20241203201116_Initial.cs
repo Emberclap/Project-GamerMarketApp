@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GamerMarketApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class initial5 : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,8 @@ namespace GamerMarketApp.Data.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -293,13 +294,23 @@ namespace GamerMarketApp.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1", null, "Admin", "ADMIN" });
+                columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "1", null, "IdentityRole", "Admin", "ADMIN" },
+                    { "2", null, "IdentityRole", "MANAGER", "MANAGER" },
+                    { "3", null, "IdentityRole", "User", "USER" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 0, "8b80bae2-64a1-492d-85ed-8cc426d0b341", "admin@example.com", true, false, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", "AQAAAAIAAYagAAAAEF6MArzVR2cY/yANjQ7OFiJbXVTn9oOObQoO0JDmOqlhQpYOW7nv9w7+PF6F09XsIA==", null, false, "9e06e609-8f14-4a31-a713-200c74f124b8", false, "admin@example.com" });
+                values: new object[,]
+                {
+                    { "11b7f420-600c-4095-926f-677202d4235f", 3, "ca1750d7-a6d8-45aa-9a06-b7189b747ee5", "user@gmail.com", true, true, null, "USER@GMAIL.COM", "USER", "AQAAAAIAAYagAAAAEKjOf8nxBBAElvGkEu2VMTn+yl7ntHHEWmV3ta44F8yLyL275ii47GoR1C7sB2iE+A==", null, false, "7062fce8-82b8-4584-8fa8-05ddd7319373", false, "User" },
+                    { "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 3, "cfb1d6da-acfe-4f39-a852-4438ef045e8e", "admin@gmail.com", true, true, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEE+QRGHM2nclEKo8YsF49X85NLnzhiziVluVpvUO+Uji5jLG7FB5S4KlGMR9axI+RA==", null, false, "ef7a5a60-52b1-4b4e-a380-8cd3c4dde96f", false, "Admin" },
+                    { "edd0d843-08a0-40d8-99f3-89414603ae15", 3, "13edec63-ab04-4b7c-af83-0d63aadb4b8a", "manager@gmail.com", true, true, null, "MANAGER@GMAIL.COM", "MANAGER", "AQAAAAIAAYagAAAAEEIsAfny2V8Co6j81tovxivQjnMkpRtkdX6+AKd+aPY0nvF3b9Q1f6GYgUm3dIxnaQ==", null, false, "b313c21e-2ce7-4d8f-8aec-8fad58acc682", false, "Manager" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Genres",
@@ -343,7 +354,12 @@ namespace GamerMarketApp.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "1", "a75b8366-0bac-46e0-9e94-e9cfaf771b3d" });
+                values: new object[,]
+                {
+                    { "3", "11b7f420-600c-4095-926f-677202d4235f" },
+                    { "1", "a75b8366-0bac-46e0-9e94-e9cfaf771b3d" },
+                    { "2", "edd0d843-08a0-40d8-99f3-89414603ae15" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Games",
@@ -402,16 +418,16 @@ namespace GamerMarketApp.Data.Migrations
                 columns: new[] { "ItemId", "AddedOn", "Description", "GameId", "ImageUrl", "IsDeleted", "Name", "Price", "PublisherId", "SubtypeId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "A rare arcana skin for Pudge, featuring stunning visual effects.", 2, "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUivB9aSQPRVees2c6cQ0hwIgFot6imKglhnfWbdz8SuYjkw4SJz_OmZrjUlGoD6px307yV9Ir23lK18hZpN2H7IIGLMlhprnEbA94/360fx360f", false, "Feast of Abscession", 22.9m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
-                    { 2, new DateTime(2023, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "A legendary knife skin for CS:GO with sleek animations and rare patterns.", 1, "https://xn--b1agb1afb.com/image/cache/catalog/2128/2129/viber_%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_2019-12-05_11-15-18-800x800w.jpg", false, "Karambit", 199.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
-                    { 3, new DateTime(2023, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "An epic astronaut-themed skin for Fortnite, perfect for galactic explorers.", 3, "https://qudahalloween.com/cdn/shop/articles/Dark-Voyager-costume-featured_1201x.jpg?v=1719395076", false, "Dark Voyager", 14.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
-                    { 4, new DateTime(2023, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "A dynamic skin for Lux that changes elements during the match.", 6, "https://i.pinimg.com/originals/f8/31/92/f83192912b8b605cc046810c47e9b8e7.jpg", false, "Elementalist Lux", 24.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
-                    { 5, new DateTime(2023, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "A rare arcana skin for Pudge, featuring stunning visual effects.", 2, "https://dota-showcase.com/storage/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style2.png", false, "Manifold Paradox", 19.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
-                    { 6, new DateTime(2023, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "The fabled blades that shattered the Anvil Magus Hroth. Its terrible weight dented and shattered his iron shell, just as its blades tore into the enchanted hide beneath.", 2, "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXB9AJbIo8h5hlcX0TVVduv287XVk5LJxFZsragejhs0uHPdHMXuIzgwtaIk6_wMuvUwDoF7pJ12-_D8Ijw0FG1-UVpMTr2LYGQdVA2fxiOrTHuJria/360fx360f", false, "Inscribed The Basher Blades", 6.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
-                    { 7, new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "High risk and high reward, the infamous AWP is recognizable by its signature report and one-shot, one-kill policy. It has been painted by airbrushing transparent paints that fade together over a chrome base coat. This isn't just a weapon, it's a conversation piece - Imogen, Arms Dealer In Training", 1, "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAZh7PLfYQJE7dizq4yCkP_gfezXxj0IvJBy2rrH9NSh2VXs80VsYWGnd9SWcAFoaFCEqVa7wu3oh5Gi_MOeScxOzqI/360fx360f", false, "AWP | Fade", 1799.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 7 },
-                    { 8, new DateTime(2024, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "A unique skin for Wraith that delves into her mysterious past.", 13, "https://cdnb.artstation.com/p/assets/images/images/027/923/487/4k/gary-huang-voidwalker-master.jpg?1592962782", false, "Wraith Voidwalker", 11.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
-                    { 9, new DateTime(2023, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "An ultra-rare mount with a ghostly tiger aesthetic.", 4, "https://wow.zamimg.com/uploads/screenshots/normal/1079770-reins-of-the-swift-spectral-tiger.jpg", false, "Swift Spectral Tiger", 499.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 6 },
-                    { 10, new DateTime(2024, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brutosaurs are used by the Zandalari Empire as both weapons of war and enormous, mobile trading posts.", 4, "https://wow.zamimg.com/uploads/screenshots/normal/742674-reins-of-the-mighty-caravan-brutosaur.jpg", false, "Reins of the Mighty Caravan Brutosaur", 290.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 6 }
+                    { 1, new DateTime(2024, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "A rare arcana skin for Pudge, featuring stunning visual effects.", 2, "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUivB9aSQPRVees2c6cQ0hwIgFot6imKglhnfWbdz8SuYjkw4SJz_OmZrjUlGoD6px307yV9Ir23lK18hZpN2H7IIGLMlhprnEbA94/360fx360f", false, "Feast of Abscession", 22.9m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
+                    { 2, new DateTime(2023, 12, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "A legendary knife skin for CS:GO with sleek animations and rare patterns.", 1, "https://xn--b1agb1afb.com/image/cache/catalog/2128/2129/viber_%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_2019-12-05_11-15-18-800x800w.jpg", false, "Karambit", 199.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
+                    { 3, new DateTime(2023, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "An epic astronaut-themed skin for Fortnite, perfect for galactic explorers.", 3, "https://qudahalloween.com/cdn/shop/articles/Dark-Voyager-costume-featured_1201x.jpg?v=1719395076", false, "Dark Voyager", 14.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
+                    { 4, new DateTime(2024, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "A dynamic skin for Lux that changes elements during the match.", 6, "https://i.pinimg.com/originals/f8/31/92/f83192912b8b605cc046810c47e9b8e7.jpg", false, "Elementalist Lux", 24.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
+                    { 5, new DateTime(2024, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "A rare arcana skin for Pudge, featuring stunning visual effects.", 2, "https://dota-showcase.com/storage/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style2.png", false, "Manifold Paradox", 19.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
+                    { 6, new DateTime(2024, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "The fabled blades that shattered the Anvil Magus Hroth. Its terrible weight dented and shattered his iron shell, just as its blades tore into the enchanted hide beneath.", 2, "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXB9AJbIo8h5hlcX0TVVduv287XVk5LJxFZsragejhs0uHPdHMXuIzgwtaIk6_wMuvUwDoF7pJ12-_D8Ijw0FG1-UVpMTr2LYGQdVA2fxiOrTHuJria/360fx360f", false, "Inscribed The Basher Blades", 6.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
+                    { 7, new DateTime(2023, 1, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "High risk and high reward, the infamous AWP is recognizable by its signature report and one-shot, one-kill policy. It has been painted by airbrushing transparent paints that fade together over a chrome base coat. This isn't just a weapon, it's a conversation piece - Imogen, Arms Dealer In Training", 1, "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAZh7PLfYQJE7dizq4yCkP_gfezXxj0IvJBy2rrH9NSh2VXs80VsYWGnd9SWcAFoaFCEqVa7wu3oh5Gi_MOeScxOzqI/360fx360f", false, "AWP | Fade", 1799.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 7 },
+                    { 8, new DateTime(2024, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "A unique skin for Wraith that delves into her mysterious past.", 13, "https://cdnb.artstation.com/p/assets/images/images/027/923/487/4k/gary-huang-voidwalker-master.jpg?1592962782", false, "Wraith Voidwalker", 11.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 1 },
+                    { 9, new DateTime(2024, 4, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "An ultra-rare mount with a ghostly tiger aesthetic.", 4, "https://wow.zamimg.com/uploads/screenshots/normal/1079770-reins-of-the-swift-spectral-tiger.jpg", false, "Swift Spectral Tiger", 499.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 6 },
+                    { 10, new DateTime(2023, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brutosaurs are used by the Zandalari Empire as both weapons of war and enormous, mobile trading posts.", 4, "https://wow.zamimg.com/uploads/screenshots/normal/742674-reins-of-the-mighty-caravan-brutosaur.jpg", false, "Reins of the Mighty Caravan Brutosaur", 290.99m, "a75b8366-0bac-46e0-9e94-e9cfaf771b3d", 6 }
                 });
 
             migrationBuilder.CreateIndex(

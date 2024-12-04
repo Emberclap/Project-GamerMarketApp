@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamerMarketApp.Data.Migrations
 {
     [DbContext(typeof(GamerMarketDbContext))]
-    [Migration("20241202200115_seedTestUsersWithRoles")]
-    partial class seedTestUsersWithRoles
+    [Migration("20241203231142_RenameManagerRole2")]
+    partial class RenameManagerRole2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -337,131 +337,261 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 1,
-                            AddedOn = new DateTime(2023, 6, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2024, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "A rare arcana skin for Pudge, featuring stunning visual effects.",
+                            GameId = 2,
+                            ImageUrl = "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUivB9aSQPRVees2c6cQ0hwIgFot6imKglhnfWbdz8SuYjkw4SJz_OmZrjUlGoD6px307yV9Ir23lK18hZpN2H7IIGLMlhprnEbA94/360fx360f",
+                            IsDeleted = false,
+                            Name = "Feast of Abscession",
+                            Price = 25.9m,
+                            PublisherId = "11b7f420-600c-4095-926f-677202d4235f",
+                            SubtypeId = 1
+                        },
+                        new
+                        {
+                            ItemId = 2,
+                            AddedOn = new DateTime(2024, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "A legendary knife skin for CS:GO with sleek animations and rare patterns.",
+                            GameId = 1,
+                            ImageUrl = "https://xn--b1agb1afb.com/image/cache/catalog/2128/2129/viber_%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_2019-12-05_11-15-18-800x800w.jpg",
+                            IsDeleted = false,
+                            Name = "Karambit",
+                            Price = 333.99m,
+                            PublisherId = "11b7f420-600c-4095-926f-677202d4235f",
+                            SubtypeId = 1
+                        },
+                        new
+                        {
+                            ItemId = 3,
+                            AddedOn = new DateTime(2024, 4, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "An epic astronaut-themed skin for Fortnite, perfect for galactic explorers.",
+                            GameId = 3,
+                            ImageUrl = "https://qudahalloween.com/cdn/shop/articles/Dark-Voyager-costume-featured_1201x.jpg?v=1719395076",
+                            IsDeleted = false,
+                            Name = "Dark Voyager",
+                            Price = 66.99m,
+                            PublisherId = "11b7f420-600c-4095-926f-677202d4235f",
+                            SubtypeId = 1
+                        },
+                        new
+                        {
+                            ItemId = 4,
+                            AddedOn = new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "A dynamic skin for Lux that changes elements during the match.",
+                            GameId = 6,
+                            ImageUrl = "https://i.pinimg.com/originals/f8/31/92/f83192912b8b605cc046810c47e9b8e7.jpg",
+                            IsDeleted = false,
+                            Name = "Elementalist Lux",
+                            Price = 33.99m,
+                            PublisherId = "11b7f420-600c-4095-926f-677202d4235f",
+                            SubtypeId = 1
+                        },
+                        new
+                        {
+                            ItemId = 5,
+                            AddedOn = new DateTime(2024, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "A rare arcana skin for Pudge, featuring stunning visual effects.",
+                            GameId = 2,
+                            ImageUrl = "https://dota-showcase.com/storage/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style2.png",
+                            IsDeleted = false,
+                            Name = "Manifold Paradox",
+                            Price = 25.99m,
+                            PublisherId = "11b7f420-600c-4095-926f-677202d4235f",
+                            SubtypeId = 1
+                        },
+                        new
+                        {
+                            ItemId = 6,
+                            AddedOn = new DateTime(2024, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "The fabled blades that shattered the Anvil Magus Hroth. Its terrible weight dented and shattered his iron shell, just as its blades tore into the enchanted hide beneath.",
+                            GameId = 2,
+                            ImageUrl = "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXB9AJbIo8h5hlcX0TVVduv287XVk5LJxFZsragejhs0uHPdHMXuIzgwtaIk6_wMuvUwDoF7pJ12-_D8Ijw0FG1-UVpMTr2LYGQdVA2fxiOrTHuJria/360fx360f",
+                            IsDeleted = false,
+                            Name = "Inscribed The Basher Blades",
+                            Price = 15.99m,
+                            PublisherId = "11b7f420-600c-4095-926f-677202d4235f",
+                            SubtypeId = 1
+                        },
+                        new
+                        {
+                            ItemId = 7,
+                            AddedOn = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "High risk and high reward, the infamous AWP is recognizable by its signature report and one-shot, one-kill policy. It has been painted by airbrushing transparent paints that fade together over a chrome base coat. This isn't just a weapon, it's a conversation piece - Imogen, Arms Dealer In Training",
+                            GameId = 1,
+                            ImageUrl = "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAZh7PLfYQJE7dizq4yCkP_gfezXxj0IvJBy2rrH9NSh2VXs80VsYWGnd9SWcAFoaFCEqVa7wu3oh5Gi_MOeScxOzqI/360fx360f",
+                            IsDeleted = false,
+                            Name = "AWP | Fade",
+                            Price = 2599.99m,
+                            PublisherId = "11b7f420-600c-4095-926f-677202d4235f",
+                            SubtypeId = 7
+                        },
+                        new
+                        {
+                            ItemId = 8,
+                            AddedOn = new DateTime(2024, 5, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "A unique skin for Wraith that delves into her mysterious past.",
+                            GameId = 13,
+                            ImageUrl = "https://cdnb.artstation.com/p/assets/images/images/027/923/487/4k/gary-huang-voidwalker-master.jpg?1592962782",
+                            IsDeleted = false,
+                            Name = "Wraith Voidwalker",
+                            Price = 15.99m,
+                            PublisherId = "11b7f420-600c-4095-926f-677202d4235f",
+                            SubtypeId = 1
+                        },
+                        new
+                        {
+                            ItemId = 9,
+                            AddedOn = new DateTime(2024, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "An ultra-rare mount with a ghostly tiger aesthetic.",
+                            GameId = 4,
+                            ImageUrl = "https://wow.zamimg.com/uploads/screenshots/normal/1079770-reins-of-the-swift-spectral-tiger.jpg",
+                            IsDeleted = false,
+                            Name = "Swift Spectral Tiger",
+                            Price = 444.99m,
+                            PublisherId = "11b7f420-600c-4095-926f-677202d4235f",
+                            SubtypeId = 6
+                        },
+                        new
+                        {
+                            ItemId = 10,
+                            AddedOn = new DateTime(2023, 4, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Brutosaurs are used by the Zandalari Empire as both weapons of war and enormous, mobile trading posts.",
+                            GameId = 4,
+                            ImageUrl = "https://wow.zamimg.com/uploads/screenshots/normal/742674-reins-of-the-mighty-caravan-brutosaur.jpg",
+                            IsDeleted = false,
+                            Name = "Reins of the Mighty Caravan Brutosaur",
+                            Price = 250.99m,
+                            PublisherId = "11b7f420-600c-4095-926f-677202d4235f",
+                            SubtypeId = 6
+                        },
+                        new
+                        {
+                            ItemId = 11,
+                            AddedOn = new DateTime(2024, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A rare arcana skin for Pudge, featuring stunning visual effects.",
                             GameId = 2,
                             ImageUrl = "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUivB9aSQPRVees2c6cQ0hwIgFot6imKglhnfWbdz8SuYjkw4SJz_OmZrjUlGoD6px307yV9Ir23lK18hZpN2H7IIGLMlhprnEbA94/360fx360f",
                             IsDeleted = false,
                             Name = "Feast of Abscession",
                             Price = 22.9m,
-                            PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
+                            PublisherId = "d5c07341-f610-4e1a-82af-792644004c7e",
                             SubtypeId = 1
                         },
                         new
                         {
-                            ItemId = 2,
-                            AddedOn = new DateTime(2024, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 12,
+                            AddedOn = new DateTime(2024, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A legendary knife skin for CS:GO with sleek animations and rare patterns.",
                             GameId = 1,
                             ImageUrl = "https://xn--b1agb1afb.com/image/cache/catalog/2128/2129/viber_%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_2019-12-05_11-15-18-800x800w.jpg",
                             IsDeleted = false,
                             Name = "Karambit",
                             Price = 199.99m,
-                            PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
+                            PublisherId = "d5c07341-f610-4e1a-82af-792644004c7e",
                             SubtypeId = 1
                         },
                         new
                         {
-                            ItemId = 3,
-                            AddedOn = new DateTime(2024, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 13,
+                            AddedOn = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "An epic astronaut-themed skin for Fortnite, perfect for galactic explorers.",
                             GameId = 3,
                             ImageUrl = "https://qudahalloween.com/cdn/shop/articles/Dark-Voyager-costume-featured_1201x.jpg?v=1719395076",
                             IsDeleted = false,
                             Name = "Dark Voyager",
                             Price = 14.99m,
-                            PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
+                            PublisherId = "d5c07341-f610-4e1a-82af-792644004c7e",
                             SubtypeId = 1
                         },
                         new
                         {
-                            ItemId = 4,
-                            AddedOn = new DateTime(2023, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 14,
+                            AddedOn = new DateTime(2023, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A dynamic skin for Lux that changes elements during the match.",
                             GameId = 6,
                             ImageUrl = "https://i.pinimg.com/originals/f8/31/92/f83192912b8b605cc046810c47e9b8e7.jpg",
                             IsDeleted = false,
                             Name = "Elementalist Lux",
                             Price = 24.99m,
-                            PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
+                            PublisherId = "d5c07341-f610-4e1a-82af-792644004c7e",
                             SubtypeId = 1
                         },
                         new
                         {
-                            ItemId = 5,
-                            AddedOn = new DateTime(2024, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 15,
+                            AddedOn = new DateTime(2023, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A rare arcana skin for Pudge, featuring stunning visual effects.",
                             GameId = 2,
                             ImageUrl = "https://dota-showcase.com/storage/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style2.png",
                             IsDeleted = false,
                             Name = "Manifold Paradox",
                             Price = 19.99m,
-                            PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
+                            PublisherId = "d5c07341-f610-4e1a-82af-792644004c7e",
                             SubtypeId = 1
                         },
                         new
                         {
-                            ItemId = 6,
-                            AddedOn = new DateTime(2023, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 16,
+                            AddedOn = new DateTime(2023, 8, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The fabled blades that shattered the Anvil Magus Hroth. Its terrible weight dented and shattered his iron shell, just as its blades tore into the enchanted hide beneath.",
                             GameId = 2,
                             ImageUrl = "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXB9AJbIo8h5hlcX0TVVduv287XVk5LJxFZsragejhs0uHPdHMXuIzgwtaIk6_wMuvUwDoF7pJ12-_D8Ijw0FG1-UVpMTr2LYGQdVA2fxiOrTHuJria/360fx360f",
                             IsDeleted = false,
                             Name = "Inscribed The Basher Blades",
                             Price = 6.99m,
-                            PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
+                            PublisherId = "d5c07341-f610-4e1a-82af-792644004c7e",
                             SubtypeId = 1
                         },
                         new
                         {
-                            ItemId = 7,
-                            AddedOn = new DateTime(2024, 7, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 17,
+                            AddedOn = new DateTime(2024, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "High risk and high reward, the infamous AWP is recognizable by its signature report and one-shot, one-kill policy. It has been painted by airbrushing transparent paints that fade together over a chrome base coat. This isn't just a weapon, it's a conversation piece - Imogen, Arms Dealer In Training",
                             GameId = 1,
                             ImageUrl = "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAZh7PLfYQJE7dizq4yCkP_gfezXxj0IvJBy2rrH9NSh2VXs80VsYWGnd9SWcAFoaFCEqVa7wu3oh5Gi_MOeScxOzqI/360fx360f",
                             IsDeleted = false,
                             Name = "AWP | Fade",
                             Price = 1799.99m,
-                            PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
+                            PublisherId = "d5c07341-f610-4e1a-82af-792644004c7e",
                             SubtypeId = 7
                         },
                         new
                         {
-                            ItemId = 8,
-                            AddedOn = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 18,
+                            AddedOn = new DateTime(2024, 8, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A unique skin for Wraith that delves into her mysterious past.",
                             GameId = 13,
                             ImageUrl = "https://cdnb.artstation.com/p/assets/images/images/027/923/487/4k/gary-huang-voidwalker-master.jpg?1592962782",
                             IsDeleted = false,
                             Name = "Wraith Voidwalker",
                             Price = 11.99m,
-                            PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
+                            PublisherId = "d5c07341-f610-4e1a-82af-792644004c7e",
                             SubtypeId = 1
                         },
                         new
                         {
-                            ItemId = 9,
-                            AddedOn = new DateTime(2023, 12, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 19,
+                            AddedOn = new DateTime(2024, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "An ultra-rare mount with a ghostly tiger aesthetic.",
                             GameId = 4,
                             ImageUrl = "https://wow.zamimg.com/uploads/screenshots/normal/1079770-reins-of-the-swift-spectral-tiger.jpg",
                             IsDeleted = false,
                             Name = "Swift Spectral Tiger",
                             Price = 499.99m,
-                            PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
+                            PublisherId = "d5c07341-f610-4e1a-82af-792644004c7e",
                             SubtypeId = 6
                         },
                         new
                         {
-                            ItemId = 10,
-                            AddedOn = new DateTime(2023, 7, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 20,
+                            AddedOn = new DateTime(2023, 12, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Brutosaurs are used by the Zandalari Empire as both weapons of war and enormous, mobile trading posts.",
                             GameId = 4,
                             ImageUrl = "https://wow.zamimg.com/uploads/screenshots/normal/742674-reins-of-the-mighty-caravan-brutosaur.jpg",
                             IsDeleted = false,
                             Name = "Reins of the Mighty Caravan Brutosaur",
                             Price = 290.99m,
-                            PublisherId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
+                            PublisherId = "d5c07341-f610-4e1a-82af-792644004c7e",
                             SubtypeId = 6
                         });
                 });
@@ -749,7 +879,7 @@ namespace GamerMarketApp.Data.Migrations
                     b.ToTable("UsersItems");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<string>", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -757,6 +887,11 @@ namespace GamerMarketApp.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
@@ -775,25 +910,9 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.ToTable("AspNetRoles", (string)null);
 
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "2",
-                            Name = "MANAGER",
-                            NormalizedName = "MANAGER"
-                        },
-                        new
-                        {
-                            Id = "3",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
+                    b.HasDiscriminator().HasValue("IdentityRole<string>");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -889,50 +1008,66 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             Id = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "b2672b21-456d-4205-9f1f-0b8b619c83c4",
+                            AccessFailedCount = 3,
+                            ConcurrencyStamp = "b6ddd8e5-5de0-4e90-9702-2de499bab95f",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
-                            LockoutEnabled = false,
+                            LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
-                            NormalizedUserName = "TESTADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMjawoAS42P5hMncS8G9cHfv1HM5ysoue0tgEzyi7DetlQd4HIpHDhANWvT4aKpCKQ==",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHeypfKnyPyWGEFNX4fVKX5CgCNJhk7fDR/bp78CG/6VeoqaM55GfaF4YpcMATV6FQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7a38c900-4d0f-448d-99dc-76c8e7baeafa",
+                            SecurityStamp = "7e056181-ee86-49fe-90cc-8339f8b9f661",
                             TwoFactorEnabled = false,
-                            UserName = "testAdmin"
+                            UserName = "Admin"
                         },
                         new
                         {
                             Id = "edd0d843-08a0-40d8-99f3-89414603ae15",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "4d5ba15d-bf01-48f1-b5e0-01c0d9615134",
-                            Email = "Manager@GMAIL.COM",
+                            AccessFailedCount = 3,
+                            ConcurrencyStamp = "e1a5f0e4-96e7-4d2a-a374-cb543ee87b73",
+                            Email = "Moderator@gmail.com",
                             EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MANAGER@GMAIL.COM",
-                            NormalizedUserName = "TESTMANAGER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL6kqshHbwqRZc/OpGjlKQMnMGTgeAaNARWevsrcSmg15bh7OhbjKjY/zBaFTUZkBg==",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "MODERATOR@GMAIL.COM",
+                            NormalizedUserName = "MODERATOR",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDEcQTaTCFvVAtOhCW03o+fyAYV6m9XTHx93j/JI42a7Y2ei8V+x1JcFPH4a8ookJA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ceab3a3a-5324-4025-8175-d2115bff7ba1",
+                            SecurityStamp = "f424a8ba-6e78-49c3-b9d5-308afb9033e8",
                             TwoFactorEnabled = false,
-                            UserName = "testManager"
+                            UserName = "Moderator"
                         },
                         new
                         {
                             Id = "11b7f420-600c-4095-926f-677202d4235f",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "6b648811-9607-4416-9ed8-155a202713ef",
-                            Email = "TESTUSER@GMAIL.COM",
+                            AccessFailedCount = 3,
+                            ConcurrencyStamp = "e26edc3c-7a46-46fa-a50e-450136124f4d",
+                            Email = "user@gmail.com",
                             EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "TESTUSER@GMAIL.COM",
-                            NormalizedUserName = "TESTUSER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOcSzBg7rY3kFFTYEuHR4Q/9pTFAgRUQZJVwyFD+xdKwVC5fD23GP+omt06zPUNjdg==",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "USER@GMAIL.COM",
+                            NormalizedUserName = "USER",
+                            PasswordHash = "AQAAAAIAAYagAAAAECzFsE1EnWmXp1Gu40Q9g03ljNg8p+FUOEkpW0jFGDdzk4PVNr+jIV3VWM2x8aXD7Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "89b2d5d7-30b3-4cad-acdf-d4650e8749dc",
+                            SecurityStamp = "a24c6ea2-a323-421e-83f4-d125cb243a4a",
                             TwoFactorEnabled = false,
-                            UserName = "testUser"
+                            UserName = "User"
+                        },
+                        new
+                        {
+                            Id = "d5c07341-f610-4e1a-82af-792644004c7e",
+                            AccessFailedCount = 3,
+                            ConcurrencyStamp = "75f4cb8d-32cb-4bff-9ea2-778170a1aa3a",
+                            Email = "user2@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "USER2@GMAIL.COM",
+                            NormalizedUserName = "USER2",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK+nyBhUMEuPHpAz7odMnsYkLXZDDeZ12ZkANZw/aikIPprCumYcRV281cWj+OlW2Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "242dc555-167b-48b7-ae17-854cbcca2cd0",
+                            TwoFactorEnabled = false,
+                            UserName = "User2"
                         });
                 });
 
@@ -1038,6 +1173,33 @@ namespace GamerMarketApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole<string>");
+
+                    b.HasDiscriminator().HasValue("IdentityRole");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            Name = "Moderator",
+                            NormalizedName = "MODERATOR"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
+                });
+
             modelBuilder.Entity("GamerMarketApp.Data.Models.Game", b =>
                 {
                     b.HasOne("GamerMarketApp.Data.Models.Genre", "Genre")
@@ -1108,7 +1270,7 @@ namespace GamerMarketApp.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<string>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1135,7 +1297,7 @@ namespace GamerMarketApp.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<string>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)

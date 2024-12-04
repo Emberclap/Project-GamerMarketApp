@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamerMarketApp.Data.Migrations
 {
     [DbContext(typeof(GamerMarketDbContext))]
-    [Migration("20241201025444_initial5")]
-    partial class initial5
+    [Migration("20241203201116_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -337,7 +337,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 1,
-                            AddedOn = new DateTime(2023, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2024, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A rare arcana skin for Pudge, featuring stunning visual effects.",
                             GameId = 2,
                             ImageUrl = "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUivB9aSQPRVees2c6cQ0hwIgFot6imKglhnfWbdz8SuYjkw4SJz_OmZrjUlGoD6px307yV9Ir23lK18hZpN2H7IIGLMlhprnEbA94/360fx360f",
@@ -350,7 +350,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 2,
-                            AddedOn = new DateTime(2023, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2023, 12, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A legendary knife skin for CS:GO with sleek animations and rare patterns.",
                             GameId = 1,
                             ImageUrl = "https://xn--b1agb1afb.com/image/cache/catalog/2128/2129/viber_%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_2019-12-05_11-15-18-800x800w.jpg",
@@ -363,7 +363,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 3,
-                            AddedOn = new DateTime(2023, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2023, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "An epic astronaut-themed skin for Fortnite, perfect for galactic explorers.",
                             GameId = 3,
                             ImageUrl = "https://qudahalloween.com/cdn/shop/articles/Dark-Voyager-costume-featured_1201x.jpg?v=1719395076",
@@ -376,7 +376,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 4,
-                            AddedOn = new DateTime(2023, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2024, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A dynamic skin for Lux that changes elements during the match.",
                             GameId = 6,
                             ImageUrl = "https://i.pinimg.com/originals/f8/31/92/f83192912b8b605cc046810c47e9b8e7.jpg",
@@ -389,7 +389,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 5,
-                            AddedOn = new DateTime(2023, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2024, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A rare arcana skin for Pudge, featuring stunning visual effects.",
                             GameId = 2,
                             ImageUrl = "https://dota-showcase.com/storage/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style2.png",
@@ -402,7 +402,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 6,
-                            AddedOn = new DateTime(2023, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2024, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The fabled blades that shattered the Anvil Magus Hroth. Its terrible weight dented and shattered his iron shell, just as its blades tore into the enchanted hide beneath.",
                             GameId = 2,
                             ImageUrl = "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXB9AJbIo8h5hlcX0TVVduv287XVk5LJxFZsragejhs0uHPdHMXuIzgwtaIk6_wMuvUwDoF7pJ12-_D8Ijw0FG1-UVpMTr2LYGQdVA2fxiOrTHuJria/360fx360f",
@@ -415,7 +415,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 7,
-                            AddedOn = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2023, 1, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "High risk and high reward, the infamous AWP is recognizable by its signature report and one-shot, one-kill policy. It has been painted by airbrushing transparent paints that fade together over a chrome base coat. This isn't just a weapon, it's a conversation piece - Imogen, Arms Dealer In Training",
                             GameId = 1,
                             ImageUrl = "https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAZh7PLfYQJE7dizq4yCkP_gfezXxj0IvJBy2rrH9NSh2VXs80VsYWGnd9SWcAFoaFCEqVa7wu3oh5Gi_MOeScxOzqI/360fx360f",
@@ -428,7 +428,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 8,
-                            AddedOn = new DateTime(2024, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2024, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A unique skin for Wraith that delves into her mysterious past.",
                             GameId = 13,
                             ImageUrl = "https://cdnb.artstation.com/p/assets/images/images/027/923/487/4k/gary-huang-voidwalker-master.jpg?1592962782",
@@ -441,7 +441,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 9,
-                            AddedOn = new DateTime(2023, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2024, 4, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "An ultra-rare mount with a ghostly tiger aesthetic.",
                             GameId = 4,
                             ImageUrl = "https://wow.zamimg.com/uploads/screenshots/normal/1079770-reins-of-the-swift-spectral-tiger.jpg",
@@ -454,7 +454,7 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             ItemId = 10,
-                            AddedOn = new DateTime(2024, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AddedOn = new DateTime(2023, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Brutosaurs are used by the Zandalari Empire as both weapons of war and enormous, mobile trading posts.",
                             GameId = 4,
                             ImageUrl = "https://wow.zamimg.com/uploads/screenshots/normal/742674-reins-of-the-mighty-caravan-brutosaur.jpg",
@@ -749,7 +749,7 @@ namespace GamerMarketApp.Data.Migrations
                     b.ToTable("UsersItems");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<string>", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -757,6 +757,11 @@ namespace GamerMarketApp.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
@@ -775,13 +780,9 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.ToTable("AspNetRoles", (string)null);
 
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        });
+                    b.HasDiscriminator().HasValue("IdentityRole<string>");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -877,18 +878,50 @@ namespace GamerMarketApp.Data.Migrations
                         new
                         {
                             Id = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "8b80bae2-64a1-492d-85ed-8cc426d0b341",
-                            Email = "admin@example.com",
+                            AccessFailedCount = 3,
+                            ConcurrencyStamp = "cfb1d6da-acfe-4f39-a852-4438ef045e8e",
+                            Email = "admin@gmail.com",
                             EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@EXAMPLE.COM",
-                            NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF6MArzVR2cY/yANjQ7OFiJbXVTn9oOObQoO0JDmOqlhQpYOW7nv9w7+PF6F09XsIA==",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE+QRGHM2nclEKo8YsF49X85NLnzhiziVluVpvUO+Uji5jLG7FB5S4KlGMR9axI+RA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9e06e609-8f14-4a31-a713-200c74f124b8",
+                            SecurityStamp = "ef7a5a60-52b1-4b4e-a380-8cd3c4dde96f",
                             TwoFactorEnabled = false,
-                            UserName = "admin@example.com"
+                            UserName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "edd0d843-08a0-40d8-99f3-89414603ae15",
+                            AccessFailedCount = 3,
+                            ConcurrencyStamp = "13edec63-ab04-4b7c-af83-0d63aadb4b8a",
+                            Email = "manager@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "MANAGER@GMAIL.COM",
+                            NormalizedUserName = "MANAGER",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEIsAfny2V8Co6j81tovxivQjnMkpRtkdX6+AKd+aPY0nvF3b9Q1f6GYgUm3dIxnaQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "b313c21e-2ce7-4d8f-8aec-8fad58acc682",
+                            TwoFactorEnabled = false,
+                            UserName = "Manager"
+                        },
+                        new
+                        {
+                            Id = "11b7f420-600c-4095-926f-677202d4235f",
+                            AccessFailedCount = 3,
+                            ConcurrencyStamp = "ca1750d7-a6d8-45aa-9a06-b7189b747ee5",
+                            Email = "user@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "USER@GMAIL.COM",
+                            NormalizedUserName = "USER",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKjOf8nxBBAElvGkEu2VMTn+yl7ntHHEWmV3ta44F8yLyL275ii47GoR1C7sB2iE+A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7062fce8-82b8-4584-8fa8-05ddd7319373",
+                            TwoFactorEnabled = false,
+                            UserName = "User"
                         });
                 });
 
@@ -960,6 +993,16 @@ namespace GamerMarketApp.Data.Migrations
                         {
                             UserId = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
                             RoleId = "1"
+                        },
+                        new
+                        {
+                            UserId = "edd0d843-08a0-40d8-99f3-89414603ae15",
+                            RoleId = "2"
+                        },
+                        new
+                        {
+                            UserId = "11b7f420-600c-4095-926f-677202d4235f",
+                            RoleId = "3"
                         });
                 });
 
@@ -982,6 +1025,33 @@ namespace GamerMarketApp.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole<string>");
+
+                    b.HasDiscriminator().HasValue("IdentityRole");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            Name = "MANAGER",
+                            NormalizedName = "MANAGER"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.Game", b =>
@@ -1054,7 +1124,7 @@ namespace GamerMarketApp.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<string>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1081,7 +1151,7 @@ namespace GamerMarketApp.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<string>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
