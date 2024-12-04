@@ -16,7 +16,8 @@ namespace GamerMarketApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
+                ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<GamerMarketDbContext>(options =>
                options.UseSqlServer(connectionString));
 
@@ -24,13 +25,14 @@ namespace GamerMarketApp
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options =>
             {
-                options.SignIn.RequireConfirmedAccount = true;
+                options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 6;
                 options.Password.RequireNonAlphanumeric = false;
             })
+                .AddRoles<IdentityRole<string>>()
                 .AddEntityFrameworkStores<GamerMarketDbContext>();
 
             builder.Services.AddScoped(typeof(IGenericRepository<>),
@@ -41,6 +43,7 @@ namespace GamerMarketApp
             builder.Services.AddScoped<IGameService, GameService>();
             builder.Services.AddScoped<IItemService, ItemService>();
             builder.Services.AddScoped<IWatchlistService, WatchlistService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             builder.Services.AddControllersWithViews();
             var app = builder.Build();
@@ -61,10 +64,17 @@ namespace GamerMarketApp
             app.UseStaticFiles();
 
             app.UseRouting();
+           // app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
 
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.MapControllerRoute(
+                 name: "Areas",
+                 pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+            app.MapControllerRoute(
+                name: "Errors",
+                pattern: "{controller=Home}/{action=Index}/{statusCode?}");
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

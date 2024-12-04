@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace GamerMarketApp.Data
 {
-    public class GamerMarketDbContext : IdentityDbContext
+    public class GamerMarketDbContext : IdentityDbContext<IdentityUser, IdentityRole<string>, string>
     {
 
         public GamerMarketDbContext()
