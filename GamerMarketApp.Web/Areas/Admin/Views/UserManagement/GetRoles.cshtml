@@ -1,0 +1,35 @@
+﻿@using GamerMarketApp.Web.ViewModels.Admin.Role;
+@model RoleViewModel
+@{
+    ViewBag.Title = "Role Manager";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form asp-controller="UserManagement" asp-action="AddRole" method="post">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Enter Role:</label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-outline-info btn-dark-text mb-2 w-100 py-3 fw-bold rounded">Add Role</button>
+        </form>
+        <form asp-controller="UserManagement" asp-action="DeleteRole" method="post">
+            <div class="mb-3">
+                <label for="Name" class="form-label">Role: </label>
+                <select asp-for="Name" class="form-select d-inline w-50">
+                    @foreach (var role in Model.Roles)
+                    {
+                        <option value="@role">@role</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-outline-info btn-dark-text mb-2 w-100 py-3 fw-bold rounded">Remove Role</button>
+            </div>
+        </form>
+    </div>
+</div>

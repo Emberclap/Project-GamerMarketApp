@@ -3,102 +3,102 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using GamerMarketApp.Web.ViewModels.Admin.User;
 using System.Data;
+using GamerMarketApp.Web.ViewModels.Admin.Role;
 
 namespace GamerMarketApp.Services.Data
 {
 
     public class UserService(UserManager<IdentityUser> userManager, RoleManager<IdentityRole<string>> roleManager) : IUserService
     {
-        private readonly UserManager<IdentityUser> userManager = userManager;
-        private readonly RoleManager<IdentityRole<string>> roleManager = roleManager;
-
-        public async Task<bool> AssignUserRoleAsync(string userId, string role)
+        public async Task<IdentityResult> AssignUserRoleAsync(string userId, string role)
         {
             var user = await userManager
                 .FindByIdAsync(userId);
 
-            bool roleExists = await this.roleManager.RoleExistsAsync(role);
+            bool roleExists = await roleManager.RoleExistsAsync(role);
 
             if (user == null || !roleExists)
             {
-                return true;
+                return IdentityResult.Failed();
             }
 
-            bool alreadyInRole = await this.userManager.IsInRoleAsync(user, role);
+            bool alreadyInRole = await userManager.IsInRoleAsync(user, role);
 
             if (!alreadyInRole)
             {
-                var result = await this.userManager
+                var result = await userManager
                     .AddToRoleAsync(user, role);
 
                 if (!result.Succeeded)
                 {
-                    return false;
+                    return IdentityResult.Failed();
                 }
             }
 
-            return true;
+            return IdentityResult.Success;
         }
 
 
         public async Task<bool> CheckUserByIdAsync(string userId)
         {
-            var user = await this.userManager
+            var user = await userManager
                  .FindByIdAsync(userId);
             if (user == null)
             {
                 return false;
+
             }
             return true;
         }
 
-        public async Task<bool> DeleteUserAsync(string userId)
+        public async Task<IdentityResult> DeleteUserAsync(string userId)
         {
             var user = await userManager
                 .FindByIdAsync(userId);
 
             if (user == null)
             {
-                return false;
+                IdentityResult.Failed();
             }
 
-            var result = await this.userManager
+            var result = await userManager
                 .DeleteAsync(user);
             if (!result.Succeeded)
             {
-                return false;
+                IdentityResult.Failed();
             }
 
-            return true;
+            return IdentityResult.Success;
         }
 
-        public async Task<bool> DisableUserAsync(string userId)
+        public async Task<IdentityResult> DisableUserAsync(string userId)
         {
-            var user = await this.userManager
+            var user = await userManager
                  .FindByIdAsync(userId);
             if (user == null)
             {
-                return false;
+                return IdentityResult.Failed(); ;
             }
             await userManager.SetLockoutEnabledAsync(user, true);
-            return true;
+            await userManager.SetLockoutEndDateAsync(user, DateTime.Today.AddYears(10));
+            return IdentityResult.Success;
         }
 
-        public async Task<bool> EnableUserAsync(string userId)
+        public async Task<IdentityResult> EnableUserAsync(string userId)
         {
-            var user = await this.userManager
+            var user = await userManager
                  .FindByIdAsync(userId);
             if (user == null)
             {
-                return false;
+                return IdentityResult.Failed();
             }
             await userManager.SetLockoutEndDateAsync(user, DateTime.Now);
-            return true;
+            return IdentityResult.Success;
         }
 
         public async Task<IEnumerable<UsersViewModel>> GetAllUsersAsync()
         {
-            var users = await this.userManager.Users
+            var users = await userManager.Users
                 .ToArrayAsync();
 
             var usersViewModel = new List<UsersViewModel>();
@@ -106,7 +106,7 @@ namespace GamerMarketApp.Services.Data
 
             foreach (var user in users)
             {
-                IEnumerable<string> roles = await this.userManager.GetRolesAsync(user);
+                IEnumerable<string> roles = await userManager.GetRolesAsync(user);
 
                 usersViewModel.Add(new UsersViewModel()
                 {
@@ -118,33 +118,55 @@ namespace GamerMarketApp.Services.Data
             return usersViewModel;
         }
 
-        public async Task<bool> RemoveUserRoleAsync(string userId, string role)
+        public async Task<IdentityResult> RemoveUserRoleAsync(string userId, string role)
         {
             var user = await userManager
                  .FindByIdAsync(userId);
 
-            bool roleExists = await this.roleManager.RoleExistsAsync(role);
+            bool roleExists = await roleManager.RoleExistsAsync(role);
 
             if (user == null || !roleExists)
             {
-                return false;
+                return IdentityResult.Failed();
             }
 
-            bool alreadyInRole = await this.userManager.IsInRoleAsync(user, role);
+            bool alreadyInRole = await userManager.IsInRoleAsync(user, role);
 
-            if (alreadyInRole)
+            if (!alreadyInRole)
             {
-                var result = await this.userManager
-                    .RemoveFromRoleAsync(user, role);
+                return IdentityResult.Failed();
 
-                if (!result.Succeeded)
-                {
-                    return false;
-                }
             }
-
-            return true;
+            var result = await userManager
+                    .RemoveFromRoleAsync(user, role);
+            return IdentityResult.Success;
         }
 
+        public async Task AddRoleAsync(string roleName)
+        {
+            await roleManager.CreateAsync(new IdentityRole(roleName));
+        }
+        public async Task<RoleViewModel> GetRolesAsync()
+        {
+            var availableRoles = await roleManager
+               .Roles
+               .Select(r => r.Name)
+               .ToListAsync();
+            var model = new RoleViewModel()
+            {
+
+                Roles = availableRoles
+            };
+            return model;
+        }
+
+        public async Task DeleteRoleAsync(string roleName)
+        {
+            var role = await roleManager.FindByNameAsync(roleName);
+            if (role != null)
+            {
+                await roleManager.DeleteAsync(role);
+            }
+        }
     }
 }

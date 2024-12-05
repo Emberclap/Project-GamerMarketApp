@@ -45,7 +45,7 @@
                     <form asp-action="AssignRole" method="post" asp-controller="UserManagement" asp-area="Admin" class="d-inline">
                         <input type="hidden" name="userId" value="@user.Id" />
                         <select name="role" class="form-select d-inline w-50">
-                            @foreach (string role in availableRoles)
+                            @foreach (var role in availableRoles)
                             {
                                 <option value="@role">@role</option>
                             }
