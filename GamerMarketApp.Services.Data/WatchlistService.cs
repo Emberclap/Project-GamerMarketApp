@@ -8,7 +8,6 @@ namespace GamerMarketApp.Services.Data
 {
     public class WatchlistService(IGenericRepository<UserItem> userItemRepository) : IWatchlistService
     {
-        private readonly IGenericRepository<UserItem> userItemRepository = userItemRepository;
 
         public async Task AddToWatchlistAsync(string userId, int itemId)
         {

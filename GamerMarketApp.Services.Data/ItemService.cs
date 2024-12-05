@@ -9,7 +9,6 @@ namespace GamerMarketApp.Services.Data
 {
     public class ItemService(IItemRepository itemRepository) : IItemService
     {
-        private readonly IItemRepository itemRepository = itemRepository;
 
         public async Task AddItemAsync(ItemAddViewModel model, string userId)
         {
@@ -168,7 +167,7 @@ namespace GamerMarketApp.Services.Data
 
             entity.IsDeleted = true;
 
-            await this.itemRepository.UpdateAsync(entity);
+            await itemRepository.UpdateAsync(entity);
         }
 
         public async Task<IEnumerable<ItemPreviewViewModel>> GetAllDeletedItemsAsync()

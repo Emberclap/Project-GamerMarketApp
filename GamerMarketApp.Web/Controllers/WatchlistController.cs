@@ -9,7 +9,6 @@ namespace GamerMarketApp.Web.Controllers
     [Authorize]
     public class WatchlistController(IWatchlistService watchlistService) : BaseController
     {
-        private readonly IWatchlistService watchlistService = watchlistService;
 
         [HttpGet]
         public async Task<IActionResult> Index()

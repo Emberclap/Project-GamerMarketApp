@@ -9,7 +9,6 @@ namespace GamerMarketApp.Web.Controllers
     public class ItemController(IItemService itemService) 
         : BaseController
     {
-        private readonly IItemService itemService = itemService;
 
         [HttpGet]
         [AllowAnonymous]
@@ -111,7 +110,7 @@ namespace GamerMarketApp.Web.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var isModerator = User.IsInRole("Moderator");
-            var model = await this.itemService.GetItemDeleteModelAsync(id);
+            var model = await itemService.GetItemDeleteModelAsync(id);
             if (model == null)
             {
                 return NotFound();
@@ -132,7 +131,7 @@ namespace GamerMarketApp.Web.Controllers
             {
                 return View(Model);
             }
-            await this.itemService.SoftDeleteItemAsync(Model.ItemId);
+            await itemService.SoftDeleteItemAsync(Model.ItemId);
             return RedirectToAction(nameof(Index));
         }
 
@@ -148,7 +147,7 @@ namespace GamerMarketApp.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> HardDelete(int id)
         {
-            await this.itemService.DeleteItemAsync(id);
+            await itemService.DeleteItemAsync(id);
 
             return RedirectToAction(nameof(DeletedItems));
         }

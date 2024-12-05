@@ -10,11 +10,9 @@ namespace GamerMarketApp.Web.Controllers
     public class GameController(IGameService gameService)
             : BaseController
     {
-        private readonly IGameService gameService = gameService;
-
  
         [HttpGet]
-        public async Task<IActionResult> AllGames()
+        public async Task<IActionResult> Index()
         {
             var model = await gameService.GetAllGamesAsync();
             return View(model);
@@ -46,7 +44,7 @@ namespace GamerMarketApp.Web.Controllers
             }
             await gameService.AddGameAsync(model);
 
-            return RedirectToAction(nameof(AllGames));
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -65,9 +63,9 @@ namespace GamerMarketApp.Web.Controllers
             {
                 return View(model);
             }
-            await this.gameService.EditGameAsync(model);
+            await gameService.EditGameAsync(model);
 
-            return RedirectToAction(nameof(AllGames));
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -86,16 +84,16 @@ namespace GamerMarketApp.Web.Controllers
         public async Task<IActionResult> SoftDelete(int id)
         {
 
-            await this.gameService.SoftDeleteGameAsync(id);
-            return RedirectToAction(nameof(AllGames));
+            await gameService.SoftDeleteGameAsync(id);
+            return RedirectToAction(nameof(Index));
         }
         [HttpPost]
         [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> BringGameBack(int id)
         {
 
-            await this.gameService.UndoSoftDeleteGameAsync(id);
-            return RedirectToAction(nameof(AllGames));
+            await gameService.UndoSoftDeleteGameAsync(id);
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -110,9 +108,9 @@ namespace GamerMarketApp.Web.Controllers
         public async Task<IActionResult> DeleteConfirmed(GameConfirmDeleteViewModel model)
         {
 
-            await this.gameService.DeleteGameAsync(model);
+            await gameService.DeleteGameAsync(model);
 
-            return RedirectToAction(nameof(AllGames));
+            return RedirectToAction(nameof(Index));
         }
     }
 }
