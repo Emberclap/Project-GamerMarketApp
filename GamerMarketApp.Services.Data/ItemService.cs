@@ -4,6 +4,7 @@ using GamerMarketApp.Services.Data.Interfaces;
 using GamerMarketApp.Web.ViewModels.Item;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using static GamerMarketApp.Commons.EntityValidationConstants.Item;
 
 namespace GamerMarketApp.Services.Data
 {
@@ -68,9 +69,30 @@ namespace GamerMarketApp.Services.Data
 
         }
 
-        public async Task<IEnumerable<ItemPreviewViewModel>> GetAllItemsAsync(string userId)
+        public async Task<IEnumerable<ItemPreviewViewModel>> GetAllItemsAsync(string userId, AllItemsSearchFilterViewModel inputModel)
         {
-            return await itemRepository.GetAllAttached()
+            inputModel.AllGames = await itemRepository.GetAllAttached().Select(g => g.Game.Title).Distinct().ToListAsync();
+            inputModel.AllTypes = await itemRepository.GetAllAttached().Select(g => g.Subtype.Name).Distinct().ToListAsync();
+
+            var ItemsQuery = itemRepository
+               .GetAllAttached();
+
+            if (!String.IsNullOrWhiteSpace(inputModel.SearchQuery))
+            {
+                ItemsQuery = ItemsQuery
+                    .Where(i => i.Name.Contains(inputModel.SearchQuery.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(inputModel.GameFilter))
+            {
+                ItemsQuery = ItemsQuery
+                    .Where(i => i.Game.Title.ToLower() == inputModel.GameFilter.ToLower());
+            }
+            if (!String.IsNullOrWhiteSpace(inputModel.TypeFilter))
+            {
+                ItemsQuery = ItemsQuery
+                    .Where(i => i.Subtype.Name.ToLower() == inputModel.TypeFilter);
+            }
+            return await ItemsQuery
                .Include(i => i.UserItems)
                .Where(i => i.IsDeleted == false)
                .Select(i => new ItemPreviewViewModel()
@@ -92,8 +114,8 @@ namespace GamerMarketApp.Services.Data
         {
             var model = new ItemAddViewModel()
             {
-                Games = (List<Game>)await itemRepository.GetGamesAsync(),
-                ItemSubtypes = (List<ItemSubtype>)await itemRepository.GetItemSubtypesAsync()
+                Games = await itemRepository.GetGamesAsync(),
+                ItemSubtypes = await itemRepository.GetItemSubtypesAsync()
             };
             return model;
         }
@@ -187,5 +209,7 @@ namespace GamerMarketApp.Services.Data
                 })
                 .ToListAsync();
         }
+
+
     }
 }

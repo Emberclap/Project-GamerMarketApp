@@ -12,11 +12,21 @@ namespace GamerMarketApp.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(AllItemsSearchFilterViewModel inputModel)
         {
             var userId = GetUserId();
-            var model = await itemService.GetAllItemsAsync(userId);
-            return View(model);
+            var itemModels = await itemService.GetAllItemsAsync(userId, inputModel);
+            var searchModel = new AllItemsSearchFilterViewModel()
+            { 
+                Items = itemModels,
+                SearchQuery = inputModel.SearchQuery,
+                GameFilter = inputModel.GameFilter,
+                TypeFilter = inputModel.TypeFilter,
+                AllGames = inputModel.AllGames,
+                AllTypes = inputModel.AllTypes,
+            };
+
+            return View(searchModel);
         }
 
         [HttpGet]

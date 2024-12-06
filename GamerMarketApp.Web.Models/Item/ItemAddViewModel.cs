@@ -25,7 +25,7 @@ namespace GamerMarketApp.Web.ViewModels.Item
 
         [Precision(18, 2)]
         public decimal Price { get; set; }
-        public List<Data.Models.Game> Games { get; set; } = [];
-        public List<ItemSubtype> ItemSubtypes { get; set; } = [];
+        public IEnumerable<Data.Models.Game> Games { get; set; } = [];
+        public IEnumerable<ItemSubtype> ItemSubtypes { get; set; } = [];
     }
 }
