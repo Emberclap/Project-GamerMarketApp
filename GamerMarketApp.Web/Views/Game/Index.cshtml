@@ -6,46 +6,47 @@
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
-
-<div class="text-center row">
-    @foreach (var e in Model)
-    {
-        <div class="card text-dark  col-4">
-            @if (!string.IsNullOrEmpty(e.ImageUrl))
-            {
-                <img src="@e.ImageUrl" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;">
-            }
-            else
-            {
-                <img src="~/img/NoImage.jpg" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;" alt="Placeholder Image">
-            }
-            <div class="card-body d-flex flex-column">
-                <div class="row">
-                    <div class="col">
-                        <div class="title-wrapper" style="height: 6em; overflow: hidden;">
-                            <h3 class="card-title mt-1">@e.Title</h3>
+<div class="container w-100">
+    <div class="row">
+        @foreach (var e in Model)
+        {
+            <div class="card text-dark  col-sm-4">
+                @if (!string.IsNullOrEmpty(e.ImageUrl))
+                {
+                    <img src="@e.ImageUrl" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;">
+                }
+                else
+                {
+                    <img src="~/img/NoImage.jpg" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;" alt="Placeholder Image">
+                }
+                <div class="card-body d-flex flex-column">
+                    <div class="row">
+                        <div class="col">
+                            <div class="title-wrapper" style="height: 6em; overflow: hidden;">
+                                <h3 class="card-title mt-1">@e.Title</h3>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <hr />
-                <h5 class="card-title mt-1">@e.Genre</h5>
-                <p class="card-text">@e.Description</p>
-                <div class="row mt-auto">
-                    <div class="col-12 px-1">
-                        <a asp-controller="Item" asp-action="ItemsByGame" asp-route-id="@e.Id" class="btn btn-outline-info w-100 mb-2"> Browse Items</a>
+                    <hr />
+                    <h5 class="card-title mt-1">@e.Genre</h5>
+                    <p class="card-text">@e.Description</p>
+                    <div class="row mt-auto">
+                        <div class="col-12 px-1">
+                            <a asp-controller="Item" asp-action="index" asp-route-id="@e.Title" class="btn btn-outline-info w-100 mb-2"> Browse Items</a>
+                        </div>
+                        @if (User?.Identity?.IsAuthenticated == true && User.IsInRole("Moderator"))
+                        {
+                            <div class="col-6 px-1">
+                                <a asp-controller="Game" asp-action="Edit" asp-route-id="@e.Id" class="btn btn-secondary w-100 mb-2">Edit</a>
+                            </div>
+                            <div class="col-6 px-1">
+                                <a asp-controller="Game" asp-action="Delete" asp-route-id="@e.Id" class="btn btn-danger w-100 mb-2">Delete</a>
+                            </div>
+                        }
                     </div>
-                    @if (User?.Identity?.IsAuthenticated == true && User.IsInRole("Moderator"))
-                    {
-                        <div class="col-6 px-1">
-                            <a asp-controller="Game" asp-action="Edit" asp-route-id="@e.Id" class="btn btn-secondary w-100 mb-2">Edit</a>
-                        </div>
-                        <div class="col-6 px-1">
-                            <a asp-controller="Game" asp-action="Delete" asp-route-id="@e.Id" class="btn btn-danger w-100 mb-2">Delete</a>
-                        </div>
-                    }
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
 
