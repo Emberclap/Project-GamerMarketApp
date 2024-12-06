@@ -6,6 +6,7 @@ using GamerMarketApp.Data.Repository;
 using GamerMarketApp.Data.Repository.Interfaces;
 using GamerMarketApp.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GamerMarketApp
 {
@@ -45,7 +46,10 @@ namespace GamerMarketApp
             builder.Services.AddScoped<IWatchlistService, WatchlistService>();
             builder.Services.AddScoped<IUserService, UserService>();
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews(cfg =>
+            {
+                cfg.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

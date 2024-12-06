@@ -6,7 +6,7 @@ namespace GamerMarketApp.Services.Data.Interfaces
     {
         Task<ItemAddViewModel> GetItemAddModelAsync();
         Task AddItemAsync(ItemAddViewModel model , string userId);
-        Task<IEnumerable<ItemPreviewViewModel>> GetAllItemsAsync(string userId);
+        Task<IEnumerable<ItemPreviewViewModel>> GetAllItemsAsync(string userId, AllItemsSearchFilterViewModel inputModel);
         Task<ItemEditViewModel> GetItemEditModelAsync(int id);
         Task EditItemAsync(ItemEditViewModel model);
         Task SoftDeleteItemAsync(int id);
@@ -14,5 +14,6 @@ namespace GamerMarketApp.Services.Data.Interfaces
         Task DeleteItemAsync(int id);
         Task<ItemDetailsViewModel?> GetItemDetailsAsync(string userId, int id);
         Task<IEnumerable<ItemPreviewViewModel>> GetAllDeletedItemsAsync();
+
     }
 }
