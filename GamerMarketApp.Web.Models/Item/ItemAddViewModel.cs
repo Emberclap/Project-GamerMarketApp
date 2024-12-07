@@ -12,17 +12,18 @@ namespace GamerMarketApp.Web.ViewModels.Item
         [Key]
         public int ItemId { get; set; }
         [Required(ErrorMessage = NameRequiredMessage)]
-        [StringLength(NameMaxValue, MinimumLength =NameMinValue)]
+        [StringLength(NameMaxValue, MinimumLength = NameMinValue, ErrorMessage = NameLengthMessage)]
         public string Name { get; set; } = null!;
 
-        [StringLength(DescriptionMaxValue, MinimumLength =DescriptionMinValue)]
+        [StringLength(DescriptionMaxValue, MinimumLength = DescriptionMinValue, ErrorMessage = DescriptionLengthMessage)]
         public string? Description { get; set; }
         [Required(ErrorMessage = ImageRequiredMessage)]
+        [StringLength(ItemImageUrlMaxValue, MinimumLength = ItemImageUrlMinValue, ErrorMessage = ImageUrlLengthMessage)]
         public string ImageUrl { get; set; } = null!;
         public int SubtypeId { get; set; }
         public int GameId { get; set; }
-        [Required(ErrorMessage = AddedOnDateFormatMessage)]
-        [RegularExpression(@"\d{2}/\d{2}/\d{4}")]
+        [Required]
+        [RegularExpression(@"\d{2}/\d{2}/\d{4}", ErrorMessage = AddedOnDateFormatMessage)]
         public string AddedOn { get; set; } = null!;
 
         [Precision(18, 2)]
