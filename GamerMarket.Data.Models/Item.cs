@@ -43,6 +43,8 @@ namespace GamerMarketApp.Data.Models
         public bool IsDeleted { get; set; }
 
         public virtual ICollection<UserItem> UserItems { get; set; } = new HashSet<UserItem>();
+        public virtual IEnumerable<CartItem> CartItems { get; set; } = new List<CartItem>();
+
 
     }
 }

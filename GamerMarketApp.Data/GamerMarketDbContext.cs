@@ -24,6 +24,8 @@ namespace GamerMarketApp.Data
         public virtual DbSet<ItemSubtype> ItemSubtypes { get; set; }
         public virtual DbSet<ItemType> ItemTypes { get; set; }
         public virtual DbSet<UserItem> UsersItems { get; set; }
+        public virtual DbSet<CartItem> CartItems { get; set; }
+        public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

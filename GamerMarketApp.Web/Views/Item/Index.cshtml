@@ -1,6 +1,9 @@
 ﻿@using static GamerMarketApp.Commons.ApplicationConstants;
+@using GamerMarketApp.Services.Data.Interfaces
 @using GamerMarketApp.Web.ViewModels.Item;
 @model AllItemsSearchFilterViewModel
+@inject IShoppingCartService cartItemService;
+
 @{
     ViewBag.Title = "Items";
 }
@@ -45,15 +48,15 @@
                 </div>
             </div>
         </form>
-    @if (User?.Identity?.IsAuthenticated ?? false)
-    {
-        <div class="col-auto">
-            <div class="col">
-                <a asp-controller="Item" asp-action="Add" class="btn btn-outline-info">Add Item</a>
-                <a asp-controller="Watchlist" asp-action="Index" class="btn btn-outline-primary">My Watchlist</a>
+        @if (User?.Identity?.IsAuthenticated ?? false)
+        {
+            <div class="col-auto">
+                <div class="col">
+                    <a asp-controller="Item" asp-action="Add" class="btn btn-outline-info">Add Item</a>
+                    <a asp-controller="Watchlist" asp-action="Index" class="btn btn-outline-primary">My Watchlist</a>
+                </div>
             </div>
-        </div>
-    }
+        }
     </div>
 </div>
 <hr />
@@ -64,7 +67,7 @@
     <div class="row">
         @foreach (var e in Model.Items)
         {
-            <div class="card-group d-flex flex-column col-lg-3 col-md-6 col-sm-3">
+            <div id="@e.ItemId" class="card-group d-flex flex-column col-lg-3 col-md-6 col-sm-3">
                 <img src="@e.ImageUrl" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;">
                 <div class="card-body border-secondary  d-flex flex-column">
                     <div class="card-body d-flex flex-column mt-auto" style="height: 9em;">
@@ -84,10 +87,20 @@
                             {
                                 @if (User?.Identity?.Name != e.Publisher)
                                 {
-
-                                    <div class="col-6 px-1">
-                                        <a asp-controller="Item" asp-action="AddToCart" asp-route-id="@e.ItemId" class="btn btn-secondary w-100 mb-2">Add to Cart</a>
-                                    </div>
+                                    @if (!await cartItemService.AlreadyInCart(User?.Identity?.Name, e.ItemId))
+                                    {
+                                        <form method="post" class="col-6 px-1">
+                                            <input type="hidden" name="itemId" asp-for="@e.ItemId" />
+                                            <button asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-source="Items" type="submit" class="btn btn-secondary w-100 mb-2">Add to Cart</button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <form method="post" class="col-6 px-1">
+                                            <input type="hidden" name="itemId" asp-for="@e.ItemId" />
+                                            <button asp-controller="ShoppingCart" asp-action="RemoveFromCart" asp-route-source="Items" asp-route-id="@e.ItemId" type="submit" class="btn btn-secondary w-100 mb-2">Remove from Cart</button>
+                                        </form>
+                                    }
                                     @if (!e.IsInWatchlist)
                                     {
                                         <form method="post" class="col-6 px-1">
@@ -109,5 +122,6 @@
             </div>
         }
     </div>
+
 }
 

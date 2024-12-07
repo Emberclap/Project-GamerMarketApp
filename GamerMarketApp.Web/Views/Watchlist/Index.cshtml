@@ -1,7 +1,8 @@
 ﻿@using static GamerMarketApp.Commons.ApplicationConstants;
+@using GamerMarketApp.Services.Data.Interfaces
 @using GamerMarketApp.Web.ViewModels.Item;
 @model IEnumerable<ItemPreviewViewModel>
-
+@inject IShoppingCartService cartItemService;
 @{
     ViewBag.Title = "Watchlist";
 }
@@ -19,24 +20,34 @@
                     <p class="text-light">@e.Game</p>
                     <h5 class="text-light">€ @e.Price</h5>
                 </div>
-                <form method="post">
                 <div class="card-text mt-auto">
                     <div class="row mt-auto">
-                        <div class="col-12 px-1">
+                        <form method="post" class="col-12 px-1">
                             <a asp-controller="Item" asp-action="Details" asp-route-id="@e.ItemId" class="btn btn-outline-info w-100 mb-2">Details</a>
-                        </div>
+                        </form>
                         @if (User?.Identity?.IsAuthenticated ?? false)
                         {
-                            <div class="col-6 px-1">
-                                <button asp-controller="" asp-action="AddToCart" asp-route-id="@e.ItemId" class="btn btn-secondary w-100 mb-2">Add to Cart</button>
-                            </div>
-                            <div class="col-6 px-1">
+                            @if (!await cartItemService.AlreadyInCart(User?.Identity?.Name, e.ItemId))
+                            {
+
+                                <form method="post" class="col-6 px-1">
+                                    <input type="hidden" name="itemId" asp-for="@e.ItemId" />
+                                    <button asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-source="Watchlist" asp-route-id="@e.ItemId" type="submit" class="btn btn-secondary w-100 mb-2">Add to Cart</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form method="post" class="col-6 px-1">
+                                    <input type="hidden" name="itemId" asp-for="@e.ItemId" />
+                                    <button asp-controller="ShoppingCart" asp-action="RemoveFromCart" asp-route-source="Watchlist" asp-route-id="@e.ItemId" type="submit" class="btn btn-secondary w-100 mb-2">Remove from Cart</button>
+                                </form>
+                            }
+                            <form method="post" class="col-6 px-1">
                                 <button asp-controller="Watchlist" asp-action="RemoveFromMyWatchlist" asp-route-id="@e.ItemId" type="submit" class="btn btn-primary w-100 mb-2">Remove</button>
-                            </div>
+                            </form>
                         }
                     </div>
                 </div>
-                </form>
             </div>
         </div>
     }

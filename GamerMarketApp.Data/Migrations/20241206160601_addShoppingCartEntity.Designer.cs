@@ -4,6 +4,7 @@ using GamerMarketApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamerMarketApp.Data.Migrations
 {
     [DbContext(typeof(GamerMarketDbContext))]
-    partial class GamerMarketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241206160601_addShoppingCartEntity")]
+    partial class addShoppingCartEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.ToTable("CartItems", (string)null);
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.Game", b =>
@@ -68,7 +71,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Games", (string)null);
+                    b.ToTable("Games");
 
                     b.HasData(
                         new
@@ -214,7 +217,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasKey("GenreId");
 
-                    b.ToTable("Genres", (string)null);
+                    b.ToTable("Genres");
 
                     b.HasData(
                         new
@@ -343,7 +346,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("SubtypeId");
 
-                    b.ToTable("Items", (string)null);
+                    b.ToTable("Items");
 
                     b.HasData(
                         new
@@ -633,7 +636,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("ItemTypeId");
 
-                    b.ToTable("ItemSubtypes", (string)null);
+                    b.ToTable("ItemSubtypes");
 
                     b.HasData(
                         new
@@ -821,7 +824,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasKey("ItemTypeId");
 
-                    b.ToTable("ItemTypes", (string)null);
+                    b.ToTable("ItemTypes");
 
                     b.HasData(
                         new
@@ -892,7 +895,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ShoppingCart", (string)null);
+                    b.ToTable("ShoppingCart");
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.UserItem", b =>
@@ -907,7 +910,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UsersItems", (string)null);
+                    b.ToTable("UsersItems");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<string>", b =>

@@ -41,6 +41,7 @@ namespace GamerMarketApp
             builder.Services.AddScoped<IGameRepository, GameRepository>();
             builder.Services.AddScoped<IItemRepository, ItemRepository>();
 
+            builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
             builder.Services.AddScoped<IGameService, GameService>();
             builder.Services.AddScoped<IItemService, ItemService>();
             builder.Services.AddScoped<IWatchlistService, WatchlistService>();
