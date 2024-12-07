@@ -103,7 +103,7 @@ namespace GamerMarketApp.Services.Data
                    Game = i.Game.Title,
                    ImageUrl = i.ImageUrl,
                    Subtype = i.Subtype.Name,
-                   Publisher = i.Publisher.UserName,
+                   Publisher = i.Publisher.UserName!,
                    Price = i.Price.ToString("# ###.00"),
                    IsInWatchlist = i.UserItems.Any(ui => ui.UserId == userId)
                })

@@ -54,7 +54,7 @@ namespace GamerMarketApp.Data.Repository
 
         public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
         {
-            var entity = await this.dbSet
+            var entity = await dbSet
                 .FirstOrDefaultAsync(predicate);
 
             return entity;
