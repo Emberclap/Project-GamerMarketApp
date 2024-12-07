@@ -28,7 +28,7 @@ namespace GamerMarketApp.Web.Controllers
 
             return View(searchModel);
         }
-
+       
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
@@ -55,7 +55,7 @@ namespace GamerMarketApp.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        [ValidateAntiForgeryToken]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Add(ItemAddViewModel model)
         {
 
@@ -96,7 +96,7 @@ namespace GamerMarketApp.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        [ValidateAntiForgeryToken]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Edit(ItemEditViewModel model)
         {
             if (!DateTime
@@ -134,7 +134,7 @@ namespace GamerMarketApp.Web.Controllers
         }
         [HttpPost]
         [Authorize]
-        [ValidateAntiForgeryToken]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Delete(ItemDeleteViewModel Model)
         {
             if (ModelState.IsValid)
@@ -154,7 +154,7 @@ namespace GamerMarketApp.Web.Controllers
         }
         [HttpPost]
         [Authorize(Roles = "Moderator")]
-        [ValidateAntiForgeryToken]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> HardDelete(int id)
         {
             await itemService.DeleteItemAsync(id);
