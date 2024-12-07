@@ -30,6 +30,8 @@
             public const int DescriptionMaxValue = 500;
 
             public const string AddedOnFormat = "dd/MM/yyyy";
+            public const double PriceMinValue = 0;
+            public const double PriceMaxValue = double.PositiveInfinity;
         }
         public static class ItemType
         {

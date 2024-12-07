@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static GamerMarketApp.Commons.EntityValidationConstants.Game;
+using static GamerMarketApp.Commons.EntityValidationMessages.Game;
+
 using GamerMarketApp.Data.Models;
 
 
@@ -10,12 +12,12 @@ namespace GamerMarketApp.Web.ViewModels.Game
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = TitleRequiredMessage)]
         [StringLength(TitleMaxValue, MinimumLength = TitleMinValue)]
         public string Title { get; set; } = null!;
         public string? ImageUrl { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = TitleRequiredMessage)]
         [StringLength(DescriptionMaxValue, MinimumLength = DescriptionMinValue)]
         public string Description { get; set; } = null!;
         public int GenreId { get; set; }
