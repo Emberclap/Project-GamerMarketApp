@@ -1,4 +1,6 @@
-﻿@{
+﻿@using GamerMarketApp.Web.ViewModels.Item;
+@model IEnumerable<ItemPreviewViewModel>
+@{
     ViewData["Title"] = "Welcome to GMarket";
 }
 
@@ -9,38 +11,47 @@
     <a class="btn btn-outline-light btn-lg" asp-area="" asp-controller="Item" asp-action="Add">Sell Your Items</a>
 </div>
 
-@* <div class="container my-5">
+<div class="container mt-5">
     <h2 class="text-center mb-4">Featured Items</h2>
     <div class="row">
-        @foreach (var item in Model.FeaturedItems)
+        @foreach (var item in Model)
         {
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm h-100">
                     <img src="@item.ImageUrl" class="card-img-top" alt="@item.Name">
-                    <div class="card-body">
-                        <h5 class="card-title">@item.Name</h5>
-                        <p class="card-text">@item.Description.Substring(0, Math.Min(item.Description.Length, 100))...</p>
-                        <p class="text-muted">Price: $@item.Price</p>
-                        <a href="/items/details/@item.Id" class="btn btn-primary">View Details</a>
+                    <div class="card-body  d-flex flex-column ">
+                        <div class="mt-auto row">
+                        <h3 class="card-title text-success">@item.Name</h3>
+                        <p class="card-text">@item.Description.Substring(0, Math.Min(item.Description.Length, 65))...</p>
+                        </div>
+                        <div class="mt-auto row">
+                            <p class="text-muted">€@item.Price</p>
+                            <form method="post" class="col-12 mt-auto px-1">
+                                <input type="hidden" name="itemId" asp-for="@item.ItemId" />
+                                <a asp-controller="Item" asp-action="Details" asp-route-id="@item.ItemId" class="btn btn-outline-info w-100 mb-2">Details</a>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         }
     </div>
-</div> *@
+</div>
+
+
 
 <div class="bg-light-subtle py-5">
     <div class="container">
         <h2 class="text-center text-dark mb-4">Explore Categories</h2>
-        <div class="row text-center">
+        <div class="row justify-content-between text-center">
+            @*  <div class="col-md-3">
+            <a class="page-link text-dark" asp-area="" asp-controller="Item" asp-action="Index">
+            <h5>Consoles</h5>
+            </a>
+            </div> *@
             <div class="col-md-3">
                 <a class="page-link text-dark" asp-area="" asp-controller="Item" asp-action="Index">
-                    <h5>Consoles</h5>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <a class="page-link text-dark" asp-area="" asp-controller="Item" asp-action="Index">
-                <h5>Items</h5>
+                    <h5>Items</h5>
                 </a>
             </div>
             <div class="col-md-3">
@@ -51,7 +62,7 @@
             <div class="col-md-3">
                 <a class="page-link text-dark" asp-area="" asp-controller="" asp-action="Index">
                     <h5>Crafted Items</h5>
-                 </a>
+                </a>
             </div>
         </div>
     </div>

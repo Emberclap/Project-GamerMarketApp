@@ -1,3 +1,5 @@
+using GamerMarketApp.Services.Data;
+using GamerMarketApp.Services.Data.Interfaces;
 using GamerMarketApp.Web.Controllers;
 using GamerMarketApp.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -5,18 +7,15 @@ using System.Diagnostics;
 
 namespace GamerMarketApp.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController(IItemService itemService, ILogger<HomeController> logger) 
+        : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
+            var model = await itemService.GetHomeItemsAsync();
+            return View(model);
         }
 
 

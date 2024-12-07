@@ -218,6 +218,24 @@ namespace GamerMarketApp.Services.Data
                 .ToListAsync();
         }
 
-
+        public async Task<IEnumerable<ItemPreviewViewModel>> GetHomeItemsAsync()
+        {
+            return await itemRepository.GetAllAttached()
+                 .Where(i => i.IsDeleted == false)
+                 .OrderByDescending(i => i.Price)
+                 .Select(i => new ItemPreviewViewModel()
+                 {
+                     ItemId = i.ItemId,
+                     Name = i.Name,
+                     ImageUrl = i.ImageUrl,
+                     Game = i.Game.Title,
+                     Description = i.Description,
+                     Price = i.Price.ToString("# ###.00"),
+                     Subtype = i.Subtype.Name,
+                     Publisher = i.Publisher.UserName!,
+                 })
+                 .Take(3)
+                 .ToListAsync();
+        }
     }
 }
