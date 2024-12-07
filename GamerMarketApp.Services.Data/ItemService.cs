@@ -72,10 +72,12 @@ namespace GamerMarketApp.Services.Data
         public async Task<IEnumerable<ItemPreviewViewModel>> GetAllItemsAsync(string userId, AllItemsSearchFilterViewModel inputModel)
         {
             inputModel.AllGames = await itemRepository.GetAllAttached().Select(g => g.Game.Title).Distinct().ToListAsync();
-            inputModel.AllTypes = await itemRepository.GetAllAttached().Select(g => g.Subtype.Name).Distinct().ToListAsync();
+            inputModel.AllTypes = await itemRepository.GetAllAttached().Select(t => t.Subtype.Name).Distinct().ToListAsync();
 
             var itemsQuery = itemRepository
-               .GetAllAttached();
+               .GetAllAttached()
+               .Where(i => i.IsDeleted == false);
+
 
             if (!String.IsNullOrWhiteSpace(inputModel.SearchQuery))
             {
@@ -92,6 +94,8 @@ namespace GamerMarketApp.Services.Data
                 itemsQuery = itemsQuery
                     .Where(i => i.Subtype.Name.ToLower() == inputModel.TypeFilter);
             }
+            inputModel.TotalPages = (int)Math.Ceiling((double)itemsQuery.Count() / inputModel.EntitiesPerPage);
+
             return await itemsQuery
                .Include(i => i.UserItems)
                .Where(i => i.IsDeleted == false)
@@ -107,6 +111,8 @@ namespace GamerMarketApp.Services.Data
                    Price = i.Price.ToString("# ###.00"),
                    IsInWatchlist = i.UserItems.Any(ui => ui.UserId == userId)
                })
+               .Skip(inputModel.EntitiesPerPage * (inputModel.CurrentPage - 1))
+               .Take(inputModel.EntitiesPerPage)
                .ToListAsync();
         }
 

@@ -61,7 +61,7 @@
 </div>
 <hr />
 
-@if (Model.Items != null)
+@if (Model.Items!.Count() > 0)
 {
 
     <div class="row">
@@ -122,6 +122,50 @@
             </div>
         }
     </div>
-
 }
+else
+{
+    <h2 class="text-center">No items were found matching your selection!</h2>
+}
+<nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination">
+        @if (Model.CurrentPage > 1)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index"
+                   asp-route-currentPage="@(Model.CurrentPage - 1)"
+                   asp-route-searchQuery="@Model.SearchQuery"
+                   asp-route-gameFilter="@Model.GameFilter"
+                   asp-route-typeFilter="@Model.TypeFilter">
+                    Previous
+                </a>
+            </li>
+        }
 
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a class="page-link" asp-action="Index"
+                   asp-route-currentPage="@i"
+                   asp-route-searchQuery="@Model.SearchQuery"
+                   asp-route-gameFilter="@Model.GameFilter"
+                   asp-route-typeFilter="@Model.TypeFilter">
+                    @i
+                </a>
+            </li>
+        }
+
+        @if (Model.CurrentPage < Model.TotalPages)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index"
+                   asp-route-currentPage="@(Model.CurrentPage + 1)"
+                   asp-route-searchQuery="@Model.SearchQuery"
+                   asp-route-gameFilter="@Model.GameFilter"
+                   asp-route-typeFilter="@Model.TypeFilter">
+                    Next
+                </a>
+            </li>
+        }
+    </ul>
+</nav>

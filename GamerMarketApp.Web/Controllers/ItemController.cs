@@ -17,13 +17,16 @@ namespace GamerMarketApp.Web.Controllers
             var userId = GetUserId();
             var itemModels = await itemService.GetAllItemsAsync(userId, inputModel);
             var searchModel = new AllItemsSearchFilterViewModel()
-            { 
+            {
                 Items = itemModels,
                 SearchQuery = inputModel.SearchQuery,
                 GameFilter = inputModel.GameFilter,
                 TypeFilter = inputModel.TypeFilter,
                 AllGames = inputModel.AllGames,
                 AllTypes = inputModel.AllTypes,
+                CurrentPage = inputModel.CurrentPage,
+                EntitiesPerPage = inputModel.EntitiesPerPage,
+                TotalPages = inputModel.TotalPages,
             };
 
             return View(searchModel);
