@@ -34,7 +34,7 @@ namespace GamerMarketApp.Web.Controllers
             }
             else if (source == "Details")
             {
-                return RedirectToAction("Details", "Item", new { itemId });
+                return RedirectToAction("Details", "Item", new { id = itemId });
             }
             else
             {
@@ -57,7 +57,7 @@ namespace GamerMarketApp.Web.Controllers
             }
             else if(source == "Details")
             {
-                return RedirectToAction("Details", "Item", new { itemId });
+                return RedirectToAction("Details", "Item", new { id = itemId });
             }
             else
             {

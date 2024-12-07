@@ -1,5 +1,7 @@
 ﻿@using GamerMarketApp.Web.ViewModels.Item;
+@using GamerMarketApp.Services.Data.Interfaces
 @model ItemDetailsViewModel
+@inject IShoppingCartService cartItemService;
 
 @{
     ViewData["Title"] = "Details";
@@ -32,12 +34,13 @@
             <p class="text-body">Added On: @Model.AddedOn </p>
             <p class="text-body">Owned By: @Model.Publisher </p>
         </div>
-        <form method="post">
-            <input type="hidden" asp-for="ItemId" />
-            @if (User?.Identity?.IsAuthenticated ?? false)
+
+        @if (User?.Identity?.IsAuthenticated ?? false)
+        {
+            @if (User.IsInRole("Moderator") || User?.Identity?.Name == Model.Publisher)
             {
-                @if (User.IsInRole("Moderator") || User?.Identity?.Name == Model.Publisher)
-                {
+                <form method="post">
+                    <input type="hidden" asp-for="ItemId" />
                     <div class="row mt-auto">
                         <div class="col-6 px-1">
                             <a asp-controller="Item" asp-action="Edit" asp-route-id="@Model.ItemId" class="btn btn-primary w-100 mb-2">Edit</a>
@@ -46,29 +49,40 @@
                             <a asp-controller="Item" asp-action="Delete" asp-route-id="@Model.ItemId" class="btn btn-danger w-100 mb-2">Delete</a>
                         </div>
                     </div>
-                }
-                else 
-                {
-                    <div class="row mt-auto">
-                        <div class="col-6 px-1">
+                </form>
+            }
+            else
+            {
+                <div class="row mt-auto">
+                    @if (!await cartItemService.AlreadyInCart(User?.Identity?.Name, @Model.ItemId))
+                    {
+
+                        <form method="post" class="col-6 px-1">
                             <input type="hidden" name="itemId" asp-for="@Model.ItemId" />
                             <button asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-source="Details" asp-route-id="@Model.ItemId" type="submit" class="btn btn-secondary w-100 mb-2">Add to Cart</button>
-                        </div>
-                        @if (!Model.IsInWatchlist)
-                        {
-                            <div class="col-6 px-1">
-                                <button asp-controller="Watchlist" asp-action="AddToMyWatchlist" asp-route-source="Details" asp-route-id="@Model.ItemId" type="submit" class="btn btn-primary w-100 mb-2">Add to Watchlist</button>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="col-6 px-1">
-                                <button asp-controller="Watchlist" asp-action="RemoveFromMyWatchlist" asp-route-source="Details" asp-route-id="@Model.ItemId" type="submit" class="btn  btn-primary w-100 mb-2">Remove Watch</button>
-                            </div>
-                        }
-                    </div>
-                }
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="post" class="col-6 px-1">
+                            <input type="hidden" name="itemId" asp-for="@Model.ItemId" />
+                            <button asp-controller="ShoppingCart" asp-action="RemoveFromCart" asp-route-source="Details" 9 asp-route-id="@Model.ItemId" type="submit" class="btn btn-secondary w-100 mb-2">Remove from Cart</button>
+                        </form>
+                    }
+                    @if (!Model.IsInWatchlist)
+                    {
+                        <form method="post" class="col-6 px-1">
+                            <button asp-controller="Watchlist" asp-action="AddToMyWatchlist" asp-route-source="Details" asp-route-id="@Model.ItemId" type="submit" class="btn btn-primary w-100 mb-2">Add to Watchlist</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="post" class="col-6 px-1">
+                            <button asp-controller="Watchlist" asp-action="RemoveFromMyWatchlist" asp-route-source="Details" asp-route-id="@Model.ItemId" type="submit" class="btn  btn-primary w-100 mb-2">Remove Watch</button>
+                        </form>
+                    }
+                </div>
             }
-        </form>
+        }
     </div>
 </div>

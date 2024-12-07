@@ -80,7 +80,7 @@ namespace GamerMarketApp.Web.Controllers
 
             var model = await itemService.GetItemEditModelAsync(id);
 
-            if (userId != model.PublisherId || !isModerator)
+            if (userId != model.PublisherId && !isModerator)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -105,6 +105,11 @@ namespace GamerMarketApp.Web.Controllers
             {
                 throw new InvalidOperationException("Invalid date format.");
             }
+            var isModerator = User.IsInRole("Moderator");
+            if (GetUserId() != model.PublisherId && !isModerator)
+            {
+                return RedirectToAction(nameof(Index));
+            }
 
             if (!ModelState.IsValid)
             {
@@ -119,13 +124,13 @@ namespace GamerMarketApp.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            var isModerator = User.IsInRole("Moderator");
             var model = await itemService.GetItemDeleteModelAsync(id);
             if (model == null)
             {
                 return NotFound();
             }
-            if (GetUserId() != model.Publisher || !isModerator)
+            var isModerator = User.IsInRole("Moderator");
+            if (GetUserId() != model.PublisherId && !isModerator)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -135,13 +140,15 @@ namespace GamerMarketApp.Web.Controllers
         [HttpPost]
         [Authorize]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Delete(ItemDeleteViewModel Model)
+        public async Task<IActionResult> Delete(ItemDeleteViewModel model)
         {
-            if (ModelState.IsValid)
+            var isModerator = User.IsInRole("Moderator");
+            if (GetUserId() != model.PublisherId && !isModerator)
             {
-                return View(Model);
+                return RedirectToAction(nameof(Index));
             }
-            await itemService.SoftDeleteItemAsync(Model.ItemId);
+
+            await itemService.SoftDeleteItemAsync(model.ItemId);
             return RedirectToAction(nameof(Index));
         }
 
@@ -149,6 +156,7 @@ namespace GamerMarketApp.Web.Controllers
         [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> DeletedItems()
         {
+
             var model = await itemService.GetAllDeletedItemsAsync();
             return View(model);
         }

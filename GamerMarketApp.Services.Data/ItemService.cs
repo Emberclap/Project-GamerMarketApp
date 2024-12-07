@@ -74,25 +74,25 @@ namespace GamerMarketApp.Services.Data
             inputModel.AllGames = await itemRepository.GetAllAttached().Select(g => g.Game.Title).Distinct().ToListAsync();
             inputModel.AllTypes = await itemRepository.GetAllAttached().Select(g => g.Subtype.Name).Distinct().ToListAsync();
 
-            var ItemsQuery = itemRepository
+            var itemsQuery = itemRepository
                .GetAllAttached();
 
             if (!String.IsNullOrWhiteSpace(inputModel.SearchQuery))
             {
-                ItemsQuery = ItemsQuery
-                    .Where(i => i.Name.Contains(inputModel.SearchQuery.ToLower()));
+                itemsQuery = itemsQuery
+                    .Where(i => i.Name.ToLower().Contains(inputModel.SearchQuery.ToLower()));
             }
             if (!String.IsNullOrWhiteSpace(inputModel.GameFilter))
             {
-                ItemsQuery = ItemsQuery
+                itemsQuery = itemsQuery
                     .Where(i => i.Game.Title.ToLower() == inputModel.GameFilter.ToLower());
             }
             if (!String.IsNullOrWhiteSpace(inputModel.TypeFilter))
             {
-                ItemsQuery = ItemsQuery
+                itemsQuery = itemsQuery
                     .Where(i => i.Subtype.Name.ToLower() == inputModel.TypeFilter);
             }
-            return await ItemsQuery
+            return await itemsQuery
                .Include(i => i.UserItems)
                .Where(i => i.IsDeleted == false)
                .Select(i => new ItemPreviewViewModel()
@@ -136,7 +136,9 @@ namespace GamerMarketApp.Services.Data
                 AddedOn = i.AddedOn.ToString("dd/MM/yyyy"),
                 SubType = i.Subtype.Name,
                 Publisher = i.Publisher.UserName!,
-            })
+                PublisherId = i.Publisher.Id,
+
+                })
             .FirstOrDefaultAsync(g => g.ItemId == id);
             return entity;
         }
