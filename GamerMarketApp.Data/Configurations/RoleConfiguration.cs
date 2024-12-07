@@ -29,12 +29,6 @@ namespace GamerMarketApp.Data.Configurations
                     Name = "Moderator",
                     NormalizedName = "MODERATOR"
                 },
-                new IdentityRole
-                {
-                    Id = "3",
-                    Name = "User",
-                    NormalizedName = "USER"
-                }
             };
             return roles;
         }

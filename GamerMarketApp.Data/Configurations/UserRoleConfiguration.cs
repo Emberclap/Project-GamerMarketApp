@@ -27,11 +27,6 @@ namespace GamerMarketApp.Data.Configurations
                     UserId = "edd0d843-08a0-40d8-99f3-89414603ae15",
                     RoleId = "2"
                 },
-                new IdentityUserRole<string>
-                {
-                    UserId = "11b7f420-600c-4095-926f-677202d4235f",
-                    RoleId = "3"
-                }
             };
             return userRoles;
         }
