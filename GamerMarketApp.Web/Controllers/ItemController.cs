@@ -31,7 +31,28 @@ namespace GamerMarketApp.Web.Controllers
 
             return View(searchModel);
         }
-       
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> MyItems(AllItemsSearchFilterViewModel inputModel)
+        {
+            var userId = GetUserId();
+            var itemModels = await itemService.GetMyItemsAsync(userId, inputModel);
+            var searchModel = new AllItemsSearchFilterViewModel()
+            {
+                Items = itemModels,
+                SearchQuery = inputModel.SearchQuery,
+                GameFilter = inputModel.GameFilter,
+                TypeFilter = inputModel.TypeFilter,
+                AllGames = inputModel.AllGames,
+                AllTypes = inputModel.AllTypes,
+                CurrentPage = inputModel.CurrentPage,
+                EntitiesPerPage = inputModel.EntitiesPerPage,
+                TotalPages = inputModel.TotalPages,
+            };
+
+            return View(nameof(Index),searchModel);
+        }
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
@@ -67,11 +88,21 @@ namespace GamerMarketApp.Web.Controllers
                 model = await itemService.GetItemAddModelAsync();
                 return View(model);
             }
-
             string userId = GetUserId();
-            await itemService.AddItemAsync(model, userId);
+            try
+            {
 
-            return RedirectToAction(nameof(Index));
+                await itemService.AddItemAsync(model, userId);
+                return RedirectToAction(nameof(Index));
+            }
+            catch(Exception)
+            {
+                ModelState.AddModelError("Item", "An error occurred while adding the item.");
+                return View(model);
+            }
+            
+
+            
         }
 
         [HttpGet]
@@ -91,7 +122,7 @@ namespace GamerMarketApp.Web.Controllers
             
             if (model == null)
             {
-                return NotFound();
+                return View(model);
             }
 
             return View(model);
@@ -118,8 +149,17 @@ namespace GamerMarketApp.Web.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            await itemService.EditItemAsync(model);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await itemService.EditItemAsync(model);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("Item", "An error occurred while editing the item.");
+                return View(model);
+            }
+            
         }
 
 
@@ -150,9 +190,16 @@ namespace GamerMarketApp.Web.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-
-            await itemService.SoftDeleteItemAsync(model.ItemId);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await itemService.SoftDeleteItemAsync(model.ItemId);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Item", "An error occurred while deleting the item.");
+                return View(model);
+            }
         }
 
         [HttpGet]
@@ -172,6 +219,7 @@ namespace GamerMarketApp.Web.Controllers
 
             return RedirectToAction(nameof(DeletedItems));
         }
+
 
     }
 }

@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace GamerMarketApp.Controllers
 {
-    public class HomeController(IItemService itemService, ILogger<HomeController> logger) 
+    public class HomeController(IItemService itemService) 
         : BaseController
     {
 

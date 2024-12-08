@@ -15,5 +15,6 @@ namespace GamerMarketApp.Services.Data.Interfaces
         Task<ItemDetailsViewModel?> GetItemDetailsAsync(string userId, int id);
         Task<IEnumerable<ItemPreviewViewModel>> GetAllDeletedItemsAsync();
         Task<IEnumerable<ItemPreviewViewModel>> GetHomeItemsAsync();
+        Task<IEnumerable<ItemPreviewViewModel>> GetMyItemsAsync(string userId, AllItemsSearchFilterViewModel inputModel);
     }
 }

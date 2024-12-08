@@ -42,9 +42,18 @@ namespace GamerMarketApp.Web.Controllers
             {
                 return View(model);
             }
-            await gameService.AddGameAsync(model);
 
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await gameService.AddGameAsync(model);
+                return RedirectToAction(nameof(Index));
+
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Game", "An error occurred while Adding the game.");
+                return View(model); 
+            }
         }
 
         [HttpGet]
@@ -63,9 +72,17 @@ namespace GamerMarketApp.Web.Controllers
             {
                 return View(model);
             }
-            await gameService.EditGameAsync(model);
+            try
+            {
+                await gameService.EditGameAsync(model);
+                return RedirectToAction(nameof(Index));
 
-            return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Game", "An error occurred while editing the game.");
+                return View(model);
+            }
         }
 
         [HttpGet]
@@ -91,7 +108,7 @@ namespace GamerMarketApp.Web.Controllers
         [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> BringGameBack(int id)
         {
-
+            
             await gameService.UndoSoftDeleteGameAsync(id);
             return RedirectToAction(nameof(Index));
         }
@@ -107,10 +124,16 @@ namespace GamerMarketApp.Web.Controllers
         [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> DeleteConfirmed(GameConfirmDeleteViewModel model)
         {
-
-            await gameService.DeleteGameAsync(model);
-
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await gameService.DeleteGameAsync(model);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Game", "An error occurred while deleting the game.");
+                return View(model); 
+            }
         }
     }
 }

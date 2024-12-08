@@ -98,7 +98,6 @@ namespace GamerMarketApp.Services.Data
 
             return await itemsQuery
                .Include(i => i.UserItems)
-               .Where(i => i.IsDeleted == false)
                .Select(i => new ItemPreviewViewModel()
                {
                    ItemId = i.ItemId,
@@ -236,6 +235,52 @@ namespace GamerMarketApp.Services.Data
                  })
                  .Take(3)
                  .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ItemPreviewViewModel>> GetMyItemsAsync(string userId, AllItemsSearchFilterViewModel inputModel)
+        {
+            inputModel.AllGames = await itemRepository.GetAllAttached().Select(g => g.Game.Title).Distinct().ToListAsync();
+            inputModel.AllTypes = await itemRepository.GetAllAttached().Select(t => t.Subtype.Name).Distinct().ToListAsync();
+
+            var itemsQuery = itemRepository
+               .GetAllAttached()
+               .Where(i => i.IsDeleted == false && i.PublisherId == userId);
+
+
+            if (!String.IsNullOrWhiteSpace(inputModel.SearchQuery))
+            {
+                itemsQuery = itemsQuery
+                    .Where(i => i.Name.ToLower().Contains(inputModel.SearchQuery.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(inputModel.GameFilter))
+            {
+                itemsQuery = itemsQuery
+                    .Where(i => i.Game.Title.ToLower() == inputModel.GameFilter.ToLower());
+            }
+            if (!String.IsNullOrWhiteSpace(inputModel.TypeFilter))
+            {
+                itemsQuery = itemsQuery
+                    .Where(i => i.Subtype.Name.ToLower() == inputModel.TypeFilter);
+            }
+            inputModel.TotalPages = (int)Math.Ceiling((double)itemsQuery.Count() / inputModel.EntitiesPerPage);
+
+            return await itemsQuery
+               .Include(i => i.UserItems)
+               .Select(i => new ItemPreviewViewModel()
+               {
+                   ItemId = i.ItemId,
+                   Name = i.Name,
+                   Description = i.Description,
+                   Game = i.Game.Title,
+                   ImageUrl = i.ImageUrl,
+                   Subtype = i.Subtype.Name,
+                   Publisher = i.Publisher.UserName!,
+                   Price = i.Price.ToString("# ###.00"),
+                   IsInWatchlist = i.UserItems.Any(ui => ui.UserId == userId)
+               })
+               .Skip(inputModel.EntitiesPerPage * (inputModel.CurrentPage - 1))
+               .Take(inputModel.EntitiesPerPage)
+               .ToListAsync();
         }
     }
 }
