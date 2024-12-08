@@ -1,5 +1,4 @@
-﻿using GamerMarketApp.Controllers;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -13,6 +12,6 @@ namespace GamerMarketApp.Web.Controllers
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
         }
-
+       
     }
 }

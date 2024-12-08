@@ -69,7 +69,8 @@ namespace GamerMarketApp
             app.UseStaticFiles();
 
             app.UseRouting();
-           // app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
+            app.UseExceptionHandler("/Home/Error");
+            app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
 
             app.UseAuthentication();
             app.UseAuthorization();

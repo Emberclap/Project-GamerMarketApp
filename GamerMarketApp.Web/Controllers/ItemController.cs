@@ -195,7 +195,7 @@ namespace GamerMarketApp.Web.Controllers
                 await itemService.SoftDeleteItemAsync(model.ItemId);
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ModelState.AddModelError("Item", "An error occurred while deleting the item.");
                 return View(model);

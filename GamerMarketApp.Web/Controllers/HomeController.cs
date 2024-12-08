@@ -1,9 +1,6 @@
-using GamerMarketApp.Services.Data;
 using GamerMarketApp.Services.Data.Interfaces;
 using GamerMarketApp.Web.Controllers;
-using GamerMarketApp.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace GamerMarketApp.Controllers
 {
@@ -19,10 +16,19 @@ namespace GamerMarketApp.Controllers
         }
 
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
+        public IActionResult Error(int statusCode)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (statusCode == 404)
+            {
+                return View("NotFound");
+            }
+            return View("Error");
         }
+
     }
 }
