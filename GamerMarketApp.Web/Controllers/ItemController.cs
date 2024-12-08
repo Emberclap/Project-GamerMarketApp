@@ -51,7 +51,7 @@ namespace GamerMarketApp.Web.Controllers
                 TotalPages = inputModel.TotalPages,
             };
 
-            return View(nameof(Index),searchModel);
+            return View(nameof(MyItems),searchModel);
         }
         [HttpGet]
         [AllowAnonymous]
