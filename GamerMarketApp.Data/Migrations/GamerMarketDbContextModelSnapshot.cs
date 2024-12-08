@@ -34,7 +34,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItems", (string)null);
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.Game", b =>
@@ -69,7 +69,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Games");
+                    b.ToTable("Games", (string)null);
 
                     b.HasData(
                         new
@@ -215,7 +215,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasKey("GenreId");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
 
                     b.HasData(
                         new
@@ -345,7 +345,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("SubtypeId");
 
-                    b.ToTable("Items");
+                    b.ToTable("Items", (string)null);
 
                     b.HasData(
                         new
@@ -635,7 +635,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("ItemTypeId");
 
-                    b.ToTable("ItemSubtypes");
+                    b.ToTable("ItemSubtypes", (string)null);
 
                     b.HasData(
                         new
@@ -823,7 +823,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasKey("ItemTypeId");
 
-                    b.ToTable("ItemTypes");
+                    b.ToTable("ItemTypes", (string)null);
 
                     b.HasData(
                         new
@@ -894,7 +894,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ShoppingCart");
+                    b.ToTable("ShoppingCart", (string)null);
                 });
 
             modelBuilder.Entity("GamerMarketApp.Data.Models.UserItem", b =>
@@ -909,7 +909,7 @@ namespace GamerMarketApp.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UsersItems");
+                    b.ToTable("UsersItems", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<string>", b =>

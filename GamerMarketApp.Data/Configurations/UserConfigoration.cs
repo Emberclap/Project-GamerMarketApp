@@ -23,7 +23,7 @@ namespace GamerMarketApp.Data.Configurations
                 Id = "a75b8366-0bac-46e0-9e94-e9cfaf771b3d",
                 UserName = "Admin",
                 NormalizedUserName = "ADMIN",
-                Email = "admin@gmail.com",
+                Email = "admin@Gmail.com",
                 NormalizedEmail = "ADMIN@GMAIL.COM",
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "Adminqwe123"), // Hash the password
@@ -37,7 +37,7 @@ namespace GamerMarketApp.Data.Configurations
                 Id = "edd0d843-08a0-40d8-99f3-89414603ae15",
                 UserName = "Moderator",
                 NormalizedUserName = "MODERATOR",
-                Email = "Moderator@gmail.com",
+                Email = "Moderator@Gmail.com",
                 NormalizedEmail = "MODERATOR@GMAIL.COM",
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "Managerqwe123"), // Hash the password
