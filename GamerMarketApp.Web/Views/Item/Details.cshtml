@@ -54,7 +54,7 @@
             else
             {
                 <div class="row mt-auto">
-                    @if (!await cartItemService.AlreadyInCart(User?.Identity?.Name, @Model.ItemId))
+                    @if (!await cartItemService.AlreadyInCart(User?.Identity?.Name!, @Model.ItemId))
                     {
 
                         <form method="post" class="col-6 px-1">

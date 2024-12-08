@@ -66,7 +66,7 @@ namespace GamerMarketApp.Services.Data
 
             var model = new GameAddViewModel()
             {
-                Id = game.GameId,
+                Id = game!.GameId,
                 Title = game.Title,
                 Description = game.Description,
                 ImageUrl = game.ImageUrl,
@@ -98,14 +98,14 @@ namespace GamerMarketApp.Services.Data
 
             var model = new GameConfirmDeleteViewModel()
             {
-                Id = gameToDelete.GameId,
+                Id = gameToDelete!.GameId,
                 Title = gameToDelete.Title,
                 ImageUrl = gameToDelete.ImageUrl
             };
             return model;
         }
 
-        public async Task<GameDeleteViewModel> GetGameDeleteModelAsync(int id)
+        public async Task<GameDeleteViewModel?> GetGameDeleteModelAsync(int id)
         {
             var model = await gameRepository.GetAllAttached()
                 .Where(g => g.IsDeleted == false)
@@ -125,14 +125,20 @@ namespace GamerMarketApp.Services.Data
         public async Task DeleteGameAsync(GameConfirmDeleteViewModel model)
         {
             var gameEntity = await gameRepository.GetByIdAsync(model.Id);
-
+            if (gameEntity == null)
+            {
+                return;
+            }
             await gameRepository.DeleteAsync(gameEntity);
 
         }
         public async Task UndoSoftDeleteGameAsync(int id)
         {
             var gameEntity = await gameRepository.GetByIdAsync(id);
-
+            if(gameEntity == null)
+            {
+                return;
+            }
             gameEntity.IsDeleted = false;
 
             await this.gameRepository.UpdateAsync(gameEntity);
@@ -140,7 +146,10 @@ namespace GamerMarketApp.Services.Data
         public async Task SoftDeleteGameAsync(int id)
         {
             var gameEntity = await gameRepository.GetByIdAsync(id);
-
+            if (gameEntity == null)
+            {
+                return;
+            }
             gameEntity.IsDeleted = true;
 
             await this.gameRepository.UpdateAsync(gameEntity);

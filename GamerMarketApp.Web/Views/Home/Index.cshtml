@@ -22,7 +22,7 @@
                     <div class="card-body  d-flex flex-column ">
                         <div class="mt-auto row">
                         <h3 class="card-title text-success">@item.Name</h3>
-                        <p class="card-text">@item.Description.Substring(0, Math.Min(item.Description.Length, 65))...</p>
+                        <p class="card-text">@item.Description?.Substring(0, Math.Min(item.Description.Length, 65))...</p>
                         </div>
                         <div class="mt-auto row">
                             <p class="text-muted">€@item.Price</p>

@@ -62,7 +62,7 @@ namespace GamerMarketApp.Services.Data
             }
 
             var result = await userManager
-                .DeleteAsync(user);
+                .DeleteAsync(user!);
             if (!result.Succeeded)
             {
                 IdentityResult.Failed();
@@ -146,16 +146,19 @@ namespace GamerMarketApp.Services.Data
         {
             await roleManager.CreateAsync(new IdentityRole(roleName));
         }
-        public async Task<RoleViewModel> GetRolesAsync()
+        public async Task<RoleViewModel?> GetRolesAsync()
         {
             var availableRoles = await roleManager
                .Roles
                .Select(r => r.Name)
                .ToListAsync();
+            if (availableRoles.Count <= 0)
+            {
+                return null;
+            }
             var model = new RoleViewModel()
             {
-
-                Roles = availableRoles
+                Roles = availableRoles!
             };
             return model;
         }

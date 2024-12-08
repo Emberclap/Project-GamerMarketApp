@@ -14,7 +14,7 @@ namespace GamerMarketApp.Services.Data.Interfaces
         Task<GameAddViewModel> GetEditModelAsync(int id);
         Task EditGameAsync(GameAddViewModel model);
         Task SoftDeleteGameAsync(int id);
-        Task<GameDeleteViewModel> GetGameDeleteModelAsync(int id);
+        Task<GameDeleteViewModel?> GetGameDeleteModelAsync(int id);
         Task DeleteGameAsync(GameConfirmDeleteViewModel model);
         Task<GameConfirmDeleteViewModel> GetConfirmDeleteModelAsync(int id);
         Task<IEnumerable<GameViewModel>> GetAllDeletedGamesAsync();

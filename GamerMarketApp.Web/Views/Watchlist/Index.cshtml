@@ -27,7 +27,7 @@
                         </form>
                         @if (User?.Identity?.IsAuthenticated ?? false)
                         {
-                            @if (!await cartItemService.AlreadyInCart(User?.Identity?.Name, e.ItemId))
+                            @if (!await cartItemService.AlreadyInCart(User?.Identity?.Name!, e.ItemId))
                             {
 
                                 <form method="post" class="col-6 px-1">

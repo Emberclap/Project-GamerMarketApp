@@ -11,6 +11,6 @@ namespace GamerMarketApp.Data.Repository.Interfaces
         Task<bool> DeleteAsync(T entity);
         IQueryable<T> GetAllAttached();
         Task SaveAsync();
-        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
+        Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
     }
 }

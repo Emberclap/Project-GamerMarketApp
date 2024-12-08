@@ -65,7 +65,7 @@
 {
 
     <div class="row">
-        @foreach (var e in Model.Items)
+        @foreach (var e in Model.Items!)
         {
             <div id="@e.ItemId" class="card-group d-flex flex-column col-lg-3 col-md-6 col-sm-3">
                 <img src="@e.ImageUrl" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;">
@@ -87,7 +87,7 @@
                             {
                                 @if (User?.Identity?.Name != e.Publisher)
                                 {
-                                    @if (!await cartItemService.AlreadyInCart(User?.Identity?.Name, e.ItemId))
+                                    @if (!await cartItemService.AlreadyInCart(User?.Identity?.Name!, e.ItemId))
                                     {
                                         <form method="post" class="col-6 px-1">
                                             <input type="hidden" name="itemId" asp-for="@e.ItemId" />

@@ -52,7 +52,7 @@ namespace GamerMarketApp.Data.Repository
             await context.SaveChangesAsync();
         }
 
-        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
+        public async Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
         {
             var entity = await dbSet
                 .FirstOrDefaultAsync(predicate);

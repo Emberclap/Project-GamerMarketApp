@@ -72,10 +72,5 @@ namespace GamerMarketApp.Web.Controllers
             await cartService.ClearCart(userId);
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> CheckOut()
-        {
-            return  NotFound();
-        }
-
     }
 }

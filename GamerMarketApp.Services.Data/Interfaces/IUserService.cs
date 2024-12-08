@@ -15,7 +15,7 @@ namespace GamerMarketApp.Services.Data.Interfaces
         Task<IdentityResult> EnableUserAsync(string userId);
 
         Task AddRoleAsync(string roleName);
-        Task<RoleViewModel> GetRolesAsync();
+        Task<RoleViewModel?> GetRolesAsync();
         Task DeleteRoleAsync(string roleName);
     }
 }

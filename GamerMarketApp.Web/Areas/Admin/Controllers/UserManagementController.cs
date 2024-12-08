@@ -100,7 +100,7 @@ namespace GamerMarketApp.Web.Areas.Admin.Controllers
             {
                 return View(model);
             }
-            await userService.AddRoleAsync(model.Name);
+            await userService.AddRoleAsync(model.Name!);
             return this.RedirectToAction(nameof(GetRoles));
         }
         [HttpPost]
@@ -110,7 +110,7 @@ namespace GamerMarketApp.Web.Areas.Admin.Controllers
             {
                 return View(model);
             }
-            await userService.DeleteRoleAsync(model.Name);
+            await userService.DeleteRoleAsync(model.Name!);
             return this.RedirectToAction(nameof(GetRoles));
         }
     }

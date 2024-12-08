@@ -38,6 +38,10 @@ namespace GamerMarketApp.Services.Data
         {
             var entity = await itemRepository
                 .FirstOrDefaultAsync(i => i.ItemId == id);
+            if (entity == null)
+            {
+                return;
+            }
             await itemRepository.DeleteAsync(entity);
         }
 
@@ -150,6 +154,10 @@ namespace GamerMarketApp.Services.Data
 
         public async Task<ItemDetailsViewModel?> GetItemDetailsAsync(string userId,int id)
         {
+            if (userId == null)
+            {
+                return null; 
+            }
             return await itemRepository.GetAllAttached()
                .Include(i => i.UserItems)
                .Where(i => i.IsDeleted == false && i.ItemId == id)
@@ -159,7 +167,7 @@ namespace GamerMarketApp.Services.Data
                    Name = i.Name,
                    Description = i.Description,
                    Game = i.Game.Title,
-                   Publisher = i.Publisher.UserName,
+                   Publisher = i.Publisher.UserName!,
                    ImageUrl = i.ImageUrl,
                    SubType = i.Subtype.Name,
                    Price = i.Price.ToString("# ###.00"),
@@ -175,7 +183,7 @@ namespace GamerMarketApp.Services.Data
 
             var model = new ItemEditViewModel()
             {
-                ItemId = item.ItemId,
+                ItemId = item!.ItemId,
                 Name = item.Name,
                 AddedOn = item.AddedOn.ToString("dd/MM/yyyy"),
                 Description = item.Description,
@@ -193,7 +201,10 @@ namespace GamerMarketApp.Services.Data
         public async Task SoftDeleteItemAsync(int id)
         {
             var entity = await itemRepository.GetByIdAsync(id);
-
+            if (entity == null)
+            {
+                return;
+            }
             entity.IsDeleted = true;
 
             await itemRepository.UpdateAsync(entity);

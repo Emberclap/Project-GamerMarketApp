@@ -49,7 +49,7 @@ namespace GamerMarketApp.Web.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ModelState.AddModelError("Game", "An error occurred while Adding the game.");
                 return View(model); 
@@ -61,6 +61,10 @@ namespace GamerMarketApp.Web.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var model = await gameService.GetEditModelAsync(id);
+            if (model == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             return View(model);
         }
 
@@ -78,7 +82,7 @@ namespace GamerMarketApp.Web.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ModelState.AddModelError("Game", "An error occurred while editing the game.");
                 return View(model);
@@ -92,15 +96,14 @@ namespace GamerMarketApp.Web.Controllers
             var model = await gameService.GetGameDeleteModelAsync(id);
             if (model == null)
             {
-                return NotFound(model);
+                return RedirectToAction(nameof(Index));
             }
-                return View(model);
+            return View(model);
         }
         [HttpPost]
         [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> SoftDelete(int id)
         {
-
             await gameService.SoftDeleteGameAsync(id);
             return RedirectToAction(nameof(Index));
         }
@@ -108,7 +111,6 @@ namespace GamerMarketApp.Web.Controllers
         [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> BringGameBack(int id)
         {
-            
             await gameService.UndoSoftDeleteGameAsync(id);
             return RedirectToAction(nameof(Index));
         }
@@ -118,6 +120,10 @@ namespace GamerMarketApp.Web.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var model = await gameService.GetConfirmDeleteModelAsync(id);
+            if (model == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             return View(model);
         }
         [HttpPost]
@@ -129,7 +135,7 @@ namespace GamerMarketApp.Web.Controllers
                 await gameService.DeleteGameAsync(model);
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 ModelState.AddModelError("Game", "An error occurred while deleting the game.");
                 return View(model); 
