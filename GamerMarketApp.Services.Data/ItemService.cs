@@ -13,6 +13,10 @@ namespace GamerMarketApp.Services.Data
 
         public async Task AddItemAsync(ItemAddViewModel model, string userId)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
             if (!DateTime
                 .TryParseExact(model.AddedOn, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,
                 out DateTime addedOn))
