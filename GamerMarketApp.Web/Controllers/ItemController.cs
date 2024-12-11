@@ -114,15 +114,13 @@ namespace GamerMarketApp.Web.Controllers
 
             var model = await itemService.GetItemEditModelAsync(id);
 
+            if (model == null)
+            {
+                return NotFound();
+            }
             if (userId != model.PublisherId && !isModerator)
             {
                 return RedirectToAction(nameof(Index));
-            }
-
-            
-            if (model == null)
-            {
-                return View(model);
             }
 
             return View(model);

@@ -106,7 +106,6 @@ namespace GamerMarketApp.Services.Data
             inputModel.TotalPages = (int)Math.Ceiling((double)itemsQuery.Count() / inputModel.EntitiesPerPage);
 
             return await itemsQuery
-               .Include(i => i.UserItems)
                .Select(i => new ItemPreviewViewModel()
                {
                    ItemId = i.ItemId,
@@ -137,10 +136,9 @@ namespace GamerMarketApp.Services.Data
         public async Task<ItemDeleteViewModel?> GetItemDeleteModelAsync(int id)
         {
             var entity = await itemRepository.GetAllAttached()
-                .Include(g => g.Game)
                 .Where(i => !i.IsDeleted)
                 .Select(i => new ItemDeleteViewModel()
-            {
+                {
                 ItemId = i.ItemId,
                 Name = i.Name,
                 ImageUrl = i.ImageUrl,
@@ -151,7 +149,6 @@ namespace GamerMarketApp.Services.Data
                 SubType = i.Subtype.Name,
                 Publisher = i.Publisher.UserName!,
                 PublisherId = i.Publisher.Id,
-
                 })
             .FirstOrDefaultAsync(g => g.ItemId == id);
             return entity;
@@ -164,7 +161,6 @@ namespace GamerMarketApp.Services.Data
                 return null; 
             }
             return await itemRepository.GetAllAttached()
-               .Include(i => i.UserItems)
                .Where(i => i.IsDeleted == false && i.ItemId == id)
                .Select(i => new ItemDetailsViewModel()
                {
@@ -184,8 +180,13 @@ namespace GamerMarketApp.Services.Data
 
         public async Task<ItemEditViewModel> GetItemEditModelAsync(int id)
         {
-            var item = await itemRepository.FirstOrDefaultAsync(g => g.ItemId == id);
+            var item = await itemRepository
+                .FirstOrDefaultAsync(g => g.ItemId == id);
 
+            if (item == null)
+            {
+                return null;
+            }
             var model = new ItemEditViewModel()
             {
                 ItemId = item!.ItemId,
