@@ -4,7 +4,6 @@ using GamerMarketApp.Services.Data.Interfaces;
 using GamerMarketApp.Web.ViewModels.Item;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using static GamerMarketApp.Commons.EntityValidationConstants.Item;
 
 namespace GamerMarketApp.Services.Data
 {
@@ -60,7 +59,7 @@ namespace GamerMarketApp.Services.Data
                 out DateTime addedOn))
             {
                 throw new InvalidOperationException("Invalid date format.");
-            }
+            }       
             var entity = new Item()
             {
                 ItemId = model.ItemId,
@@ -79,8 +78,10 @@ namespace GamerMarketApp.Services.Data
 
         public async Task<IEnumerable<ItemPreviewViewModel>> GetAllItemsAsync(string userId, AllItemsSearchFilterViewModel inputModel)
         {
-            inputModel.AllGames = await itemRepository.GetAllAttached().Select(g => g.Game.Title).Distinct().ToListAsync();
-            inputModel.AllTypes = await itemRepository.GetAllAttached().Select(t => t.Subtype.Name).Distinct().ToListAsync();
+            var games = await itemRepository.GetGamesAsync();
+            inputModel.AllGames = games.Select(g => g.Title);
+            var types = await itemRepository.GetItemSubtypesAsync();
+            inputModel.AllTypes = types.Select(g => g.Name);
 
             var itemsQuery = itemRepository
                .GetAllAttached()
@@ -197,8 +198,8 @@ namespace GamerMarketApp.Services.Data
                 SubtypeId = item.SubtypeId,
                 PublisherId = item.PublisherId,
             };
-            model.Games = (List<Game>)await itemRepository.GetGamesAsync();
-            model.ItemSubtypes = (List<ItemSubtype>)await itemRepository.GetItemSubtypesAsync();
+            model.Games = await itemRepository.GetGamesAsync();
+            model.ItemSubtypes = await itemRepository.GetItemSubtypesAsync();
             return model;
         }
 
@@ -254,8 +255,10 @@ namespace GamerMarketApp.Services.Data
 
         public async Task<IEnumerable<ItemPreviewViewModel>> GetMyItemsAsync(string userId, AllItemsSearchFilterViewModel inputModel)
         {
-            inputModel.AllGames = await itemRepository.GetAllAttached().Select(g => g.Game.Title).Distinct().ToListAsync();
-            inputModel.AllTypes = await itemRepository.GetAllAttached().Select(t => t.Subtype.Name).Distinct().ToListAsync();
+            var games = await itemRepository.GetGamesAsync();
+            inputModel.AllGames = games.Select(g => g.Title);
+            var types = await itemRepository.GetItemSubtypesAsync();
+            inputModel.AllTypes = types.Select(g => g.Name);
 
             var itemsQuery = itemRepository
                .GetAllAttached()
@@ -280,7 +283,6 @@ namespace GamerMarketApp.Services.Data
             inputModel.TotalPages = (int)Math.Ceiling((double)itemsQuery.Count() / inputModel.EntitiesPerPage);
 
             return await itemsQuery
-               .Include(i => i.UserItems)
                .Select(i => new ItemPreviewViewModel()
                {
                    ItemId = i.ItemId,
@@ -291,7 +293,6 @@ namespace GamerMarketApp.Services.Data
                    Subtype = i.Subtype.Name,
                    Publisher = i.Publisher.UserName!,
                    Price = i.Price.ToString("# ###.00"),
-                   IsInWatchlist = i.UserItems.Any(ui => ui.UserId == userId)
                })
                .Skip(inputModel.EntitiesPerPage * (inputModel.CurrentPage - 1))
                .Take(inputModel.EntitiesPerPage)

@@ -10,12 +10,16 @@ namespace GamerMarketApp.Data.Repository
 
         public async Task<IEnumerable<Game>> GetGamesAsync()
         {
-            return await context.Games.ToListAsync();
+            return await context.Games
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<ItemSubtype>> GetItemSubtypesAsync()
         {
-            return await context.ItemSubtypes.ToListAsync();
+            return await context.ItemSubtypes
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }

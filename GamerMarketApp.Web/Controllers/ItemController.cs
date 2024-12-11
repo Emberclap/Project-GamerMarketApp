@@ -144,10 +144,10 @@ namespace GamerMarketApp.Web.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-
             if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                model = await itemService.GetItemEditModelAsync(model.ItemId);
+                return View(model);
             }
             try
             {

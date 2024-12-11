@@ -1,12 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GamerMarketApp.Web.ViewModels.Item
+﻿namespace GamerMarketApp.Web.ViewModels.Item
 {
     public class ItemPreviewViewModel
     { 

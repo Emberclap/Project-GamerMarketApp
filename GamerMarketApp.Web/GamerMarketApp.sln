@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerMarketApp.Web.ViewMode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerMarketApp.Services.Data", "..\GamerMarketApp.Services.Data\GamerMarketApp.Services.Data.csproj", "{DF63406D-747F-4563-ADBF-932D82908000}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BA6CE1C8-289F-4B98-AE77-59A5DD7F17D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameMarketApp.Services.Tests", "..\GameMarketApp.Services.Tests\GameMarketApp.Services.Tests.csproj", "{4363736B-FC8B-46B1-8712-B0416A939DD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,10 @@ Global
 		{DF63406D-747F-4563-ADBF-932D82908000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF63406D-747F-4563-ADBF-932D82908000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF63406D-747F-4563-ADBF-932D82908000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4363736B-FC8B-46B1-8712-B0416A939DD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4363736B-FC8B-46B1-8712-B0416A939DD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4363736B-FC8B-46B1-8712-B0416A939DD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4363736B-FC8B-46B1-8712-B0416A939DD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +69,7 @@ Global
 		{4689CABE-AD5A-4320-A4E5-B738CEC8A2B8} = {59F900B6-61EC-4D88-854A-D5A5E0F55FA0}
 		{FBEF5ED6-945F-4D57-9F09-9E1271EB0C90} = {BF99D997-75B3-4D62-B0DA-5FB5EF67FB18}
 		{DF63406D-747F-4563-ADBF-932D82908000} = {5A545F33-F4D0-4783-BBA5-03263244AC04}
+		{4363736B-FC8B-46B1-8712-B0416A939DD0} = {BA6CE1C8-289F-4B98-AE77-59A5DD7F17D6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8AB2BAA2-01BC-440B-8DB3-BBFE37B6911A}
