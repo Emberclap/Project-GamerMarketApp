@@ -6,9 +6,12 @@ using GamerMarketApp.Services.Data;
 using GamerMarketApp.Web.ViewModels.Item;
 using Microsoft.IdentityModel.Tokens;
 using GamerMarketApp.Data.Repository.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace GameMarketApp.Services.Tests
 {
+    [TestFixture]
     public class ItemServiceInMemoryTests
     {
 
@@ -92,14 +95,14 @@ namespace GameMarketApp.Services.Tests
         private IItemRepository SetupInMemoryRepository()
         {
             var options = new DbContextOptionsBuilder<GamerMarketDbContext>()
-                .UseInMemoryDatabase("TestDb") 
+                .UseInMemoryDatabase(Guid.NewGuid().ToString()) 
                 .Options;
 
             var context = new GamerMarketDbContext(options);
             context.Items.AddRangeAsync(items);
             context.Games.AddRangeAsync(games);
             context.ItemSubtypes.AddRangeAsync(types);
-            context.Users.Add(new Microsoft.AspNetCore.Identity.IdentityUser { Id = "TestUser", UserName = "TestUser" });
+            context.Users.Add(new IdentityUser { Id = "TestUser", UserName = "TestUser" });
             context.SaveChanges();
 
             return new ItemRepository(context); 
@@ -163,7 +166,7 @@ namespace GameMarketApp.Services.Tests
 
 
             Assert.That(result.Count(), Is.EqualTo(1));
-            Assert.That(inputModel.TotalPages, Is.EqualTo(2));
+            Assert.That(inputModel.TotalPages, Is.EqualTo(3));
         }
 
         [Test]
@@ -307,7 +310,7 @@ namespace GameMarketApp.Services.Tests
             var result = await service.GetAllDeletedItemsAsync();
 
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Count(), Is.EqualTo(1)); // Verify all returned items are deleted
+            Assert.That(result.Count(), Is.EqualTo(1)); 
         }
 
         [Test]

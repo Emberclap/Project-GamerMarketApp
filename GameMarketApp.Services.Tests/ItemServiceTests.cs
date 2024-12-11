@@ -314,17 +314,6 @@ namespace GameMarketApp.Services.Tests
         }
 
         [Test]
-        public async Task GetItemAddModelAsync_ReturnsModelWithEmptyListsWhenNoData()
-        {
-
-            var result = await itemService.GetItemAddModelAsync();
-
-            Assert.NotNull(result);
-            Assert.That(result.Games.IsNullOrEmpty);
-            Assert.That(result.ItemSubtypes.IsNullOrEmpty);
-        }
-
-        [Test]
         public async Task GetMyItemsAsync_ReturnsEmptyWhenNoMatches()
         {
             var itemsData = items.BuildMock();

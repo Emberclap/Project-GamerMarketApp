@@ -58,14 +58,14 @@ namespace GamerMarketApp.Services.Data
 
             if (user == null)
             {
-                IdentityResult.Failed();
+               return IdentityResult.Failed();
             }
 
             var result = await userManager
                 .DeleteAsync(user!);
             if (!result.Succeeded)
             {
-                IdentityResult.Failed();
+                return IdentityResult.Failed();
             }
 
             return IdentityResult.Success;
